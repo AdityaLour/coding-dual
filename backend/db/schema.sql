@@ -9,11 +9,11 @@ CREATE TABLE users(
 );
 
 CREATE TABLE logins(
-    id INT AUTO_INCREMENT PRIMARY KEY ,
+    id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    provider ENUM('email' , 'google') DEFAULT "email" NOT NULL,
-    provider_user_id VARCHAR(255),
+    provider ENUM('email', 'google') DEFAULT "email" NOT NULL,
+    provider_user_id VARCHAR(255) NOT NULL,
     password VARCHAR(255),
     UNIQUE (provider, provider_user_id)
 );
@@ -24,5 +24,5 @@ CREATE TABLE sessions(
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
     token VARCHAR(255) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    expires_at  TIMESTAMP NOT NULL
+    expires_at TIMESTAMP NOT NULL
 );
