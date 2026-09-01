@@ -1,0 +1,28 @@
+DROP TABLE IF EXISTS sessions;
+DROP TABLE IF EXISTS logins;
+DROP TABLE IF EXISTS users;
+
+CREATE TABLE users(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) UNIQUE NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE logins(
+    id INT AUTO_INCREMENT PRIMARY KEY ,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    provider ENUM('email' , 'google') DEFAULT "email" NOT NULL,
+    provider_user_id VARCHAR(255),
+    password VARCHAR(255),
+    UNIQUE (provider, provider_user_id)
+);
+
+CREATE TABLE sessions(
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    token VARCHAR(255) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    expires_at  TIMESTAMP NOT NULL
+);
