@@ -1,9 +1,11 @@
 import express from "express";
 
 import pool from "./db/connection.js";
+import { signup } from "./controllers/authController.js";
 
 const app = express();
 app.use(express.json());
+app.post("/signup", signup);
 
 async function startServer() {
   try {
