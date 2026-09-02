@@ -5,7 +5,7 @@ import { createSession } from "../utils/session.js";
 export async function signup(req, res) {
   const { email, password } = req.body;
   try {
-    if (!email || !password) {
+    if (!email?.trim() || !password?.trim()) {
       return res.status(400).json({
         message: "Please Enter all Credentials",
       });
@@ -39,6 +39,47 @@ export async function signup(req, res) {
     if (error.code === "ER_DUP_ENTRY") {
       return res.status(409).json({ message: "Email already registered" });
     }
+    console.error(error);
+    return res.status(500).json({ message: "Something went wrong" });
+  }
+}
+
+export async function login(req, res) {
+  const { email, password } = req.body;
+  try {
+    if (!password?.trim() || !email?.trim()) {
+      return res.status(400).json({
+        message: "Please Provide all the credentials",
+      });
+    }
+
+    const [result] = await pool.execute(
+      "SELECT user_id, password from logins WHERE provider = ? AND provider_user_id =?",
+      ["email", email],
+    );
+
+    if (result.length === 0) {
+      return res.status(401).json({
+        message: "Either the account does not exist or credentials are invalid",
+      });
+    }
+
+    const hashPass = result[0].password;
+    const compare = await bcrypt.compare(password, hashPass);
+
+    if (!compare) {
+      return res.status(401).json({
+        message: "Either the account does not exist or credentials are invalid",
+      });
+    }
+
+    const userId = result[0].user_id;
+    const { token, expiresAt } = await createSession(userId);
+
+    return res
+      .status(200)
+      .json({ message: "Login successful", token, expiresAt });
+  } catch (error) {
     console.error(error);
     return res.status(500).json({ message: "Something went wrong" });
   }

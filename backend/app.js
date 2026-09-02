@@ -1,11 +1,12 @@
 import express from "express";
 
 import pool from "./db/connection.js";
-import { signup } from "./controllers/authController.js";
+import authRoutes from "./routes/authRoutes.js";
 
 const app = express();
+
 app.use(express.json());
-app.post("/signup", signup);
+app.use(authRoutes);
 
 async function startServer() {
   try {
