@@ -21,5 +21,13 @@ export function setUpWebSocket(wss) {
         return;
       }
     });
+
+    ws.on("close", function () {
+      const index = clients.findIndex((c) => c.socket === ws);
+      if (index !== -1) {
+        clients.splice(index, 1);
+      }
+      console.log("Client disconnected. Remaining:", clients.length);
+    });
   });
 }
