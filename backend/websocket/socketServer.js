@@ -38,7 +38,32 @@ export function setUpWebSocket(wss) {
 
           if (opponent) {
             const opponentClient = clients.find((c) => c.id === opponent);
-            console.log("Found opponent", opponent);
+
+            if (!opponentClient) {
+              const now = Date.now();
+              await redisClient.zAdd("matchmakingQueue", {
+                score: rating,
+                value: myId,
+              });
+              await redisClient.hSet("matchmakingTimes", myId, now);
+              console.log("Opponent vanished, queued self instead");
+              return;
+            }
+
+            await redisClient.zRem("matchmakingQueue", opponent);
+            await redisClient.hDel("matchmakingTimes", opponent);
+
+            const messageForMe = {
+              type: "matchFound",
+              opponentId: opponent,
+            };
+
+            const messageForOpponent = { type: "matchFound", opponentId: myId };
+
+            ws.send(JSON.stringify(messageForMe));
+            opponentClient.socket.send(JSON.stringify(messageForOpponent));
+
+            console.log("Match made:", myId, "vs", opponent);
           } else {
             const now = Date.now();
             await redisClient.zAdd("matchmakingQueue", {
