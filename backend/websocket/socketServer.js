@@ -1,5 +1,8 @@
+import fs from "fs";
 import crypto from "crypto";
 import redisClient from "../redis/connection.js";
+
+const matchmakingScript = fs.readFileSync("redis/matchmaking.lua", "utf8");
 
 export function setUpWebSocket(wss) {
   const clients = [];
@@ -28,13 +31,10 @@ export function setUpWebSocket(wss) {
           const low = rating - 100;
           const high = rating + 100;
 
-          const match = await redisClient.zRangeByScore(
-            "matchmakingQueue",
-            low,
-            high,
-          );
-
-          const opponent = match.find((id) => id !== myId);
+          const opponent = await redisClient.eval(matchmakingScript, {
+            keys: ["matchmakingQueue", "matchmakingTimes"],
+            arguments: [String(low), String(high), myId],
+          });
 
           if (opponent) {
             const opponentClient = clients.find((c) => c.id === opponent);
@@ -49,9 +49,6 @@ export function setUpWebSocket(wss) {
               console.log("Opponent vanished, queued self instead");
               return;
             }
-
-            await redisClient.zRem("matchmakingQueue", opponent);
-            await redisClient.hDel("matchmakingTimes", opponent);
 
             const messageForMe = {
               type: "matchFound",
