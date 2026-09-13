@@ -37,6 +37,7 @@ export function setUpWebSocket(wss) {
           const opponent = match.find((id) => id !== myId);
 
           if (opponent) {
+            const opponentClient = clients.find((c) => c.id === opponent);
             console.log("Found opponent", opponent);
           } else {
             const now = Date.now();
@@ -54,9 +55,14 @@ export function setUpWebSocket(wss) {
       }
     });
 
-    ws.on("close", function () {
+    ws.on("close", async function () {
       const index = clients.findIndex((c) => c.socket === ws);
+
       if (index !== -1) {
+        const id = clients[index].id;
+
+        await redisClient.zRem("matchmakingQueue", id);
+        await redisClient.hDel("matchmakingTimes", id);
         clients.splice(index, 1);
       }
       console.log("Client disconnected. Remaining:", clients.length);
