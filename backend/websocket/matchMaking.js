@@ -1,6 +1,8 @@
 import fs from "fs";
+import crypto from "crypto";
 import redisClient from "../redis/connection.js";
 import { problems } from "../problem/problem.js";
+import { duels } from "./duels.js";
 
 const matchmakingScript = fs.readFileSync("redis/matchmaking.lua", "utf8");
 
@@ -39,11 +41,24 @@ async function runSweep(clients) {
       const opponentClient = clients.find((c) => c.id === opponent);
 
       if (meClient && opponentClient) {
+        const newDuelId = crypto.randomUUID();
+
+        duels[newDuelId] = {
+          duelId: newDuelId,
+          playerA: meClient.id,
+          playerB: opponentClient.id,
+          status: "waiting",
+          winner: null,
+        };
+
+        opponentClient.duelId = newDuelId;
+        meClient.duelId = newDuelId;
         meClient.socket.send(
           JSON.stringify({
             type: "matchFound",
             opponentId: opponent,
             problem: ques,
+            duelId: newDuelId,
           }),
         );
         opponentClient.socket.send(
@@ -51,8 +66,10 @@ async function runSweep(clients) {
             type: "matchFound",
             opponentId: id,
             problem: ques,
+            duelId: newDuelId,
           }),
         );
+
         console.log("Sweep matched:", id, "vs", opponent);
       }
     } else if (width >= 500) {
@@ -108,12 +125,29 @@ export async function handleFindMatch(ws, clients, rating) {
       type: "matchFound",
       opponentId: opponent,
       problem: ques,
+      duelId: null,
     };
     const messageForOpponent = {
       type: "matchFound",
       opponentId: myId,
       problem: ques,
+      duelId: null,
     };
+
+    const newDuelId = crypto.randomUUID();
+
+    duels[newDuelId] = {
+      duelId: newDuelId,
+      playerA: myId,
+      playerB: opponent,
+      status: "waiting",
+      winner: null,
+    };
+
+    messageForMe.duelId = newDuelId;
+    messageForOpponent.duelId = newDuelId;
+    me.duelId = newDuelId;
+    opponentClient.duelId = newDuelId;
 
     ws.send(JSON.stringify(messageForMe));
     opponentClient.socket.send(JSON.stringify(messageForOpponent));
