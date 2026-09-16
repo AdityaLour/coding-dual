@@ -1,6 +1,7 @@
 import crypto from "crypto";
 import redisClient from "../redis/connection.js";
 import { handleFindMatch } from "./matchMaking.js";
+import { handleSubmission } from "./submisson.js";
 
 export function setUpWebSocket(wss) {
   const clients = [];
@@ -18,6 +19,14 @@ export function setUpWebSocket(wss) {
 
         if (parsedData.type === "findMatch") {
           await handleFindMatch(ws, clients, parsedData.rating);
+        }
+
+        if (parsedData.type === "submitCode") {
+          await handleSubmission(
+            ws,
+            parsedData.source_code,
+            parsedData.language_id,
+          );
         }
       } catch (error) {
         console.error("Invalid message:", error);

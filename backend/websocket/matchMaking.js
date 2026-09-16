@@ -1,9 +1,11 @@
 import fs from "fs";
 import redisClient from "../redis/connection.js";
+import { problems } from "../problem/problem.js";
 
 const matchmakingScript = fs.readFileSync("redis/matchmaking.lua", "utf8");
 
 let sweepTimer = null;
+const ques = problems.addTwoNum.desc;
 
 async function runSweep(clients) {
   const waiting = await redisClient.zRangeWithScores("matchmakingQueue", 0, -1);
@@ -38,10 +40,18 @@ async function runSweep(clients) {
 
       if (meClient && opponentClient) {
         meClient.socket.send(
-          JSON.stringify({ type: "matchFound", opponentId: opponent }),
+          JSON.stringify({
+            type: "matchFound",
+            opponentId: opponent,
+            problem: ques,
+          }),
         );
         opponentClient.socket.send(
-          JSON.stringify({ type: "matchFound", opponentId: id }),
+          JSON.stringify({
+            type: "matchFound",
+            opponentId: id,
+            problem: ques,
+          }),
         );
         console.log("Sweep matched:", id, "vs", opponent);
       }
@@ -94,8 +104,16 @@ export async function handleFindMatch(ws, clients, rating) {
       return;
     }
 
-    const messageForMe = { type: "matchFound", opponentId: opponent };
-    const messageForOpponent = { type: "matchFound", opponentId: myId };
+    const messageForMe = {
+      type: "matchFound",
+      opponentId: opponent,
+      problem: ques,
+    };
+    const messageForOpponent = {
+      type: "matchFound",
+      opponentId: myId,
+      problem: ques,
+    };
 
     ws.send(JSON.stringify(messageForMe));
     opponentClient.socket.send(JSON.stringify(messageForOpponent));
