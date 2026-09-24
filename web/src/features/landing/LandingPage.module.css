@@ -1,0 +1,87 @@
+.page {
+  position: relative;
+  min-height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.header,
+.main {
+  position: relative; /* above the seam */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px clamp(20px, 4vw, 48px);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navLink {
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 4px;
+  border-radius: 4px;
+}
+
+.navLink:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.main {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 24px;
+  max-width: 720px;
+  padding: 0 clamp(20px, 4vw, 48px) 80px;
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(40px, 6vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.02em;
+}
+
+.lede {
+  margin: 0;
+  max-width: 34em;
+  font-size: 18px;
+  color: var(--text-2);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 24px;
+}
+
+.alt {
+  margin: 0;
+  color: var(--muted);
+}
+
+.alt a {
+  color: var(--text);
+  font-weight: 600;
+}
+
+/* On narrow screens the split would sit behind the text, so hide it. */
+@media (max-width: 900px) {
+  .seam {
+    display: none;
+  }
+}
