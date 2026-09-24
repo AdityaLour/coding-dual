@@ -1,0 +1,32 @@
+.seam {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.oppSide {
+  position: absolute;
+  inset: 0;
+  background: var(--opp-bg);
+}
+
+.lines {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.oppLine,
+.youLine {
+  stroke-width: var(--seam-width);
+  vector-effect: non-scaling-stroke;
+}
+
+.oppLine {
+  stroke: var(--opp);
+}
+
+.youLine {
+  stroke: var(--you);
+}

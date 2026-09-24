@@ -1,0 +1,32 @@
+/* Boip design tokens: Night Market base, Bone (you) vs Red (opponent). */
+:root {
+  --bg: #101214;
+  --surface: #171a1d;
+  --inset: #0c0e10;
+  --border: #2b3035;
+  --control-border: #3a4046;
+
+  --text: #f0f2f0;
+  --text-2: #c8cdd0;
+  --muted: #9ca3a9;
+
+  /* "You" doubles as the brand colour on every page. */
+  --you: #efe6d2;
+  --you-hover: #ffffff;
+  --you-ink: #16130d;
+
+  /* Red only ever means "the opponent". Never used for errors. */
+  --opp: #ff5c62;
+  --opp-bg: #2a1214;
+
+  /* Errors and wrong answers. */
+  --warn: #ff8a3d;
+
+  --font-display: "Archivo Black", "Arial Black", sans-serif;
+  --font-body: "Archivo", system-ui, sans-serif;
+  --font-code: "JetBrains Mono", ui-monospace, monospace;
+
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --seam-width: 4px;
+}
