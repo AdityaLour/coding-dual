@@ -1,0 +1,30 @@
+.layer {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.symbol {
+  position: absolute;
+  font: 700 22px var(--font-code);
+  color: rgba(239, 230, 210, 0.09);
+  animation: rise linear infinite;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  15% {
+    opacity: 1;
+  }
+  85% {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-120px);
+  }
+}

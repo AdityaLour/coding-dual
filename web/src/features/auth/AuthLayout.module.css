@@ -1,55 +1,60 @@
+/* Desktop: the brand panel is cut on the diagonal, with bone and red bands on the cut. */
 .page {
-  display: grid;
-  grid-template-columns: minmax(360px, 44%) 1fr;
-  min-height: 100%;
-}
-
-.brand {
   position: relative;
+  min-height: 100%;
+  display: grid;
+  grid-template-columns: 38fr 12fr 50fr;
   overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 36px 48px 56px;
-  background: var(--surface);
 }
 
-/* The seam runs down the panel's right edge: bone, then red. */
-.brand::before,
-.brand::after {
-  content: "";
+.panel,
+.bands,
+.bandYou,
+.bandOpp {
   position: absolute;
   inset: 0;
   pointer-events: none;
 }
 
-.brand::before {
+.panel {
+  background: var(--surface);
+  clip-path: polygon(0 0, 46% 0, 38% 100%, 0 100%);
+}
+
+.bandYou {
   background: var(--you);
-  clip-path: polygon(80% 0, 100% 0, 100% 100%, 62% 100%);
+  clip-path: polygon(46% 0, 48.5% 0, 40.5% 100%, 38% 100%);
 }
 
-.brand::after {
+.bandOpp {
   background: var(--opp);
-  clip-path: polygon(95% 0, 100% 0, 100% 100%, 78% 100%);
+  clip-path: polygon(48.5% 0, 50.5% 0, 42.5% 100%, 40.5% 100%);
 }
 
-.brand > * {
+.brand {
   position: relative;
-  z-index: 1;
+  grid-column: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 32px;
+  padding: 36px clamp(24px, 3vw, 48px) 48px;
+}
+
+.doodle {
+  width: min(100%, 400px);
 }
 
 .brandText {
-  max-width: 55%;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  max-width: 300px;
 }
 
 .heading {
-  margin: 0;
+  margin: 0 0 12px;
   font-family: var(--font-display);
-  font-size: clamp(36px, 4vw, 56px);
+  font-size: clamp(36px, 3.6vw, 52px);
   line-height: 1;
+  animation: reveal 600ms cubic-bezier(0.2, 0.8, 0.2, 1) 700ms both;
 }
 
 .blurb {
@@ -58,37 +63,77 @@
   color: var(--text-2);
 }
 
-.main {
+.formSide {
+  position: relative;
+  grid-column: 3;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: 48px 24px;
 }
 
-.panel {
+.formPanel {
+  position: relative;
   width: 100%;
   max-width: 400px;
 }
 
+/* Small shake when the banner lands. */
+.shaking {
+  animation: shake 220ms ease-out 260ms;
+}
+
+@keyframes reveal {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes shake {
+  25% {
+    transform: translate(-5px, 3px);
+  }
+  50% {
+    transform: translate(4px, -2px);
+  }
+  75% {
+    transform: translate(-2px, 1px);
+  }
+}
+
+/* Narrow screens: one column. The panel becomes a header bar with the seam under it. */
 @media (max-width: 900px) {
   .page {
     grid-template-columns: 1fr;
     grid-template-rows: auto 1fr;
   }
 
-  .brand {
-    padding: 20px 24px;
-    border-bottom: var(--seam-width) solid var(--you);
-    box-shadow: 0 var(--seam-width) 0 var(--opp);
-  }
-
-  .brand::before,
-  .brand::after,
+  .panel,
+  .bands,
+  .doodle,
   .brandText {
     display: none;
   }
 
-  .main {
+  .brand {
+    grid-column: 1;
+    padding: 20px 24px;
+    background: var(--surface);
+    border-bottom: var(--seam-width) solid var(--you);
+    box-shadow: 0 var(--seam-width) 0 var(--opp);
+  }
+
+  .formSide {
+    grid-column: 1;
     align-items: flex-start;
+  }
+
+  /* Centre vertically in the space below the header; auto margins never cut off
+     the top when the space is too short, e.g. with the on-screen keyboard open. */
+  .formPanel {
+    margin-block: auto;
   }
 }

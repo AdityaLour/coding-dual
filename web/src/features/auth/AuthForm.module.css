@@ -56,3 +56,8 @@
   color: var(--text);
   font-weight: 600;
 }
+
+/* The status region stays in the page for screen readers; no extra gap while it's empty. */
+.live:empty {
+  margin-top: -18px;
+}

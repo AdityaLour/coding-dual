@@ -1,16 +1,27 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
+import { useOutletContext } from "react-router";
+import { usePrefersReducedMotion } from "@/shared/hooks/usePrefersReducedMotion.js";
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const SHAKE = [
+  { transform: "translateX(0)" },
+  { transform: "translateX(-7px)" },
+  { transform: "translateX(6px)" },
+  { transform: "translateX(-3px)" },
+  { transform: "translateX(0)" },
+];
 
-// Shared field state + client-side checks for the login and signup forms.
+// Form state for login and signup. Values live in AuthLayout, so they survive the page switch.
 export function useAuthForm() {
-  const [values, setValues] = useState({ email: "", password: "" });
+  const { values, setField } = useOutletContext();
   const [errors, setErrors] = useState({});
   const [status, setStatus] = useState("");
+  const formRef = useRef(null);
+  const reduceMotion = usePrefersReducedMotion();
 
   function update(field) {
     return (event) => {
-      setValues((v) => ({ ...v, [field]: event.target.value }));
+      setField(field, event.target.value);
       if (errors[field]) setErrors((e) => ({ ...e, [field]: undefined }));
     };
   }
@@ -22,8 +33,11 @@ export function useAuthForm() {
       next.email = "Enter an email like name@example.com.";
     if (!values.password) next.password = "Enter your password.";
     setErrors(next);
-    return Object.keys(next).length === 0;
+    const ok = Object.keys(next).length === 0;
+    if (!ok && !reduceMotion)
+      formRef.current?.animate(SHAKE, { duration: 320, easing: "ease-out" });
+    return ok;
   }
 
-  return { values, errors, status, setStatus, update, validate };
+  return { values, errors, status, setStatus, update, validate, formRef };
 }
