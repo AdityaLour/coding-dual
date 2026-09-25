@@ -1,0 +1,45 @@
+.wrap {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  color: var(--muted);
+}
+
+.mark {
+  display: flex;
+  gap: 6px;
+  height: 48px;
+  transform: skewX(-14deg);
+}
+
+.you,
+.opp {
+  width: 10px;
+  height: 100%;
+  animation: pump 900ms ease-in-out infinite;
+}
+
+.you {
+  background: var(--you);
+}
+.opp {
+  background: var(--opp);
+  animation-delay: 180ms;
+}
+
+.label {
+  font-size: 14px;
+}
+
+@keyframes pump {
+  0%,
+  100% {
+    transform: scaleY(0.4);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}

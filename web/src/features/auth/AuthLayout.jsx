@@ -4,7 +4,7 @@ import Logo from "@/shared/ui/Logo.jsx";
 import { usePrefersReducedMotion } from "@/shared/hooks/usePrefersReducedMotion.js";
 import JudgeDoodle from "./JudgeDoodle.jsx";
 import FloatingSymbols from "./FloatingSymbols.jsx";
-import ChallengerBanner from "./ChallengerBanner.jsx";
+import ChallengerBanner from "@/shared/ui/ChallengerBanner.jsx";
 import SplitOpen from "./SplitOpen.jsx";
 import { AUTH_COPY, modeFromPath } from "./authCopy.js";
 import s from "./AuthLayout.module.css";
