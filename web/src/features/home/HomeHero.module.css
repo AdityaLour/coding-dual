@@ -1,0 +1,159 @@
+/* exactly one screen; content centred between the header and the bottom edge */
+.hero {
+  position: relative;
+  height: 100svh;
+  min-height: 620px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.oppSide,
+.seamYou,
+.seamOpp {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.oppSide {
+  background: var(--opp-bg);
+  clip-path: polygon(64% 0, 100% 0, 100% 100%, 54% 100%);
+}
+.seamYou {
+  background: var(--you);
+  clip-path: polygon(63.4% 0, 64% 0, 54% 100%, 53.4% 100%);
+}
+.seamOpp {
+  background: var(--opp);
+  clip-path: polygon(64% 0, 64.6% 0, 54.6% 100%, 54% 100%);
+}
+
+.copy {
+  position: relative;
+  max-width: 700px;
+  padding: 92px clamp(20px, 4.5vw, 64px) 0; /* 92px clears the site header */
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.me {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.meFace {
+  flex-shrink: 0;
+}
+
+.meText {
+  min-width: 0;
+}
+
+/* long names wrap rather than being cut off */
+.name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  line-height: 1.05;
+  overflow-wrap: anywhere;
+}
+
+.rank {
+  margin-top: 6px;
+  font-family: var(--font-code);
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(52px, 7vw, 92px);
+  line-height: 0.95;
+  letter-spacing: -2px;
+}
+
+.lede {
+  margin: 0;
+  max-width: 520px;
+  font-size: 20px;
+  color: var(--text-2);
+}
+
+.find {
+  align-self: flex-start;
+  min-height: 64px;
+  padding: 0 40px;
+  border-radius: 12px;
+  border: 1px solid var(--you);
+  background: var(--you);
+  color: var(--you-ink);
+  font-family: var(--font-display);
+  font-size: 22px;
+  cursor: pointer;
+}
+
+.find:hover {
+  background: var(--you-hover);
+}
+.find:active {
+  transform: scale(0.98);
+}
+
+.secondary {
+  background: transparent;
+  color: var(--text);
+  border-color: var(--control-border);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.secondary:hover {
+  background: transparent;
+  border-color: var(--text-2);
+}
+
+.status {
+  margin: 0;
+  min-height: 1.5em;
+  font-family: var(--font-code);
+  font-weight: 700;
+  color: var(--text-2);
+}
+
+.slot {
+  position: absolute;
+  right: clamp(40px, 11vw, 170px);
+  top: calc(50% + 46px); /* centred in the space below the header */
+  transform: translateY(-50%);
+}
+
+@media (max-width: 900px) {
+  .oppSide,
+  .seamYou,
+  .seamOpp {
+    display: none;
+  }
+
+  .hero {
+    height: auto;
+    min-height: 100svh;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .copy {
+    padding-bottom: 0;
+  }
+
+  .slot {
+    position: static;
+    transform: none;
+    margin: 40px auto 48px;
+    width: 240px;
+  }
+}

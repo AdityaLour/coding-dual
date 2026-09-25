@@ -1,0 +1,32 @@
+.clock {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font: 700 34px var(--font-code);
+}
+.group {
+  display: contents;
+}
+.digit {
+  display: inline-block;
+  min-width: 30px;
+  padding: 6px 2px;
+  text-align: center;
+  background: var(--you-ink);
+  color: var(--you);
+  border-radius: 6px;
+}
+.flip {
+  animation: flip 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.sep {
+  padding: 0 2px;
+}
+@keyframes flip {
+  from {
+    transform: rotateX(90deg);
+  }
+  to {
+    transform: none;
+  }
+}

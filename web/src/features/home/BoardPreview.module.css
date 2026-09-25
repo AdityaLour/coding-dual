@@ -1,0 +1,92 @@
+.rows {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+.row {
+  display: grid;
+  grid-template-columns: 40px 1fr 120px;
+  align-items: center;
+  padding: 10px 8px;
+  border-bottom: 1px solid var(--border);
+  font-size: 18px;
+  opacity: 0;
+  transform: translateX(-24px);
+  transition:
+    opacity 400ms ease,
+    transform 500ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+.in .row {
+  opacity: 1;
+  transform: none;
+}
+.in .row:nth-child(2) {
+  transition-delay: 90ms;
+}
+.in .row:nth-child(3) {
+  transition-delay: 180ms;
+}
+.in .row:nth-child(4) {
+  transition-delay: 300ms;
+}
+.n {
+  font-family: var(--font-code);
+  color: var(--muted);
+}
+.player {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+.player svg {
+  flex-shrink: 0;
+}
+.pname {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.r {
+  font-family: var(--font-code);
+  text-align: right;
+}
+.crown {
+  flex-shrink: 0;
+  animation: wobble 2s ease-in-out infinite;
+  transform-origin: 50% 100%;
+}
+.empty {
+  display: flex;
+  gap: 12px;
+  color: var(--text-2);
+}
+.mine {
+  margin-top: 8px;
+  border: 1px solid var(--you);
+  border-radius: 8px;
+}
+.in .mine {
+  animation: minePulse 1.4s ease-in-out 900ms 2;
+}
+@keyframes wobble {
+  0%,
+  100% {
+    transform: rotate(-8deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
+}
+@keyframes minePulse {
+  50% {
+    background: rgba(239, 230, 210, 0.1);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .row {
+    opacity: 1;
+    transform: none;
+  }
+}

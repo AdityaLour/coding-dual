@@ -1,0 +1,112 @@
+.slot {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+}
+
+.ring circle {
+  fill: none;
+  stroke: var(--opp);
+  stroke-width: 3;
+  stroke-dasharray: 10 9;
+}
+
+.inner {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  text-align: center;
+}
+
+.q {
+  font-family: var(--font-display);
+  font-size: 92px;
+  line-height: 1;
+  color: var(--opp);
+}
+
+.caption {
+  font-size: 15px;
+  color: #f0c9ca;
+}
+
+.searching .ring {
+  animation: spin 3s linear infinite;
+}
+
+.searching::before,
+.searching::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  border: 2px solid var(--opp);
+  animation: pulse 2.4s cubic-bezier(0.2, 0.8, 0.2, 1) infinite;
+}
+
+.searching::after {
+  animation-delay: 1.2s;
+}
+
+.found .ring circle {
+  stroke-dasharray: none;
+}
+
+.rival {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  animation: land 420ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.rivalName {
+  font-family: var(--font-display);
+  font-size: 22px;
+  color: var(--opp);
+}
+
+.rivalRating {
+  font-family: var(--font-code);
+  font-size: 14px;
+  color: #f0c9ca;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse {
+  from {
+    transform: scale(1);
+    opacity: 0.7;
+  }
+  to {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+@keyframes land {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  70% {
+    transform: scale(1.06);
+    opacity: 1;
+  }
+  to {
+    transform: none;
+  }
+}

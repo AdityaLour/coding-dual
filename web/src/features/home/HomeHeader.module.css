@@ -1,0 +1,70 @@
+.header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 26px clamp(20px, 4.5vw, 64px);
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-width: 0;
+  font-weight: 500;
+}
+
+.link {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+.who {
+  gap: 10px;
+  min-width: 0;
+  font-weight: 600;
+}
+
+.face {
+  flex-shrink: 0;
+}
+
+/* long names end in "…" instead of pushing the header off screen */
+.name {
+  max-width: 180px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.logout {
+  min-height: 44px;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--muted);
+  font: 500 16px var(--font-body);
+  cursor: pointer;
+}
+
+.logout:hover {
+  color: var(--text);
+}
+
+@media (max-width: 900px) {
+  .nav > .link:first-child,
+  .name {
+    display: none;
+  }
+}

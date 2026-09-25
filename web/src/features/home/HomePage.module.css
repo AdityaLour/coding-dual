@@ -1,0 +1,246 @@
+.page {
+  position: relative;
+  overflow-x: clip;
+}
+
+/* sections: content on the left, the journey lane on the right */
+.sec {
+  position: relative;
+  min-height: 560px;
+  padding: 90px clamp(20px, 4.5vw, 64px);
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.content {
+  width: min(58%, 760px);
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.content p {
+  margin: 0;
+  max-width: 520px;
+  font-size: 19px;
+  color: var(--text-2);
+}
+
+.cta {
+  align-self: flex-start;
+  min-height: 52px;
+  display: inline-flex;
+  align-items: center;
+  padding: 0 24px;
+  font-family: var(--font-display);
+  font-size: 18px;
+  text-decoration: none;
+  background: var(--surface);
+  border: 1px solid var(--control-border);
+  border-radius: 12px;
+}
+
+.cta:hover {
+  border-color: var(--you);
+}
+
+.dailySec .content {
+  padding: 44px;
+  border-radius: 22px;
+  background: var(--you);
+  color: var(--you-ink);
+}
+
+.dailySec .content p {
+  color: var(--you-ink);
+}
+
+.dailySec .cta {
+  background: var(--you-ink);
+  color: var(--you);
+  border: none;
+}
+
+.foot {
+  padding: 60px clamp(20px, 4.5vw, 64px) 120px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: var(--muted);
+}
+
+/* ---- two-way reveal ---- */
+.heading {
+  position: relative;
+  display: inline-block;
+  align-self: flex-start;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(34px, 4vw, 54px);
+  line-height: 1;
+}
+
+.txt {
+  display: inline-block;
+  clip-path: inset(0 100% 0 0);
+}
+
+.heading::after {
+  content: "";
+  position: absolute;
+  inset: -4px -6px;
+  background: var(--you);
+  transform: scaleX(0);
+  transform-origin: left;
+}
+
+.dailySec .heading::after {
+  background: var(--you-ink);
+}
+
+.heading::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -7px;
+  height: 4px;
+  width: 64px;
+  background: var(--opp);
+  transform: skewX(-20deg) scaleX(0);
+  transform-origin: left;
+  transition: transform 400ms cubic-bezier(0.2, 0.8, 0.2, 1) 700ms;
+}
+
+.content > :not(.heading) {
+  opacity: 0;
+  transform: translateX(-18px);
+  transition:
+    opacity 450ms ease,
+    transform 550ms cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.shown .heading::after {
+  animation: barIn 760ms cubic-bezier(0.7, 0, 0.2, 1) forwards;
+}
+.shown .txt {
+  animation: showTxt 1ms linear 380ms forwards;
+}
+.shown .heading::before {
+  transform: skewX(-20deg) scaleX(1);
+}
+.shown > :not(.heading) {
+  opacity: 1;
+  transform: none;
+}
+.shown > :nth-child(2) {
+  transition-delay: 420ms;
+}
+.shown > :nth-child(3) {
+  transition-delay: 520ms;
+}
+.shown > :nth-child(4) {
+  transition-delay: 620ms;
+}
+.shown > :nth-child(5) {
+  transition-delay: 720ms;
+}
+.shown > :nth-child(6) {
+  transition-delay: 820ms;
+}
+
+.hiding .txt {
+  clip-path: inset(0 0 0 0);
+  animation: hideTxt 1ms linear 300ms forwards;
+}
+.hiding .heading::after {
+  animation: barOut 620ms cubic-bezier(0.7, 0, 0.2, 1) forwards;
+}
+.hiding .heading::before {
+  transition-delay: 0ms;
+}
+
+.dailySec .content {
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  transition: clip-path 800ms cubic-bezier(0.7, 0, 0.2, 1);
+}
+.dailySec .shown {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+@keyframes barIn {
+  0% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+  50.1% {
+    transform-origin: right;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+}
+@keyframes barOut {
+  0% {
+    transform: scaleX(0);
+    transform-origin: right;
+  }
+  50% {
+    transform: scaleX(1);
+    transform-origin: right;
+  }
+  50.1% {
+    transform-origin: left;
+  }
+  100% {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+}
+@keyframes showTxt {
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes hideTxt {
+  to {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+@media (max-width: 900px) {
+  .sec {
+    min-height: 0;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 64px 20px;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .dailySec .content {
+    padding: 28px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .txt {
+    clip-path: none;
+  }
+  .content > :not(.heading) {
+    opacity: 1;
+    transform: none;
+  }
+  .dailySec .content {
+    clip-path: none;
+  }
+}
