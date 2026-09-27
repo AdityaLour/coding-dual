@@ -7,13 +7,14 @@ import {
   parseUsername,
 } from "../utils/validate.js";
 import {
-  SESSION_COOKIE,
   clearSessionCookie,
-  createSession,
   deleteSession,
+  readSessionToken,
+  rotateSession,
   setSessionCookie,
 } from "../utils/session.js";
 import { consumeEmailToken, issueEmailToken } from "../utils/emailTokens.js";
+import { isTokenShape } from "../utils/tokens.js";
 import {
   sendAlreadyRegisteredEmail,
   sendResetEmail,
@@ -25,8 +26,6 @@ import {
 } from "../utils/googleAuth.js";
 
 const BCRYPT_COST = 12;
-// Compared against when the account doesn't exist, so "no such user" costs the same time as
-// "wrong password" and response timing can't reveal which emails are registered.
 const DUMMY_HASH = await bcrypt.hash("boip-timing-dummy", BCRYPT_COST);
 
 const CHECK_EMAIL = {
@@ -118,7 +117,7 @@ export async function verifyEmail(req, res) {
       "UPDATE users SET email_verified_at = COALESCE(email_verified_at, NOW()) WHERE id = ?",
       [userId],
     );
-    const token = await createSession(userId, conn);
+    const token = await rotateSession(req, userId, conn);
     return { token, user: await getUser(conn, userId) };
   });
   if (!result) return res.status(400).json(BAD_LINK);
@@ -176,7 +175,7 @@ export async function login(req, res) {
     });
   }
 
-  const token = await createSession(account.id);
+  const token = await rotateSession(req, account.id);
   setSessionCookie(res, token);
   return res.status(200).json({
     user: { id: account.id, username: account.username, email: account.email },
@@ -194,7 +193,6 @@ export async function googleAuth(req, res) {
     return res.status(400).json({ message: "Missing Google sign-in token." });
   }
 
-  // Only verification failures are the caller's fault (401); DB errors fall through to 500.
   let identity;
   try {
     identity = await verifyGoogleToken(idToken);
@@ -210,14 +208,13 @@ export async function googleAuth(req, res) {
   }
 
   const { userId, isNew } = await findOrCreateGoogleUser(identity);
-  const token = await createSession(userId);
+  const token = await rotateSession(req, userId);
   setSessionCookie(res, token);
   return res
     .status(isNew ? 201 : 200)
     .json({ user: await getUser(pool, userId) });
 }
 
-// POST /username { username }  (logged in, only while the username is still empty)
 export async function setUsername(req, res) {
   const username = parseUsername(req.body?.username);
   if (username.error) {
@@ -251,14 +248,12 @@ export function checkSession(req, res) {
   return res.status(200).json({ user: req.user });
 }
 
-// POST /logout  -> always succeeds; the session row is deleted, not just the cookie.
 export async function logout(req, res) {
-  await deleteSession(req.cookies?.[SESSION_COOKIE]);
+  await deleteSession(readSessionToken(req));
   clearSessionCookie(res);
   return res.status(204).end();
 }
 
-// POST /forgot-password { email }  -> same answer whether or not the account exists.
 export async function forgotPassword(req, res) {
   const email = normalizeEmail(req.body?.email);
   if (email) {
@@ -275,9 +270,6 @@ export async function forgotPassword(req, res) {
   return res.status(202).json(EMAIL_SENT);
 }
 
-// POST /reset-password { token, password }
-// Proves inbox ownership, so it also verifies the email. Ends every other session.
-// If the email was unverified, the username came from an unproven owner, so it's cleared.
 export async function resetPassword(req, res) {
   const passwordError = checkPassword(req.body?.password);
   if (passwordError) {
@@ -285,6 +277,7 @@ export async function resetPassword(req, res) {
       .status(400)
       .json({ message: passwordError, errors: { password: passwordError } });
   }
+  if (!isTokenShape(req.body?.token)) return res.status(400).json(BAD_LINK);
   const hash = await bcrypt.hash(req.body.password, BCRYPT_COST);
 
   const result = await withTransaction(async (conn) => {
@@ -303,7 +296,6 @@ export async function resetPassword(req, res) {
       "INSERT INTO logins (user_id, provider, provider_user_id, password) VALUES (?, 'email', ?, ?)",
       [userId, user.email, hash],
     );
-    // MySQL applies SET left to right: username reads the OLD email_verified_at.
     await conn.execute(
       `UPDATE users SET username = IF(email_verified_at IS NULL, NULL, username),
        email_verified_at = COALESCE(email_verified_at, NOW()) WHERE id = ?`,
@@ -315,7 +307,7 @@ export async function resetPassword(req, res) {
       [userId],
     );
 
-    const token = await createSession(userId, conn);
+    const token = await rotateSession(req, userId, conn);
     return { token, user: await getUser(conn, userId) };
   });
   if (!result) return res.status(400).json(BAD_LINK);

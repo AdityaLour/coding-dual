@@ -1,18 +1,25 @@
 import pool from "../db/connection.js";
 import { hashToken, isTokenShape, newToken } from "./tokens.js";
 
-export const SESSION_COOKIE = "boip_session";
+const SECURE = process.env.COOKIE_SECURE === "true";
+// In production the "__Host-" prefix makes the browser reject the cookie unless it is Secure,
+// host-only and Path=/, so no other (sub)domain can plant or overwrite it.
+export const SESSION_COOKIE = SECURE ? "__Host-boip_session" : "boip_session";
 const SESSION_SECONDS = 21 * 24 * 60 * 60; // 3 weeks
 const CLEANUP_MS = 60 * 60 * 1000;
 
 function cookieOptions(extra = {}) {
   return {
     httpOnly: true, // JS (and so any XSS) can't read it
-    secure: process.env.COOKIE_SECURE === "true", // true in production (HTTPS only)
+    secure: SECURE, // HTTPS only in production
     sameSite: "lax", // not sent on cross-site POSTs (CSRF defence, with the Origin check)
     path: "/",
     ...extra,
   };
+}
+
+export function readSessionToken(req) {
+  return req.cookies?.[SESSION_COOKIE];
 }
 
 // db can be a transaction connection so the session is part of the same commit.
@@ -23,6 +30,18 @@ export async function createSession(userId, db = pool) {
     [userId, hashToken(token), SESSION_SECONDS],
   );
   return token;
+}
+
+// Every login gets a brand-new token, and the session the browser arrived with is deleted:
+// no session fixation, and no old sessions left alive behind a replaced cookie.
+export async function rotateSession(req, userId, db = pool) {
+  const old = readSessionToken(req);
+  if (isTokenShape(old)) {
+    await db.execute("DELETE FROM sessions WHERE token_hash = ?", [
+      hashToken(old),
+    ]);
+  }
+  return createSession(userId, db);
 }
 
 // The one place a raw session token becomes a user. Reused later by the WebSocket upgrade.
