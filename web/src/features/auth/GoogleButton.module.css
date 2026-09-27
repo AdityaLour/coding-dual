@@ -1,0 +1,19 @@
+/* Same height as Google's large button, so nothing jumps when it arrives. */
+.slot {
+  display: flex;
+  justify-content: center;
+  min-height: 44px;
+}
+
+/* While Google's script loads: an empty pill outline where the button will be. */
+.slot:empty {
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+
+.note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  text-align: center;
+}

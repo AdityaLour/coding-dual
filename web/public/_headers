@@ -1,0 +1,8 @@
+# Cloudflare Pages response headers (production only; Vite dev ignores this file).
+# Content-Security-Policy is added at deploy time, once the API domain is final.
+/*
+  X-Frame-Options: DENY
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin-allow-popups

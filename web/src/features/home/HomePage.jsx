@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Link } from "react-router";
 import Logo from "@/shared/ui/Logo.jsx";
+import { useAuth } from "@/shared/auth/useAuth.js";
 import HomeHeader from "./HomeHeader.jsx";
 import HomeHero from "./HomeHero.jsx";
 import MiniEditor from "./MiniEditor.jsx";
@@ -13,9 +14,6 @@ import SceneDoodle from "./journey/SceneDoodle.jsx";
 import { useReveal } from "./useReveal.js";
 import { FIRST_LINE, SAY } from "./homeCopy.js";
 import s from "./HomePage.module.css";
-
-// Until accounts are wired to the backend, the player is a placeholder.
-const PLAYER = { name: "aditya", rank: "Unranked" };
 
 function Section({ id, station, className = "", children }) {
   const ref = useReveal(s.shown, s.hiding);
@@ -45,17 +43,20 @@ function Heading({ id, children }) {
 
 export default function HomePage() {
   const rootRef = useRef(null);
+  const { user } = useAuth();
+  // Ratings aren't built yet, so everyone is honestly "Unranked".
+  const player = { name: user.username, rank: "Unranked" };
 
   return (
     <div ref={rootRef} className={s.page}>
       <title>Home — Boip</title>
       <meta name="robots" content="noindex" />
 
-      <HomeHeader player={PLAYER} />
+      <HomeHeader player={player} />
 
       <main>
         <div data-journey-start>
-          <HomeHero player={PLAYER} />
+          <HomeHero player={player} />
         </div>
 
         <Section id="practice" station="practice">
@@ -93,7 +94,7 @@ export default function HomePage() {
 
         <Section id="board" station="board">
           <Heading id="board-title">Leaderboard</Heading>
-          <BoardPreview player={PLAYER} />
+          <BoardPreview player={player} />
           <Link className={s.cta} to="/leaderboard">
             See the full leaderboard
           </Link>

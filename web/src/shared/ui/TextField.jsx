@@ -1,11 +1,13 @@
 import { useId, useState } from "react";
 import styles from "./TextField.module.css";
 
+// action: optional { label, ariaLabel, onClick } button inside the field (e.g. "Shuffle").
 export default function TextField({
   label,
   type = "text",
   error,
   hint,
+  action,
   ...inputProps
 }) {
   const id = useId();
@@ -20,7 +22,7 @@ export default function TextField({
       <label htmlFor={id} className={styles.label}>
         {label}
       </label>
-      <div className={styles.control}>
+      <div className={`${styles.control} ${action ? styles.hasAction : ""}`}>
         <input
           id={id}
           type={isPassword && revealed ? "text" : type}
@@ -37,6 +39,16 @@ export default function TextField({
             aria-pressed={revealed}
           >
             {revealed ? "Hide" : "Show"}
+          </button>
+        )}
+        {!isPassword && action && (
+          <button
+            type="button"
+            className={styles.reveal}
+            onClick={action.onClick}
+            aria-label={action.ariaLabel}
+          >
+            {action.label}
           </button>
         )}
       </div>

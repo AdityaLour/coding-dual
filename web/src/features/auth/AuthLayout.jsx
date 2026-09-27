@@ -7,12 +7,13 @@ import FloatingSymbols from "./FloatingSymbols.jsx";
 import ChallengerBanner from "@/shared/ui/ChallengerBanner.jsx";
 import SplitOpen from "./SplitOpen.jsx";
 import { AUTH_COPY, modeFromPath } from "./authCopy.js";
+import { randomHandle } from "./handles.js";
 import s from "./AuthLayout.module.css";
 
 const SWAP_AT_MS = 520; // the banner fully covers the middle here
 const BANNER_MS = 1100;
 
-// Shared shell for /login and /signup. It stays mounted between the two,
+// Shared shell for every auth page. It stays mounted while switching between them,
 // so the doodle keeps running and typed values carry over.
 export default function AuthLayout() {
   const navigate = useNavigate();
@@ -20,7 +21,11 @@ export default function AuthLayout() {
   const reduceMotion = usePrefersReducedMotion();
   const copy = AUTH_COPY[modeFromPath(pathname)];
 
-  const [values, setValues] = useState({ email: "", password: "" });
+  const [values, setValues] = useState(() => ({
+    email: "",
+    password: "",
+    username: randomHandle(),
+  }));
   const [banner, setBanner] = useState(null);
   const timers = useRef([]);
 
