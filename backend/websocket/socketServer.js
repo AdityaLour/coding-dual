@@ -26,6 +26,7 @@ export function setUpWebSocket(wss) {
             ws,
             parsedData.source_code,
             parsedData.language_id,
+            clients,
           );
         }
       } catch (error) {
