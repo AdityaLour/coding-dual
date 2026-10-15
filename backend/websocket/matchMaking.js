@@ -1,168 +1,127 @@
 import fs from "fs";
-import crypto from "crypto";
 import redisClient from "../redis/connection.js";
+import pool from "../db/connection.js";
 import { problems } from "../problem/problem.js";
-import { duels } from "./duels.js";
+import { clients, sendTo } from "./clients.js";
+import { createDuel, inActiveDuel } from "./duels.js";
 
-const matchmakingScript = fs.readFileSync("redis/matchmaking.lua", "utf8");
+const QUEUE = "matchmakingQueue"; // sorted set: userId scored by rating
+const TIMES = "matchmakingTimes"; // hash: userId -> arrival time (ms)
+const claimScript = fs.readFileSync("redis/matchmaking.lua", "utf8");
+const problem = problems.addTwoNum.desc;
+
+// Rating window: starts at START_WIDTH, grows GROW every STEP_MS, stops at MAX_WIDTH.
+const START_WIDTH = 100;
+const GROW = 60;
+const MAX_WIDTH = 500;
+const STEP_MS = 4000;
 
 let sweepTimer = null;
-const ques = problems.addTwoNum.desc;
+let sweeping = false;
 
-async function runSweep(clients) {
-  const waiting = await redisClient.zRangeWithScores("matchmakingQueue", 0, -1);
+const widthAfter = (waitedMs) =>
+  Math.min(START_WIDTH + Math.floor(waitedMs / STEP_MS) * GROW, MAX_WIDTH);
 
-  for (const player of waiting) {
-    const id = player.value;
-    const rating = player.score;
+const claim = (userId, rating, width) =>
+  redisClient.eval(claimScript, {
+    keys: [QUEUE, TIMES],
+    arguments: [String(rating - width), String(rating + width), String(userId)],
+  });
 
-    const arrival = await redisClient.hGet("matchmakingTimes", id);
-    if (!arrival) continue;
+// Sockets don't survive a restart, so anything still queued at boot is a ghost.
+export const resetQueue = () => redisClient.del([QUEUE, TIMES]);
 
-    const waited = Date.now() - Number(arrival);
+// True if the user was actually queued.
+export async function leaveQueue(userId) {
+  const [removed] = await redisClient
+    .multi()
+    .zRem(QUEUE, String(userId))
+    .hDel(TIMES, String(userId))
+    .exec();
+  return removed > 0;
+}
 
-    const step = Math.floor(waited / 4000);
-    let width = 100 + step * 60;
-    if (width > 500) width = 500;
+// The rating always comes from the database, never from the client.
+async function enqueue(userId) {
+  const [[row]] = await pool.execute("SELECT rating FROM users WHERE id = ?", [
+    userId,
+  ]);
+  await redisClient
+    .multi()
+    .zAdd(QUEUE, { score: row.rating, value: String(userId) })
+    .hSet(TIMES, String(userId), String(Date.now()))
+    .exec();
+  sweepTimer ??= setInterval(runSweep, STEP_MS);
+  return row.rating;
+}
 
-    const low = rating - width;
-    const high = rating + width;
-
-    const opponent = await redisClient.eval(matchmakingScript, {
-      keys: ["matchmakingQueue", "matchmakingTimes"],
-      arguments: [String(low), String(high), id],
-    });
-
-    if (opponent) {
-      await redisClient.zRem("matchmakingQueue", id);
-      await redisClient.hDel("matchmakingTimes", id);
-
-      const meClient = clients.find((c) => c.id === id);
-      const opponentClient = clients.find((c) => c.id === opponent);
-
-      if (meClient && opponentClient) {
-        const newDuelId = crypto.randomUUID();
-
-        duels[newDuelId] = {
-          duelId: newDuelId,
-          playerA: meClient.id,
-          playerB: opponentClient.id,
-          status: "waiting",
-          winner: null,
-        };
-
-        opponentClient.duelId = newDuelId;
-        meClient.duelId = newDuelId;
-        meClient.socket.send(
-          JSON.stringify({
-            type: "matchFound",
-            opponentId: opponent,
-            problem: ques,
-            duelId: newDuelId,
-          }),
-        );
-        opponentClient.socket.send(
-          JSON.stringify({
-            type: "matchFound",
-            opponentId: id,
-            problem: ques,
-            duelId: newDuelId,
-          }),
-        );
-
-        console.log("Sweep matched:", id, "vs", opponent);
-      }
-    } else if (width >= 500) {
-      const meClient = clients.find((c) => c.id === id);
-      if (meClient) {
-        meClient.socket.send(JSON.stringify({ type: "noMatch" }));
-      }
-      await redisClient.zRem("matchmakingQueue", id);
-      await redisClient.hDel("matchmakingTimes", id);
-      console.log("No match within cap, removed:", id);
-    }
+// Both ids were just removed from the queue by the claim script.
+function pair(aId, bId) {
+  const [a, b] = [Number(aId), Number(bId)];
+  if (!clients.has(a) || !clients.has(b)) {
+    // One has vanished: put the one still here back in the queue.
+    return Promise.all(
+      [a, b].filter((id) => clients.has(id)).map((id) => enqueue(id)),
+    );
   }
+  const duelId = createDuel(a, b);
+  sendTo(a, {
+    type: "matchFound",
+    opponent: clients.get(b).username,
+    problem,
+    duelId,
+  });
+  sendTo(b, {
+    type: "matchFound",
+    opponent: clients.get(a).username,
+    problem,
+    duelId,
+  });
+}
 
-  const count = await redisClient.zCard("matchmakingQueue");
-  if (count === 0) {
-    clearInterval(sweepTimer);
-    sweepTimer = null;
+async function runSweep() {
+  if (sweeping) return;
+  sweeping = true;
+  try {
+    for (const { value, score } of await redisClient.zRangeWithScores(
+      QUEUE,
+      0,
+      -1,
+    )) {
+      const arrival = Number(await redisClient.hGet(TIMES, value));
+      if (!arrival) continue;
+
+      const width = widthAfter(Date.now() - arrival);
+      const opponent = await claim(value, score, width);
+      if (opponent) await pair(value, opponent);
+      else if (width >= MAX_WIDTH && (await leaveQueue(value))) {
+        sendTo(Number(value), { type: "noMatch" });
+      }
+    }
+    if ((await redisClient.zCard(QUEUE)) === 0) {
+      clearInterval(sweepTimer);
+      sweepTimer = null;
+    }
+  } catch (error) {
+    console.error("Matchmaking sweep failed:", error);
+  } finally {
+    sweeping = false;
   }
 }
 
-export async function handleFindMatch(ws, clients, rating) {
-  if (typeof rating !== "number" || Number.isNaN(rating)) {
-    console.log("Invalid rating, ignoring findMatch");
-    return;
+export async function handleFindMatch({ userId }) {
+  if (inActiveDuel(userId))
+    return sendTo(userId, { type: "error", code: "inDuel" });
+  if ((await redisClient.zScore(QUEUE, String(userId))) !== null) {
+    return sendTo(userId, { type: "error", code: "alreadyQueued" });
   }
 
-  const me = clients.find((c) => c.socket === ws);
-  const myId = me.id;
+  const rating = await enqueue(userId);
+  const opponent = await claim(userId, rating, START_WIDTH);
+  if (opponent) await pair(userId, opponent);
+}
 
-  const low = rating - 100;
-  const high = rating + 100;
-
-  const opponent = await redisClient.eval(matchmakingScript, {
-    keys: ["matchmakingQueue", "matchmakingTimes"],
-    arguments: [String(low), String(high), myId],
-  });
-
-  if (opponent) {
-    const opponentClient = clients.find((c) => c.id === opponent);
-
-    if (!opponentClient) {
-      const now = Date.now();
-      await redisClient.zAdd("matchmakingQueue", {
-        score: rating,
-        value: myId,
-      });
-      await redisClient.hSet("matchmakingTimes", myId, now);
-      console.log("Opponent vanished, queued self instead");
-      return;
-    }
-
-    const messageForMe = {
-      type: "matchFound",
-      opponentId: opponent,
-      problem: ques,
-      duelId: null,
-    };
-    const messageForOpponent = {
-      type: "matchFound",
-      opponentId: myId,
-      problem: ques,
-      duelId: null,
-    };
-
-    const newDuelId = crypto.randomUUID();
-
-    duels[newDuelId] = {
-      duelId: newDuelId,
-      playerA: myId,
-      playerB: opponent,
-      status: "waiting",
-      winner: null,
-    };
-
-    messageForMe.duelId = newDuelId;
-    messageForOpponent.duelId = newDuelId;
-    me.duelId = newDuelId;
-    opponentClient.duelId = newDuelId;
-
-    ws.send(JSON.stringify(messageForMe));
-    opponentClient.socket.send(JSON.stringify(messageForOpponent));
-
-    console.log("Match made:", myId, "vs", opponent);
-  } else {
-    const now = Date.now();
-
-    await redisClient.zAdd("matchmakingQueue", { score: rating, value: myId });
-    await redisClient.hSet("matchmakingTimes", myId, now);
-
-    if (sweepTimer === null) {
-      sweepTimer = setInterval(() => runSweep(clients), 4000);
-    }
-
-    console.log("No opponent found — would wait in queue");
-  }
+export async function handleCancelMatch({ userId }) {
+  await leaveQueue(userId);
+  sendTo(userId, { type: "matchCancelled" });
 }

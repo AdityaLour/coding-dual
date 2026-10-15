@@ -1,52 +1,120 @@
-import crypto from "crypto";
-import redisClient from "../redis/connection.js";
-import { handleFindMatch } from "./matchMaking.js";
+import { findSessionUser } from "../utils/session.js";
+import { clients, sendTo } from "./clients.js";
+import {
+  hit,
+  MSG_LIMIT,
+  MSG_WINDOW_MS,
+  SUBMIT_GAP_MS,
+  MAX_STRIKES,
+  HEARTBEAT_MS,
+} from "./limits.js";
+import {
+  handleFindMatch,
+  handleCancelMatch,
+  leaveQueue,
+} from "./matchMaking.js";
 import { handleSubmission } from "./submisson.js";
+import { duelOf, opponentOf, removeDuel } from "./duels.js";
+
+function dispatch(client, message) {
+  switch (message?.type) {
+    case "findMatch":
+      return handleFindMatch(client);
+    case "cancelMatch":
+      return handleCancelMatch(client);
+    case "submitCode":
+      return handleSubmission(client, message.source_code, message.language_id);
+  }
+}
 
 export function setUpWebSocket(wss) {
-  const clients = [];
+  wss.on("connection", (ws, req, user) => {
+    // One live socket per user, newest wins. Registering first makes the old socket stale:
+    // its messages are dropped and its close handler leaves the shared state alone.
+    const old = clients.get(user.id);
+    const client = {
+      userId: user.id,
+      username: user.username,
+      socket: ws,
+      buckets: new Map(),
+      strikes: 0,
+    };
+    clients.set(user.id, client);
+    old?.socket.close(4001, "Opened in another tab");
 
-  wss.on("connection", function (ws) {
-    const client = { id: crypto.randomUUID(), socket: ws };
-    clients.push(client);
+    // Messages run one at a time per connection (findMatch then cancelMatch can't interleave),
+    // and the old socket's queue entry is removed before the first one runs.
+    const log = (label) => (error) => console.error(label, error);
+    let chain = (old ? leaveQueue(user.id) : Promise.resolve()).catch(
+      log("Queue cleanup failed:"),
+    );
 
-    const welcome = { type: "welcome", id: client.id };
-    ws.send(JSON.stringify(welcome));
+    ws.alive = true;
+    ws.on("pong", () => (ws.alive = true));
+    ws.on("error", log("Socket error:")); // e.g. an oversized message; unhandled, it would crash the process
 
-    ws.on("message", async function (data) {
+    ws.on("message", (data) => {
+      if (clients.get(user.id) !== client || ws.readyState !== ws.OPEN) return;
+
+      let message;
       try {
-        const parsedData = JSON.parse(data);
+        message = JSON.parse(data);
+      } catch {
+        return; // malformed JSON is ignored
+      }
 
-        if (parsedData.type === "findMatch") {
-          await handleFindMatch(ws, clients, parsedData.rating);
-        }
-
-        if (parsedData.type === "submitCode") {
-          await handleSubmission(
-            ws,
-            parsedData.source_code,
-            parsedData.language_id,
-            clients,
-          );
-        }
-      } catch (error) {
-        console.error("Invalid message:", error);
+      const tooFast =
+        !hit(client.buckets, "any", MSG_LIMIT, MSG_WINDOW_MS) ||
+        (message?.type === "submitCode" &&
+          !hit(client.buckets, "submit", 1, SUBMIT_GAP_MS));
+      if (tooFast) {
+        sendTo(user.id, { type: "error", code: "rateLimited" });
+        if (++client.strikes >= MAX_STRIKES)
+          ws.close(1008, "Too many messages");
         return;
       }
+
+      chain = chain
+        .then(() => dispatch(client, message))
+        .catch(log("Message failed:"));
     });
 
-    ws.on("close", async function () {
-      const index = clients.findIndex((c) => c.socket === ws);
-
-      if (index !== -1) {
-        const id = clients[index].id;
-
-        await redisClient.zRem("matchmakingQueue", id);
-        await redisClient.hDel("matchmakingTimes", id);
-
-        clients.splice(index, 1);
-      }
-      console.log("Client disconnected. Remaining:", clients.length);
+    ws.on("close", () => {
+      if (clients.get(user.id) !== client) return; // replaced: the new socket owns the state
+      clients.delete(user.id);
+      leaveQueue(user.id).catch(log("Queue cleanup failed:"));
+      // A duel with both players gone can never end, and would block them from queueing again.
+      const duel = duelOf(user.id);
+      if (duel && !clients.has(opponentOf(duel, user.id))) removeDuel(duel);
+      console.log("Client disconnected. Remaining:", clients.size);
     });
+
+    sendTo(user.id, { type: "welcome", username: user.username });
   });
+
+  // Every tick: drop sockets that never answered the last ping, then close any whose
+  // session has ended (logout, password reset) so an open socket can't outlive its login.
+  let checking = false;
+  setInterval(async () => {
+    for (const ws of wss.clients) {
+      if (!ws.alive) ws.terminate();
+      else {
+        ws.alive = false;
+        ws.ping();
+      }
+    }
+    if (checking) return;
+    checking = true;
+    try {
+      for (const ws of wss.clients) {
+        if (ws.readyState === ws.OPEN && !(await findSessionUser(ws.token))) {
+          ws.close(4002, "Session ended");
+        }
+      }
+    } catch (error) {
+      console.error("Session re-check failed:", error); // a database hiccup must not log anyone out
+    } finally {
+      checking = false;
+    }
+  }, HEARTBEAT_MS).unref();
 }
