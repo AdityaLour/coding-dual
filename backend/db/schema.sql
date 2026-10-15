@@ -2,13 +2,16 @@ DROP TABLE IF EXISTS email_tokens;
 DROP TABLE IF EXISTS sessions;
 DROP TABLE IF EXISTS logins;
 DROP TABLE IF EXISTS users;
+ALTER TABLE users ADD COLUMN rating INT NOT NULL DEFAULT 1200, ADD CONSTRAINT users_rating_range CHECK (rating BETWEEN 0 AND 4000);
 
 CREATE TABLE users(
     id INT AUTO_INCREMENT PRIMARY KEY,
     email VARCHAR(254) NOT NULL UNIQUE,          -- stored trimmed + lowercased
     username VARCHAR(20) NULL UNIQUE,            -- NULL until a Google user picks one
-    email_verified_at DATETIME NULL,             -- NULL = not verified
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+    email_verified_at DATETIME NULL,       
+    rating INT NOT NULL DEFAULT 1200,       -- NULL = not verified
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+        CONSTRAINT users_rating_range CHECK (rating BETWEEN 0 AND 4000)
 );
 
 CREATE TABLE logins(
@@ -43,3 +46,4 @@ CREATE TABLE email_tokens(
     used_at DATETIME NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
+
