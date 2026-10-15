@@ -1,54 +1,89 @@
 import { useCallback, useEffect, useRef, useState } from "react";
+import { useRealtime } from "@/shared/realtime/useRealtime.js";
 
-const SIMULATED_WAIT_MS = 3400;
+const GIVE_UP_MS = 30_000;
+const GONE = ["replaced", "stopped"]; // connection states that won't come back by themselves
 
-// Matchmaking state for the hero: idle → searching → found.
-// The backend isn't connected yet, so the search is simulated in development
-// only. A production build says so plainly instead of faking a match.
+// Matchmaking for the hero, driven by the server.
+// phase: idle | searching | found | cancelled | noMatch | inDuel | busy | lost
 export function useMatchmaking(onFound) {
+  const { status, send, subscribe } = useRealtime();
   const [phase, setPhase] = useState("idle");
-  const [seconds, setSeconds] = useState(0);
-  const timers = useRef({ tick: 0, done: 0 });
+  const [rival, setRival] = useState(null);
+  const [clock, setClock] = useState({ startedAt: 0, now: 0 });
+  const phaseRef = useRef("idle"); // lets the message listener see the current phase
   const onFoundRef = useRef(onFound);
   useEffect(() => {
     onFoundRef.current = onFound;
   });
 
-  const clear = () => {
-    clearInterval(timers.current.tick);
-    clearTimeout(timers.current.done);
-  };
-  useEffect(() => clear, []);
+  const change = useCallback((next) => {
+    phaseRef.current = next;
+    setPhase(next);
+  }, []);
 
-  const start = useCallback(() => {
-    if (!import.meta.env.DEV) {
-      setPhase("unavailable");
-      return;
-    }
-    clear();
-    const startedAt = Date.now();
-    setSeconds(0);
-    setPhase("searching");
-    timers.current.tick = setInterval(
-      () => setSeconds(Math.floor((Date.now() - startedAt) / 1000)),
+  useEffect(
+    () =>
+      subscribe((message) => {
+        switch (message.type) {
+          case "welcome": // (re)connected: a search that was running died with the old socket
+            if (phaseRef.current === "searching") send({ type: "findMatch" });
+            break;
+          case "matchFound":
+            setRival({ name: message.opponent, problem: message.problem });
+            change("found");
+            onFoundRef.current?.();
+            break;
+          case "noMatch":
+            change("noMatch");
+            break;
+          case "error":
+            if (message.code === "inDuel") change("inDuel");
+            else if (message.code === "rateLimited") change("busy");
+            // alreadyQueued: the server has us queued, which is what we wanted
+            break;
+          case "gameOver": // the duel ended, so the next search is allowed
+          case "result":
+            if (message.type === "gameOver" || message.correct) {
+              setRival(null);
+              change("idle");
+            }
+            break;
+        }
+      }),
+    [subscribe, send, change],
+  );
+
+  // Searching without a connection: wait a while for it to come back, then stop.
+  useEffect(() => {
+    if (phase !== "searching" || status === "open") return undefined;
+    const wait = GONE.includes(status) ? 0 : GIVE_UP_MS;
+    const timer = setTimeout(() => change("lost"), wait);
+    return () => clearTimeout(timer);
+  }, [phase, status, change]);
+
+  // The search clock; stays on the original start time across a reconnect.
+  useEffect(() => {
+    if (phase !== "searching") return undefined;
+    const tick = setInterval(
+      () => setClock((c) => ({ ...c, now: Date.now() })),
       250,
     );
-    timers.current.done = setTimeout(() => {
-      clearInterval(timers.current.tick);
-      setPhase("found");
-      onFoundRef.current?.();
-    }, SIMULATED_WAIT_MS);
-  }, []);
+    return () => clearInterval(tick);
+  }, [phase]);
+
+  const start = useCallback(() => {
+    if (!send({ type: "findMatch" })) return;
+    const now = Date.now();
+    setClock({ startedAt: now, now });
+    change("searching");
+  }, [send, change]);
 
   const cancel = useCallback(() => {
-    clear();
-    setPhase("cancelled");
-  }, []);
+    send({ type: "cancelMatch" });
+    change("cancelled");
+  }, [send, change]);
 
-  const reset = useCallback(() => {
-    clear();
-    setPhase("idle");
-  }, []);
-
-  return { phase, seconds, start, cancel, reset };
+  const seconds = Math.max(0, Math.floor((clock.now - clock.startedAt) / 1000));
+  return { phase, seconds, rival, start, cancel };
 }

@@ -8,7 +8,7 @@ const FLICKER_STEPS = 12;
 
 // The rival's side of the hero. While idle, doodle faces flicker through it like a
 // character-select screen; while searching it becomes a radar; when found it shows the rival.
-export default function RivalSlot({ phase, revealed }) {
+export default function RivalSlot({ phase, rival, revealed }) {
   const reduceMotion = usePrefersReducedMotion();
   const [flickerFace, setFlickerFace] = useState(null);
 
@@ -61,8 +61,8 @@ export default function RivalSlot({ phase, revealed }) {
               size={112}
               background="var(--opp-bg)"
             />
-            <span className={s.rivalName}>Sample rival</span>
-            <span className={s.rivalRating}>simulated match</span>
+            <span className={s.rivalName}>{rival.name}</span>
+            <span className={s.rivalMeta}>{rival.problem}</span>
           </div>
         ) : searching ? (
           <span className={s.caption}>searching…</span>

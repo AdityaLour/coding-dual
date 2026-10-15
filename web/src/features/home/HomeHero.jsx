@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import DoodleFace from "@/shared/ui/DoodleFace.jsx";
 import ChallengerBanner from "@/shared/ui/ChallengerBanner.jsx";
 import { usePrefersReducedMotion } from "@/shared/hooks/usePrefersReducedMotion.js";
+import { useRealtime } from "@/shared/realtime/useRealtime.js";
 import RivalSlot from "./RivalSlot.jsx";
 import { useMatchmaking } from "./useMatchmaking.js";
 import s from "./HomeHero.module.css";
@@ -9,11 +10,20 @@ import s from "./HomeHero.module.css";
 const REVEAL_AT_MS = 520; // the rival appears while the banner covers the screen
 const BANNER_MS = 1100;
 
+// What the status line says for each phase and for each connection problem.
 const STATUS = {
-  idle: "",
   cancelled: "Search cancelled.",
-  found: "Sample rival found. The duel screen comes next.",
-  unavailable: "Matchmaking isn't connected yet.",
+  noMatch: "No rival nearby right now. Try again.",
+  inDuel: "Finish your current duel first.",
+  busy: "Slow down a little, then try again.",
+  lost: "Connection lost. Search again.",
+  found: "Rival found. The duel screen comes next.",
+};
+const CONNECTION = {
+  connecting: "Connecting…",
+  reconnecting: "Connection lost. Reconnecting…",
+  replaced: "Boip is open in another tab.",
+  stopped: "Connection closed after too many messages. Reload the page.",
 };
 
 export default function HomeHero({ player }) {
@@ -24,8 +34,9 @@ export default function HomeHero({ player }) {
 
   useEffect(() => () => timers.current.forEach(clearTimeout), []);
 
-  // Runs the moment a match is found (from the matchmaking timer, not an effect).
+  // Runs the moment the server reports a match.
   function handleFound() {
+    clearTimers(); // a banner from an earlier match must not overlap this one
     if (reduceMotion) return;
     setBanner(true);
     timers.current.push(
@@ -33,7 +44,8 @@ export default function HomeHero({ player }) {
       setTimeout(() => setBanner(false), BANNER_MS),
     );
   }
-  const { phase, seconds, start, cancel, reset } = useMatchmaking(handleFound);
+  const { status: connection, takeOver } = useRealtime();
+  const { phase, seconds, rival, start, cancel } = useMatchmaking(handleFound);
   // With reduced motion there's no banner, so the rival shows straight away.
   const rivalShown = phase === "found" && (reduceMotion || revealed);
 
@@ -44,22 +56,35 @@ export default function HomeHero({ player }) {
     setRevealed(false);
   }
 
-  function handleClick() {
-    if (phase === "searching") return cancel();
-    clearTimers(); // a banner from the previous match must not fire later
-    if (phase === "found") return reset();
-    start();
+  const searching = phase === "searching";
+  const open = connection === "open";
+  let label = "Find a duel";
+  let action = start;
+  let disabled = !open;
+  if (searching) {
+    label = "Cancel";
+    action = cancel;
+    disabled = false;
+  } else if (phase === "found") {
+    label = "In a duel";
+    disabled = true;
+  } else if (connection === "replaced") {
+    label = "Use this tab";
+    action = takeOver;
+    disabled = false;
   }
 
-  const searching = phase === "searching";
-  const label = searching
-    ? "Cancel"
-    : phase === "found"
-      ? "Search again"
-      : "Find a duel";
-  const status = searching
-    ? `Finding a rival… 0:${String(seconds).padStart(2, "0")}`
-    : STATUS[phase];
+  function handleClick() {
+    if (!searching) clearTimers();
+    action();
+  }
+
+  const clock = `${Math.floor(seconds / 60)}:${String(seconds % 60).padStart(2, "0")}`;
+  const status = !open
+    ? CONNECTION[connection]
+    : searching
+      ? `Finding a rival… ${clock}`
+      : (STATUS[phase] ?? "");
 
   return (
     <section className={s.hero} aria-labelledby="home-title">
@@ -86,6 +111,7 @@ export default function HomeHero({ player }) {
           type="button"
           className={`${s.find} ${searching ? s.secondary : ""}`}
           onClick={handleClick}
+          disabled={disabled}
         >
           {label}
         </button>
@@ -95,7 +121,7 @@ export default function HomeHero({ player }) {
       </div>
 
       <div className={s.slot} data-rival-slot>
-        <RivalSlot phase={phase} revealed={rivalShown} />
+        <RivalSlot phase={phase} rival={rival} revealed={rivalShown} />
       </div>
 
       {banner && <ChallengerBanner text="Rival found" direction={1} />}

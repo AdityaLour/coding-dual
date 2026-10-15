@@ -12,6 +12,7 @@ import { GuestOnly, RequireAuth } from "@/shared/auth/RouteGuards.jsx";
 import ComingSoon from "@/shared/ui/ComingSoon.jsx";
 import PageLoader from "@/shared/ui/PageLoader.jsx";
 import ErrorBoundary from "@/shared/ui/ErrorBoundary.jsx";
+import RealtimeProvider from "@/shared/realtime/RealtimeProvider.jsx";
 import NotFound from "./NotFound.jsx";
 
 // Loaded only when someone opens it: logged-out visitors never download it.
@@ -42,7 +43,9 @@ export default function App() {
           </Route>
 
           <Route element={<RequireAuth />}>
-            <Route path="/home" element={<HomePage />} />
+            <Route element={<RealtimeProvider />}>
+              <Route path="/home" element={<HomePage />} />
+            </Route>{" "}
             <Route
               path="/practice"
               element={

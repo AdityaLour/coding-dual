@@ -1,6 +1,6 @@
 // The one way the app talks to the backend. credentials: "include" sends the session cookie;
 // it's httpOnly, so this code can never read the token (which is the point).
-const API_URL =
+export const API_URL =
   import.meta.env.VITE_API_URL ??
   (import.meta.env.DEV ? "http://localhost:3000" : "");
 
