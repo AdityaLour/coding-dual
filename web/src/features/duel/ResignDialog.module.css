@@ -1,0 +1,57 @@
+.dialog {
+  width: min(92vw, 400px);
+  padding: 26px 24px 22px;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--control-border);
+  border-radius: 16px;
+}
+.dialog::backdrop {
+  background: rgba(8, 9, 10, 0.82);
+}
+.dialog[open] {
+  animation: pop 180ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+.title {
+  margin: 0 0 8px;
+  font: 400 24px/1.1 var(--font-display);
+}
+.text {
+  margin: 0 0 22px;
+  color: var(--text-2);
+  line-height: 1.5;
+}
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.actions button {
+  flex: 1 1 140px;
+  min-height: 48px;
+  border-radius: var(--radius-md);
+  font: 700 16px/1 var(--font-body);
+  cursor: pointer;
+}
+.keep {
+  color: var(--you-ink);
+  background: var(--you);
+  border: 0;
+}
+.keep:hover {
+  background: var(--you-hover);
+}
+.resign {
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--control-border);
+}
+.resign:hover {
+  border-color: var(--warn);
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+  }
+}

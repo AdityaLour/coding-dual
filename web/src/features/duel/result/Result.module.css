@@ -1,0 +1,933 @@
+/* The result screen. Phone: one column with the buttons pinned to the bottom. Tablet (600px+): the same,
+   larger. Desktop (1000px+): headline and rating on the left, the head-to-head card and numbers on the right.
+   Every entrance is a CSS animation on opacity/transform; --at is its delay in ms. The base styles are the
+   finished state, so with reduced motion (which turns animations off) the page is simply there. */
+.page {
+  --head: 56px;
+  --head-long: 46px;
+  --reason: 17px;
+  --drop-win: 120px;
+  --drop-loss: 240px;
+  --ghost: 230px;
+  --ratio-was: 20px;
+  --ratio-now: 44px;
+  --chip-big: 18px;
+  --avatar: 68px;
+  --tile-num: 26px;
+  --rise-y: 20px;
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  color: var(--text);
+  background: var(--bg);
+}
+
+/* ---- the whole page settles in; a loss also thuds ---- */
+.zoom {
+  position: absolute;
+  inset: 0;
+  animation:
+    settle 600ms cubic-bezier(0.215, 0.61, 0.355, 1) both,
+    fade-in 250ms linear both;
+}
+.thud {
+  position: absolute;
+  inset: 0;
+}
+.loss .thud {
+  animation: thud 420ms linear 380ms both;
+}
+
+/* ---- colour fields and the seam ---- */
+.wash {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(172deg, rgba(239, 230, 210, 0.07) 0 var(--seam-down), rgba(255, 92, 98, 0.07) var(--seam-down) 100%);
+  animation: breathe 4.5s ease-in-out infinite;
+}
+.seamBone,
+.seamRed {
+  position: absolute;
+  left: -10%;
+  width: 120%;
+  height: 4px;
+  transform: rotate(-8deg);
+}
+.seamBone {
+  top: var(--seam-down);
+  background: var(--you);
+}
+.seamRed {
+  top: calc(var(--seam-down) + 9px);
+  background: var(--opp);
+}
+.ghostNum {
+  position: absolute;
+  right: -14px;
+  bottom: 10%;
+  font: 400 var(--ghost) / 1 var(--font-display);
+  color: transparent;
+  white-space: nowrap;
+  pointer-events: none;
+  animation: fade-in 800ms linear 900ms both;
+}
+.ghostGain {
+  -webkit-text-stroke: 2px rgba(239, 230, 210, 0.14);
+}
+.ghostLoss {
+  -webkit-text-stroke: 2px rgba(156, 163, 169, 0.12);
+}
+.burst {
+  position: fixed;
+  inset: 0;
+  z-index: 5;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+
+/* ---- layout ---- */
+.scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.grid {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 28px 20px 190px;
+}
+/* On small screens the two columns dissolve into one list, ordered here. */
+.left,
+.right {
+  display: contents;
+}
+.headline {
+  order: 1;
+}
+.reason {
+  order: 2;
+}
+.rating,
+.unrated {
+  order: 3;
+}
+.card {
+  order: 4;
+}
+.tiles {
+  order: 5;
+}
+.note {
+  order: 6;
+}
+.actions.inline {
+  display: none;
+}
+
+/* ---- headline ---- */
+.headline {
+  margin: 0;
+  font: 400 var(--head) / 1 var(--font-display);
+  outline: none;
+}
+.headline[data-long="true"] {
+  font-size: var(--head-long);
+}
+.win .headline {
+  color: var(--you);
+}
+.letters {
+  display: flex;
+  flex: none;
+  flex-wrap: nowrap;
+}
+.letter {
+  display: inline-block;
+  flex: none;
+  animation-delay: calc(250ms + var(--i) * 65ms);
+  animation-fill-mode: both;
+}
+.space {
+  flex: none;
+  width: 0.38em;
+}
+.win .letter {
+  animation-name: drop-win, letter-in;
+  animation-duration: 560ms, 140ms;
+  animation-timing-function: cubic-bezier(0.34, 1.56, 0.64, 1), linear;
+}
+.loss .letter {
+  animation-name: drop-loss, letter-in;
+  animation-duration: 700ms, 175ms;
+  animation-timing-function: linear, linear;
+}
+.soft .letter {
+  animation-name: drop-soft, letter-in;
+  animation-duration: 560ms, 140ms;
+  animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1), linear;
+}
+
+.rise {
+  animation: rise 500ms cubic-bezier(0.215, 0.61, 0.355, 1) calc(var(--at) * 1ms) both;
+}
+.reason {
+  margin: 0;
+  max-width: 32ch;
+  font-size: var(--reason);
+  line-height: 1.4;
+  color: var(--text-2);
+}
+
+/* ---- rating ---- */
+.rating {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  width: 100%;
+  max-width: 560px;
+}
+.ratingLine {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px;
+}
+.ratingWas {
+  font: 400 var(--ratio-was) var(--font-code);
+  color: var(--muted);
+}
+.ratingLine svg {
+  color: var(--muted);
+}
+.ratingNow {
+  min-width: 4ch;
+  font: 700 var(--ratio-now) / 1 var(--font-code);
+}
+.unrated {
+  margin: 0;
+  font-size: 16px;
+  color: var(--muted);
+}
+.note {
+  margin: 0;
+  max-width: 46ch;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.chip {
+  font-family: var(--font-code);
+  font-weight: 700;
+  border-radius: 6px;
+  animation: pop 300ms cubic-bezier(0.34, 1.56, 0.64, 1) 2600ms both;
+}
+.chip.gain {
+  color: var(--you-ink);
+  background: var(--you);
+}
+.chip.loss {
+  color: var(--text);
+  background: var(--border);
+}
+.chipBig {
+  padding: 4px 10px;
+  font-size: var(--chip-big);
+}
+.chipSmall {
+  padding: 3px 10px;
+  font-size: 14px;
+}
+
+.trackBox {
+  container-type: inline-size;
+  width: 100%;
+  max-width: 520px;
+}
+.track {
+  position: relative;
+  height: 44px;
+}
+.line,
+.fill {
+  position: absolute;
+  top: 9px;
+  height: 4px;
+  border-radius: 2px;
+}
+.line {
+  left: 0;
+  right: 0;
+  background: var(--border);
+}
+.fill {
+  animation: fill 1300ms cubic-bezier(0.215, 0.61, 0.355, 1) 1300ms both;
+}
+.fill.gain {
+  background: var(--you);
+}
+.fill.loss {
+  background: #7a838a;
+}
+.tick {
+  position: absolute;
+  top: 26px;
+  width: 48px;
+  margin-left: -24px;
+  text-align: center;
+  font: 400 12px var(--font-code);
+  color: var(--muted);
+}
+.tickMid {
+  color: var(--text-2);
+}
+.was,
+.now {
+  position: absolute;
+  top: 2px;
+  width: 18px;
+  height: 18px;
+  margin-left: -9px;
+  border-radius: 50%;
+}
+.was {
+  border: 2px solid var(--muted);
+  background: var(--bg);
+}
+.now {
+  left: 0;
+  transform: translateX(calc(var(--to) * 1cqw));
+  animation: slide 1300ms cubic-bezier(0.215, 0.61, 0.355, 1) 1300ms both;
+}
+.now.gain {
+  background: var(--you);
+  box-shadow: 0 0 0 5px rgba(239, 230, 210, 0.22);
+}
+.now.loss {
+  background: var(--text-2);
+  box-shadow: 0 0 0 5px rgba(200, 205, 208, 0.18);
+}
+
+/* ---- head to head ---- */
+.card {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 14px 1fr;
+  grid-template-rows: auto 1fr auto;
+  min-height: 292px;
+  padding: 0 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  animation: card-in 600ms cubic-bezier(0.215, 0.61, 0.355, 1) 700ms both;
+}
+.cardTitle {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding: 16px 6px 0;
+  font: 700 15px var(--font-body);
+}
+.side {
+  grid-row: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 18px 4px 14px;
+  animation: rise 500ms cubic-bezier(0.215, 0.61, 0.355, 1) calc(var(--at) * 1ms) both;
+}
+.sideYou {
+  grid-column: 1;
+}
+.sideRival {
+  grid-column: 3;
+}
+.cardSeam {
+  grid-column: 2;
+  grid-row: 2;
+  position: relative;
+}
+.cardSeam::before,
+.cardSeam::after {
+  content: "";
+  position: absolute;
+  top: 10%;
+  bottom: 10%;
+  width: 3px;
+  transform: rotate(8deg);
+}
+.cardSeam::before {
+  left: 2px;
+  background: var(--you);
+}
+.cardSeam::after {
+  left: 7px;
+  background: var(--opp);
+}
+.avatar {
+  display: block;
+  width: var(--avatar);
+  height: var(--avatar);
+  border-radius: 50%;
+}
+.avatar svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.sideYou .winner {
+  box-shadow:
+    0 0 0 3px var(--surface),
+    0 0 0 5px var(--you);
+}
+.sideRival .winner {
+  box-shadow:
+    0 0 0 3px var(--surface),
+    0 0 0 5px var(--opp);
+}
+.sideName {
+  max-width: 100%;
+  overflow: hidden;
+  font-weight: 700;
+  font-size: 14px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.sideYou .sideName {
+  color: var(--you);
+}
+.sideRival .sideName {
+  color: var(--opp);
+}
+.sideRating {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-family: var(--font-code);
+}
+.was2 {
+  font-size: 12px;
+  color: var(--muted);
+}
+.now2 {
+  font-size: 22px;
+  font-weight: 700;
+}
+.winnerTag {
+  font: 400 11px var(--font-code);
+  letter-spacing: 0.16em;
+}
+.tagYou {
+  color: var(--you);
+}
+.tagRival {
+  color: var(--opp);
+}
+.barRow {
+  grid-column: 1 / -1;
+  grid-row: 3;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  padding: 14px 6px 16px;
+  border-top: 1px solid var(--border);
+}
+.barLabel {
+  font-size: 13.5px;
+  color: var(--text-2);
+}
+.barTrack {
+  height: 6px;
+  overflow: hidden;
+  background: var(--border);
+  border-radius: 3px;
+}
+.barFill {
+  width: 100%;
+  height: 100%;
+  border-radius: 3px;
+  transform-origin: left center;
+  transform: scaleX(var(--ratio));
+  animation: bar 1200ms cubic-bezier(0.215, 0.61, 0.355, 1) 1500ms both;
+}
+.bar_you {
+  background: var(--you);
+}
+.bar_opp {
+  background: var(--opp);
+}
+.bar_neutral {
+  background: var(--muted);
+}
+
+/* ---- numbers ---- */
+.tiles {
+  display: flex;
+  gap: 10px;
+}
+.tile {
+  flex: 1;
+  min-width: 0;
+  min-height: 84px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+.tileLabel {
+  font-size: 12.5px;
+  color: var(--muted);
+}
+.tileNum {
+  font: 700 var(--tile-num) / 1 var(--font-code);
+}
+
+/* ---- buttons ---- */
+.actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.actions button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  transition:
+    background-color 200ms,
+    border-color 200ms,
+    box-shadow 200ms,
+    transform 120ms;
+}
+.actions button:active {
+  transform: scale(0.97);
+}
+.primary {
+  min-height: 56px;
+  padding: 0 34px;
+  color: var(--you-ink);
+  background: var(--you);
+  border: 0;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 17px;
+}
+.primary:hover {
+  background: var(--you-hover);
+}
+.ghost {
+  min-height: 48px;
+  padding: 0 26px;
+  color: var(--text);
+  background: transparent;
+  border: 1px solid var(--control-border);
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+}
+.ghost:hover {
+  background: #1f2327;
+  border-color: #566068;
+}
+.pinned {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  align-items: center;
+  padding: 28px 20px 18px;
+  background: linear-gradient(to top, var(--bg) 62%, transparent);
+  animation: rise 500ms cubic-bezier(0.215, 0.61, 0.355, 1) 2300ms both;
+}
+.pinned button {
+  width: 100%;
+  max-width: 640px;
+}
+
+@media (min-width: 600px) {
+  .page {
+    --head: 104px;
+    --head-long: 86px;
+    --reason: 22px;
+    --drop-win: 190px;
+    --drop-loss: 380px;
+    --ghost: 380px;
+    --ratio-was: 26px;
+    --ratio-now: 60px;
+    --chip-big: 22px;
+    --avatar: 92px;
+    --tile-num: 34px;
+  }
+  .grid {
+    padding: 48px 40px 190px;
+    gap: 22px;
+  }
+  .tile {
+    min-height: 104px;
+    padding: 14px;
+  }
+  .sideName {
+    font-size: 16px;
+  }
+  .card {
+    min-height: 330px;
+  }
+}
+
+@media (min-width: 1000px) {
+  .page {
+    --head: 132px;
+    --head-long: 104px;
+    --drop-win: 170px;
+    --drop-loss: 420px;
+    --ghost: 430px;
+    --avatar: 104px;
+    --tile-num: 40px;
+    --rise-y: 22px;
+  }
+  .wash {
+    background: linear-gradient(105deg, rgba(239, 230, 210, 0.07) 0 var(--seam-across), rgba(255, 92, 98, 0.07) var(--seam-across) 100%);
+  }
+  .seamBone,
+  .seamRed {
+    top: -10%;
+    bottom: -10%;
+    left: var(--seam-across);
+    width: 5px;
+    height: auto;
+    transform: rotate(14deg);
+  }
+  .seamRed {
+    transform: translateX(9px) rotate(14deg);
+  }
+  .ghostNum {
+    right: 40px;
+    bottom: -40px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 460px;
+    gap: 40px;
+    align-items: start;
+    max-width: 1340px;
+    padding: 96px 60px 60px;
+  }
+  .left {
+    display: flex;
+    flex-direction: column;
+    gap: 26px;
+  }
+  .right {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 14px;
+  }
+  .headline,
+  .reason,
+  .rating,
+  .unrated,
+  .card,
+  .tiles,
+  .note {
+    order: 0;
+  }
+  .reason {
+    font-size: 22px;
+  }
+  .note {
+    margin-top: -6px;
+    font-size: 15px;
+  }
+  .actions.inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 14px;
+    margin-top: 6px;
+    animation: rise 500ms cubic-bezier(0.215, 0.61, 0.355, 1) 2300ms both;
+  }
+  .inline .ghost {
+    min-height: 56px;
+    font-size: 16px;
+  }
+  .primary {
+    font-size: 18px;
+  }
+  .actions.pinned {
+    display: none;
+  }
+  .card {
+    min-height: 352px;
+    padding: 0 20px;
+  }
+  .cardTitle {
+    padding: 22px 6px 0;
+    font-size: 16px;
+  }
+  .sideName {
+    font-size: 16px;
+  }
+  .was2 {
+    font-size: 14px;
+  }
+  .now2 {
+    font-size: 26px;
+  }
+  .winnerTag {
+    font-size: 12px;
+  }
+  .tile {
+    min-height: 112px;
+    padding: 16px 18px;
+  }
+  .tileLabel {
+    font-size: 13.5px;
+  }
+  .barRow {
+    padding: 16px 6px 18px;
+  }
+  .barLabel {
+    font-size: 14.5px;
+  }
+  .ratingLine {
+    gap: 22px;
+  }
+  .chipBig {
+    padding: 6px 14px;
+    border-radius: 8px;
+  }
+  .unrated {
+    font-size: 17px;
+  }
+  @media (hover: hover) {
+    .tile {
+      transition:
+        transform 250ms cubic-bezier(0.2, 0.8, 0.2, 1),
+        border-color 200ms,
+        background-color 200ms;
+    }
+    .tile:hover {
+      transform: translateY(-5px);
+      background: #1d2125;
+      border-color: #566068;
+    }
+  }
+}
+
+/* ---- hover (mouse only, not with reduced motion): a headline letter hops, a head-to-head side rises
+   and its avatar tilts, the main button glows. These use the separate translate / rotate / scale
+   properties, so they never fight the entrance animations on `transform`. ---- */
+@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+  .letter {
+    transition:
+      translate 300ms cubic-bezier(0.3, 1.7, 0.5, 1),
+      rotate 300ms cubic-bezier(0.3, 1.7, 0.5, 1);
+  }
+  .letter:hover {
+    translate: 0 -14px;
+    rotate: -4deg;
+  }
+  .side {
+    transition: translate 250ms cubic-bezier(0.3, 1.5, 0.5, 1);
+  }
+  .side:hover {
+    translate: 0 -6px;
+  }
+  .avatar {
+    transition:
+      scale 300ms cubic-bezier(0.3, 1.7, 0.5, 1),
+      rotate 300ms cubic-bezier(0.3, 1.7, 0.5, 1);
+  }
+  .side:hover .avatar {
+    scale: 1.1;
+    rotate: -4deg;
+  }
+  .primary:hover {
+    box-shadow: 0 8px 30px rgba(239, 230, 210, 0.18);
+  }
+}
+
+/* ---- with a mouse, the big number, the headline and the card drift at different depths ----
+   --mx / --my (-1 to 1) are set on the page by ResultScreen; touch screens and reduced motion never set them. */
+@media (hover: hover) and (pointer: fine) {
+  .ghostNum {
+    translate: calc(var(--mx, 0) * 26px) calc(var(--my, 0) * 16px);
+    transition: translate 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .headline {
+    translate: calc(var(--mx, 0) * 12px) calc(var(--my, 0) * 7px);
+    transition: translate 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .card {
+    translate: calc(var(--mx, 0) * -6px) calc(var(--my, 0) * -4px);
+    transition: translate 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+
+@keyframes settle {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes breathe {
+  0%,
+  100% {
+    opacity: 0.7;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+@keyframes thud {
+  0%,
+  100% {
+    transform: none;
+  }
+  5% {
+    transform: translateY(5.7px);
+  }
+  16% {
+    transform: translateY(-5px);
+  }
+  26% {
+    transform: translateY(4.4px);
+  }
+  37% {
+    transform: translateY(-3.7px);
+  }
+  47% {
+    transform: translateY(3px);
+  }
+  58% {
+    transform: translateY(-2.3px);
+  }
+  68% {
+    transform: translateY(1.7px);
+  }
+  79% {
+    transform: translateY(-1px);
+  }
+  89% {
+    transform: translateY(0.6px);
+  }
+}
+@keyframes letter-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes drop-win {
+  from {
+    transform: translateY(calc(var(--drop-win) * -1)) rotate(var(--rot)) scale(0.6);
+  }
+  to {
+    transform: none;
+  }
+}
+@keyframes drop-soft {
+  from {
+    transform: translateY(-44px);
+  }
+  to {
+    transform: none;
+  }
+}
+/* A hard fall with decaying bounces. */
+@keyframes drop-loss {
+  0% {
+    transform: translateY(calc(var(--drop-loss) * -1));
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  36% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+  }
+  55% {
+    transform: translateY(calc(var(--drop-loss) * -0.25));
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  73% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+  }
+  82% {
+    transform: translateY(calc(var(--drop-loss) * -0.0625));
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  91% {
+    transform: none;
+    animation-timing-function: cubic-bezier(0, 0.55, 0.45, 1);
+  }
+  95% {
+    transform: translateY(calc(var(--drop-loss) * -0.016));
+    animation-timing-function: cubic-bezier(0.55, 0, 1, 0.45);
+  }
+  100% {
+    transform: none;
+  }
+}
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(var(--rise-y));
+  }
+}
+@keyframes card-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+}
+@keyframes fill {
+  from {
+    transform: scaleX(0);
+  }
+}
+@keyframes slide {
+  from {
+    transform: translateX(calc(var(--from) * 1cqw));
+  }
+}
+@keyframes bar {
+  from {
+    transform: scaleX(0);
+  }
+}
+@media (min-width: 1000px) {
+  @keyframes card-in {
+    from {
+      opacity: 0;
+      transform: translateX(60px);
+    }
+  }
+}

@@ -13,11 +13,12 @@ import ComingSoon from "@/shared/ui/ComingSoon.jsx";
 import PageLoader from "@/shared/ui/PageLoader.jsx";
 import ErrorBoundary from "@/shared/ui/ErrorBoundary.jsx";
 import RealtimeProvider from "@/shared/realtime/RealtimeProvider.jsx";
+import DuelProvider from "@/features/duel/DuelProvider.jsx";
 import NotFound from "./NotFound.jsx";
 
 // Loaded only when someone opens it: logged-out visitors never download it.
 const HomePage = lazy(() => import("@/features/home/HomePage.jsx"));
-
+const DuelPage = lazy(() => import("@/features/duel/DuelPage.jsx"));
 export default function App() {
   return (
     <ErrorBoundary>
@@ -44,7 +45,10 @@ export default function App() {
 
           <Route element={<RequireAuth />}>
             <Route element={<RealtimeProvider />}>
-              <Route path="/home" element={<HomePage />} />
+              <Route element={<DuelProvider />}>
+                <Route path="/home" element={<HomePage />} />
+                <Route path="/duel" element={<DuelPage />} />
+              </Route>{" "}
             </Route>{" "}
             <Route
               path="/practice"

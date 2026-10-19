@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import DoodleFace, { FACE_VARIANTS } from "@/shared/ui/DoodleFace.jsx";
 import { usePrefersReducedMotion } from "@/shared/hooks/usePrefersReducedMotion.js";
 import s from "./RivalSlot.module.css";
+import { formatRating } from "@/features/duel/format.js";
 
 const FLICKER_EVERY_MS = 3200;
 const FLICKER_STEPS = 12;
@@ -62,7 +63,9 @@ export default function RivalSlot({ phase, rival, revealed }) {
               background="var(--opp-bg)"
             />
             <span className={s.rivalName}>{rival.name}</span>
-            <span className={s.rivalMeta}>{rival.problem}</span>
+            <span className={s.rivalMeta}>
+              {formatRating(rival.rating, rival.provisional)}
+            </span>
           </div>
         ) : searching ? (
           <span className={s.caption}>searching…</span>

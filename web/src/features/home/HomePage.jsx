@@ -1,5 +1,5 @@
 import { useRef } from "react";
-import { Link } from "react-router";
+import { Link, Navigate } from "react-router";
 import Logo from "@/shared/ui/Logo.jsx";
 import { useAuth } from "@/shared/auth/useAuth.js";
 import HomeHeader from "./HomeHeader.jsx";
@@ -14,6 +14,8 @@ import SceneDoodle from "./journey/SceneDoodle.jsx";
 import { useReveal } from "./useReveal.js";
 import { FIRST_LINE, SAY } from "./homeCopy.js";
 import s from "./HomePage.module.css";
+import { useDuel } from "@/features/duel/duelContext.js";
+import { formatRating } from "@/features/duel/format.js";
 
 function Section({ id, station, className = "", children }) {
   const ref = useReveal(s.shown, s.hiding);
@@ -45,8 +47,15 @@ export default function HomePage() {
   const rootRef = useRef(null);
   const { user } = useAuth();
   // Ratings aren't built yet, so everyone is honestly "Unranked".
-  const player = { name: user.username, rank: "Unranked" };
+  const { me, phase } = useDuel();
+  // "…" until the server has said (the welcome carries the rating).
+  const player = {
+    name: user.username,
+    rank: me ? formatRating(me.rating, me.provisional) : "…",
+  };
 
+  // Mid-duel there is nothing to do here: reconnecting or opening a new tab lands back in it.
+  if (phase === "duel") return <Navigate to="/duel" replace />;
   return (
     <div ref={rootRef} className={s.page}>
       <title>Home — Boip</title>

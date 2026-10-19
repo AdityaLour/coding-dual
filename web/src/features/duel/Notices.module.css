@@ -1,0 +1,36 @@
+.strip {
+  flex: none;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px 14px;
+  padding: 11px 16px;
+  color: var(--text-2);
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  border-left: 3px solid var(--you);
+  font-size: 14px;
+  line-height: 1.35;
+}
+.warn {
+  border-left-color: var(--warn);
+}
+.num {
+  font-family: var(--font-code);
+  color: var(--text);
+}
+.strip button {
+  min-height: 44px;
+  padding: 0 16px;
+  color: var(--you-ink);
+  background: var(--you);
+  border: 0;
+  border-radius: var(--radius-sm);
+  font: 700 14px var(--font-body);
+  cursor: pointer;
+}
+@media (min-width: 600px) {
+  .strip {
+    padding-inline: 28px;
+  }
+}
