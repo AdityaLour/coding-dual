@@ -98,6 +98,16 @@
   border-color: var(--text-2);
 }
 
+/* The hidden tests are never sent to the browser, so this is a plain statement, not a list. */
+.hidden {
+  margin: 0;
+  padding: 12px 14px;
+  color: var(--muted);
+  border: 1px dashed var(--control-border);
+  border-radius: var(--radius-sm);
+  font: 400 13.5px/1.5 var(--font-body);
+}
+
 /* Phones only: a button that takes you to the editor, pinned to the bottom of the problem. */
 .write {
   position: sticky;

@@ -69,6 +69,9 @@ export default function ProblemPane({
           ))}
         </div>
       )}
+      <p className={s.hidden}>
+        Your code also runs against hidden tests when you submit.
+      </p>
       {showWrite && (
         <div className={s.write}>
           <button type="button" onClick={onWrite}>
