@@ -10,7 +10,7 @@ const secondsLeft = (endsAt, offset) =>
 
 // The countdown and its bar. It runs off the server's deadline (offset = server clock minus ours),
 // and keeps its own state, so the ticking never re-renders the rest of the screen.
-export default function Clock({ endsAt, offset, totalMs }) {
+export default function Clock({ endsAt, offset, totalMs, className = "" }) {
   const [left, setLeft] = useState(() => secondsLeft(endsAt, offset));
 
   useEffect(() => {
@@ -22,7 +22,11 @@ export default function Clock({ endsAt, offset, totalMs }) {
 
   const fraction = Math.min(1, left / (totalMs / 1000));
   return (
-    <div className={s.clock} role="timer" aria-label="Time left">
+    <div
+      className={`${s.clock} ${className}`}
+      role="timer"
+      aria-label="Time left"
+    >
       <span
         className={`${s.time} ${left <= LAST_MINUTE && left > 0 ? s.tick : ""}`}
       >

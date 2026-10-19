@@ -82,6 +82,7 @@
   flex-direction: column;
   align-items: center;
   gap: 5px;
+  transition: opacity 200ms; /* it appears with the rest of the screen when the intro's names land */
 }
 .time {
   display: inline-block;
@@ -110,6 +111,7 @@
   flex: none;
   display: flex;
   height: var(--seam-width);
+  transition: opacity 200ms;
 }
 .seamYou,
 .seamOpp {

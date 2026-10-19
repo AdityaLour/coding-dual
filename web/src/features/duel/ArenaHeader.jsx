@@ -31,6 +31,7 @@ export default function ArenaHeader({ setSlot, revealed }) {
           endsAt={duel.endsAt}
           offset={offset}
           totalMs={duel.problem.minutes * 60_000}
+          className={hidden}
         />
         <div className={`${s.rivalSide} ${hidden}`}>
           <div className={s.who} ref={(element) => setSlot("rival", element)}>
@@ -48,7 +49,7 @@ export default function ArenaHeader({ setSlot, revealed }) {
           </span>
         </div>
       </header>
-      <div className={s.seam} aria-hidden="true">
+      <div className={`${s.seam} ${hidden}`} aria-hidden="true">
         <span className={s.seamYou} />
         <span className={s.seamOpp} />
       </div>
