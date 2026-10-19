@@ -1,3 +1,4 @@
+import pool from "../db/connection.js";
 import { findSessionUser } from "../utils/session.js";
 import { clients, sendTo } from "./clients.js";
 import {
@@ -14,7 +15,8 @@ import {
   leaveQueue,
 } from "./matchMaking.js";
 import { handleSubmission } from "./submisson.js";
-import { duelOf, opponentOf, removeDuel } from "./duels.js";
+import { duelOf, handleForfeit, playerBack, playerLeft } from "./duels.js";
+import { PROVISIONAL_DUELS } from "./rating.js";
 
 function dispatch(client, message) {
   switch (message?.type) {
@@ -74,6 +76,11 @@ export function setUpWebSocket(wss) {
         return;
       }
 
+      // Resigning must not wait behind a submission that is still being judged.
+      if (message?.type === "forfeit")
+        return void Promise.resolve()
+          .then(() => handleForfeit(client))
+          .catch(log("Forfeit failed:"));
       chain = chain
         .then(() => dispatch(client, message))
         .catch(log("Message failed:"));
@@ -83,13 +90,37 @@ export function setUpWebSocket(wss) {
       if (clients.get(user.id) !== client) return; // replaced: the new socket owns the state
       clients.delete(user.id);
       leaveQueue(user.id).catch(log("Queue cleanup failed:"));
-      // A duel with both players gone can never end, and would block them from queueing again.
+      // Mid-duel: starts the grace period (see duels.js); the opponent is told.
       const duel = duelOf(user.id);
-      if (duel && !clients.has(opponentOf(duel, user.id))) removeDuel(duel);
+      if (duel) playerLeft(duel, user.id);
       console.log("Client disconnected. Remaining:", clients.size);
     });
 
-    sendTo(user.id, { type: "welcome", username: user.username });
+    // Queued behind the cleanup above, so a message sent early still waits for the welcome.
+    chain = chain
+      .then(async () => {
+        let rating = null;
+        let provisional = false;
+        try {
+          const [[row]] = await pool.execute(
+            "SELECT rating, duels_played FROM users WHERE id = ?",
+            [user.id],
+          );
+          rating = row.rating;
+          provisional = row.duels_played < PROVISIONAL_DUELS;
+        } catch (error) {
+          log("Rating lookup failed:")(error); // the welcome still goes out, just without a rating
+        }
+        if (clients.get(user.id) !== client) return; // replaced while we looked it up
+        sendTo(user.id, {
+          type: "welcome",
+          username: user.username,
+          rating,
+          provisional,
+        });
+        playerBack(user.id); // reconnecting mid-duel: the duel state follows the welcome
+      })
+      .catch(log("Welcome failed:"));
   });
 
   // Every tick: drop sockets that never answered the last ping, then close any whose

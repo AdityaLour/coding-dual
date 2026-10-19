@@ -13,6 +13,11 @@ export const UPGRADE_WINDOW_MS = 60_000;
 export const MAX_PER_IP = 10; // open sockets per IP
 export const MAX_SOCKETS = 500; // open sockets in total
 export const HEARTBEAT_MS = 30_000;
+export const MAX_ATTEMPTS = 15; // judged submissions per player per duel
+export const GRACE_MS = 30_000; // time a disconnected player has to come back
+export const MAX_RESUMES = 2; // disconnects a player may recover from; the next one forfeits
+export const JUDGE_CONCURRENCY = 3; // tests of one submission judged at once; keep <= Judge0's COUNT workers
+export const JUDGE_SLOTS = 3; // Judge0 calls in flight across ALL duels; keep = Judge0's COUNT workers
 
 // Fixed-window counter: true while `key` is within `limit` hits per `windowMs`.
 export function hit(buckets, key, limit, windowMs) {

@@ -10,6 +10,7 @@ const REQUIRED = [
   "SMTP_HOST",
   "SMTP_PORT",
   "MAIL_FROM",
+  "JUDGE0_AUTH_TOKEN",
 ];
 
 const missing = REQUIRED.filter((name) => !process.env[name]);

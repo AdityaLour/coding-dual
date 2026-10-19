@@ -1,0 +1,24 @@
+{
+  "slug": "two-sum-exists",
+  "title": "Pair With Sum",
+  "rating": 1100,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "hashing",
+    "sorting",
+    "two-pointers"
+  ],
+  "statement": "Is there a pair of **different positions** `i < j` with `a_i + a_j = k`?\n\n## Input\nThe first line contains `n` and `k`. The second line contains `n` integers `a_1 ... a_n`.\n\n## Output\nPrint `YES` if such a pair exists, otherwise `NO`.\n\n## Constraints\n- `1 <= n <= 200000`\n- `-10^9 <= a_i <= 10^9`\n- `-2 * 10^9 <= k <= 2 * 10^9`\n\nNote that one element cannot be used twice, but two equal values at different positions can.\n",
+  "samples": [
+    {
+      "input": "5 9\n2 7 11 15 1\n",
+      "output": "YES\n"
+    },
+    {
+      "input": "3 10\n5 1 2\n",
+      "output": "NO\n"
+    }
+  ]
+}

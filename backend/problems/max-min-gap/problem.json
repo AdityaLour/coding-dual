@@ -1,0 +1,23 @@
+{
+  "slug": "max-min-gap",
+  "title": "Max-Min Gap",
+  "rating": 900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 10,
+  "tags": [
+    "math",
+    "implementation"
+  ],
+  "statement": "Given an array, print the difference between its largest and smallest element.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers `a_1 ... a_n`.\n\n## Output\nPrint `max(a) - min(a)`.\n\n## Constraints\n- `1 <= n <= 100000`\n- `-10^9 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5\n3 9 1 7 4\n",
+      "output": "8\n"
+    },
+    {
+      "input": "1\n42\n",
+      "output": "0\n"
+    }
+  ]
+}

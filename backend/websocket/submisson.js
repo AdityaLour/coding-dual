@@ -1,12 +1,15 @@
-import { problems } from "../problem/problem.js";
+import pool from "../db/connection.js";
+import { getProblem } from "../problem/bank.js";
 import { sendTo } from "./clients.js";
-import { duelOf, finishDuel, opponentOf } from "./duels.js";
+import { attemptsLeft, duelOf, endDuel } from "./duels.js";
+import { runTests } from "./judge.js";
 import { MAX_SOURCE_BYTES } from "./limits.js";
 
 // Judge0 CE ids: C, C++, Java, JavaScript, Python 3.
 const LANGUAGE_IDS = new Set([50, 54, 62, 63, 71]);
-const JUDGE0_TIMEOUT_MS = 10_000;
-const RAN_OK = 3; // Judge0 status id: ran to completion; we compare the output ourselves
+
+const matchOver = (userId) =>
+  sendTo(userId, { type: "duelFinish", message: "Match Over" });
 
 export async function handleSubmission({ userId }, source_code, language_id) {
   if (
@@ -24,51 +27,74 @@ export async function handleSubmission({ userId }, source_code, language_id) {
   const duel = duelOf(userId);
   if (!duel)
     return sendTo(userId, { type: "duelError", message: "No duel found" });
-  if (duel.status === "finished") {
-    return sendTo(userId, { type: "duelFinish", message: "Match Over" });
-  }
-  if (duel.status === "judging") {
+  if (duel.status === "finished" || duel.expired) return matchOver(userId);
+  if (duel.judging.has(userId)) {
     return sendTo(userId, {
       type: "duelJudge",
-      message: "opponent's code is being judged, please wait",
+      message: "Your last submission is still being judged",
+    });
+  }
+  if (attemptsLeft(duel, userId) <= 0) {
+    return sendTo(userId, {
+      type: "submitError",
+      message: "No submissions left in this duel",
     });
   }
 
-  duel.status = "judging"; // the gate: closed before the first await, so only one submission is judged at a time
+  // The gate is per player: closed before the first await, so a player has one submission out at a time.
+  // The rival may submit meanwhile; whoever's Accepted comes back first wins (endDuel's own gate).
+  duel.judging.add(userId);
+  duel.attempts.set(userId, (duel.attempts.get(userId) ?? 0) + 1);
 
-  const { stdin, answer } = problems.addTwoNum;
-  let correct = false;
-  let message = "Judge unavailable, try again";
+  let outcome;
   try {
-    const response = await fetch(
-      "http://localhost:12358/submissions?wait=true",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "X-Auth-Token": process.env.JUDGE0_AUTH_TOKEN,
-        },
-        body: JSON.stringify({ stdin, language_id, source_code }),
-        signal: AbortSignal.timeout(JUDGE0_TIMEOUT_MS),
-      },
+    outcome = await runTests(
+      getProblem(duel.problemId),
+      language_id,
+      source_code,
     );
-    const { status, stdout } = await response.json();
-    if (status?.id !== RAN_OK) message = status?.description ?? message;
-    else if (stdout?.trim() === answer) correct = true;
-    else message = "Wrong Answer";
   } catch (error) {
-    console.error("Judge0 call failed:", error);
+    console.error("Judging failed:", error);
+    outcome = { verdict: "Judge Error", failedTest: null, runtimeMs: null };
+  }
+  duel.judging.delete(userId);
+  const { verdict, failedTest, runtimeMs } = outcome;
+
+  // The duel may have ended while the code ran (rival solved it, forfeit): nothing more to decide.
+  if (duel.status === "finished") return matchOver(userId);
+
+  if (verdict === "Judge Error")
+    duel.attempts.set(userId, duel.attempts.get(userId) - 1); // not the player's fault
+  else {
+    pool
+      .execute(
+        `INSERT INTO submissions (duel_id, user_id, language_id, source, verdict, failed_test, runtime_ms)
+         VALUES (?, ?, ?, ?, ?, ?, ?)`,
+        [
+          duel.duelId,
+          userId,
+          language_id,
+          source_code,
+          verdict,
+          failedTest,
+          runtimeMs,
+        ],
+      )
+      .catch((error) => console.error("Saving submission failed:", error));
   }
 
-  // Whatever happened above, the gate ends up open (wrong/failed) or the duel finished (won).
-  if (correct) finishDuel(duel, userId);
-  else duel.status = "waiting";
-
-  if (!correct) return sendTo(userId, { type: "result", correct, message });
+  const correct = verdict === "Accepted";
   sendTo(userId, {
     type: "result",
     correct,
-    message: "Congratulation, Correct Answer",
+    verdict,
+    failedTest,
+    runtimeMs,
+    message: correct ? "Congratulations, correct answer" : verdict,
+    attemptsLeft: attemptsLeft(duel, userId),
   });
-  sendTo(opponentOf(duel, userId), { type: "gameOver", message: "You Lost" });
+
+  if (correct) return endDuel(duel, userId, "solved");
+  // Time ran out while submissions were being judged: the last one back closes the duel.
+  if (duel.expired && duel.judging.size === 0) endDuel(duel, null, "timeout");
 }

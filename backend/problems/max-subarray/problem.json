@@ -1,0 +1,23 @@
+{
+  "slug": "max-subarray",
+  "title": "Best Stretch",
+  "rating": 1300,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 20,
+  "tags": [
+    "dp",
+    "arrays"
+  ],
+  "statement": "Find the largest possible sum of a **non-empty** run of consecutive elements of the array.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers.\n\n## Output\nPrint the largest sum of a non-empty contiguous subarray.\n\n## Constraints\n- `1 <= n <= 100000`\n- `-10^9 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "6\n-2 1 -3 4 -1 2\n",
+      "output": "5\n"
+    },
+    {
+      "input": "3\n-5 -2 -9\n",
+      "output": "-2\n"
+    }
+  ]
+}

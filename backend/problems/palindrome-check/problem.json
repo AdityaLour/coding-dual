@@ -1,0 +1,23 @@
+{
+  "slug": "palindrome-check",
+  "title": "Palindrome Check",
+  "rating": 900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 10,
+  "tags": [
+    "strings",
+    "two-pointers"
+  ],
+  "statement": "A string is a palindrome if it reads the same forwards and backwards.\n\n## Input\nOne line with a string `s` of lowercase English letters.\n\n## Output\nPrint `YES` if `s` is a palindrome, otherwise `NO`.\n\n## Constraints\n- `1 <= |s| <= 100000`\n",
+  "samples": [
+    {
+      "input": "level\n",
+      "output": "YES\n"
+    },
+    {
+      "input": "abca\n",
+      "output": "NO\n"
+    }
+  ]
+}

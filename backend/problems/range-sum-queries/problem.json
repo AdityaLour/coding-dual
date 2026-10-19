@@ -1,0 +1,23 @@
+{
+  "slug": "range-sum-queries",
+  "title": "Range Sum Queries",
+  "rating": 1200,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 20,
+  "tags": [
+    "prefix-sums",
+    "arrays"
+  ],
+  "statement": "You are given an array and several questions. Each question gives `l` and `r`; answer with the sum of `a_l ... a_r` (positions start at 1).\n\n## Input\nThe first line contains `n` and `q`. The second line contains `n` integers. Each of the next `q` lines contains `l` and `r`.\n\n## Output\nFor each question print the sum on its own line.\n\n## Constraints\n- `1 <= n, q <= 100000`\n- `-10^9 <= a_i <= 10^9`\n- `1 <= l <= r <= n`\n",
+  "samples": [
+    {
+      "input": "5 3\n1 2 3 4 5\n1 5\n2 4\n3 3\n",
+      "output": "15\n9\n3\n"
+    },
+    {
+      "input": "1 1\n-5\n1 1\n",
+      "output": "-5\n"
+    }
+  ]
+}

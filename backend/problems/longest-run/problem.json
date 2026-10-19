@@ -1,0 +1,23 @@
+{
+  "slug": "longest-run",
+  "title": "Longest Run",
+  "rating": 1000,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "strings",
+    "implementation"
+  ],
+  "statement": "A *run* is a block of equal letters standing next to each other. Find the length of the longest run in a string.\n\n## Input\nOne line with a string `s` of lowercase English letters.\n\n## Output\nPrint the length of the longest run.\n\n## Constraints\n- `1 <= |s| <= 100000`\n",
+  "samples": [
+    {
+      "input": "aabbbc\n",
+      "output": "3\n"
+    },
+    {
+      "input": "abc\n",
+      "output": "1\n"
+    }
+  ]
+}

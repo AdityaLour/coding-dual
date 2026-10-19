@@ -1,0 +1,23 @@
+{
+  "slug": "array-sum",
+  "title": "Array Sum",
+  "rating": 800,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 10,
+  "tags": [
+    "math",
+    "implementation"
+  ],
+  "statement": "You are given `n` integers. Print their sum.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers `a_1 ... a_n`.\n\n## Output\nPrint one integer: the sum of all `a_i`.\n\n## Constraints\n- `1 <= n <= 100000`\n- `-10^9 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "3\n1 2 3\n",
+      "output": "6\n"
+    },
+    {
+      "input": "2\n1000000000 1000000000\n",
+      "output": "2000000000\n"
+    }
+  ]
+}

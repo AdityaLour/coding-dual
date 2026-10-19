@@ -14,11 +14,16 @@ import { startSessionCleanup } from "./utils/session.js";
 import { setUpWebSocket } from "./websocket/socketServer.js";
 import { createUpgradeHandler } from "./websocket/upgrade.js";
 import { resetQueue } from "./websocket/matchMaking.js";
+import { voidStaleDuels } from "./websocket/duels.js";
+import { loadBank } from "./problem/bank.js";
 import { MAX_PAYLOAD } from "./websocket/limits.js";
 
 const app = express();
+// Behind Cloudflare Tunnel, set TRUST_PROXY=1 so req.ip (used by rate limits) is the visitor,
+// not the tunnel. Off by default: trusting a proxy that isn't there lets clients fake their IP.
 app.set("trust proxy", Number(process.env.TRUST_PROXY ?? 0));
 app.use(helmet());
+// API responses carry account data: never let a browser or proxy cache them.
 app.use((req, res, next) => {
   res.set("Cache-Control", "no-store");
   next();
@@ -35,20 +40,25 @@ const wss = new WebSocketServer({ noServer: true, maxPayload: MAX_PAYLOAD });
 server.on("upgrade", createUpgradeHandler(wss));
 setUpWebSocket(wss);
 
-async function startServer() {
+// Each startup step names itself, so a failure says what broke instead of "database failed".
+async function step(label, work) {
   try {
-    const conn = await pool.getConnection();
-    conn.release();
-    console.log("DB Connected");
-    await resetQueue();
-    startSessionCleanup();
-    server.listen(3000, () => {
-      console.log("Server is running on port 3000");
-    });
+    return await work();
   } catch (error) {
-    console.error("database Connection failed", error);
+    console.error(`Startup failed: ${label}`, error);
     process.exit(1);
   }
+}
+
+async function startServer() {
+  await step("database connection", async () => (await pool.getConnection()).release());
+  console.log("DB Connected");
+  await step("redis queue reset", resetQueue);
+  await step("stale duel cleanup", voidStaleDuels);
+  console.log(`Loaded ${await step("problem bank", loadBank)} problems`);
+
+  startSessionCleanup();
+  server.listen(3000, () => console.log("Server is running on port 3000"));
 }
 
 startServer();
