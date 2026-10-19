@@ -1,0 +1,25 @@
+{
+  "slug": "one-deletion-subarray",
+  "title": "Best Stretch With One Skip",
+  "topic": "dynamic-programming",
+  "difficulty": "Medium",
+  "rating": 1450,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "dp",
+    "arrays"
+  ],
+  "statement": "Pick a stretch of consecutive numbers from the array. You may skip (delete) at most one number inside the stretch, and at least one number must remain after skipping. Find the largest possible sum of the remaining numbers.\n\n## Input\nThe first line contains `n`. The second line contains `a_1 ... a_n`.\n\n## Output\nPrint the largest possible sum.\n\n## Constraints\n- `1 <= n <= 22000`\n- `-10^6 <= a_i <= 10^6`\n",
+  "samples": [
+    {
+      "input": "4\n1 -2 0 3\n",
+      "output": "4\n"
+    },
+    {
+      "input": "3\n-1 -1 -1\n",
+      "output": "-1\n"
+    }
+  ]
+}

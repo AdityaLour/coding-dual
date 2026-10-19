@@ -1,0 +1,24 @@
+{
+  "slug": "house-robber-circular",
+  "title": "Robbing a Round Street",
+  "topic": "dynamic-programming",
+  "difficulty": "Easy",
+  "rating": 1100,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "dp"
+  ],
+  "statement": "`n` houses stand around a circular street, so house `n` is next to house `1`. House `i` holds `a_i` money. You may not take from two neighbouring houses. Find the most money you can take.\n\nWith a single house, you may take from it.\n\n## Input\nThe first line contains `n`. The second line contains `a_1 ... a_n`.\n\n## Output\nPrint the largest total you can take.\n\n## Constraints\n- `1 <= n <= 17000`\n- `0 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "4\n2 3 2 1\n",
+      "output": "4\n"
+    },
+    {
+      "input": "1\n7\n",
+      "output": "7\n"
+    }
+  ]
+}

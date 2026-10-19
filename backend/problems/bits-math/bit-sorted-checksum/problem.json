@@ -1,0 +1,25 @@
+{
+  "slug": "bit-sorted-checksum",
+  "title": "Sort by Ones",
+  "topic": "bits-math",
+  "difficulty": "Easy",
+  "rating": 950,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "bits",
+    "sorting"
+  ],
+  "statement": "Sort `n` numbers by the number of `1` bits in their binary form, smaller counts first. Numbers with the same count are ordered by value, smaller first. Let the sorted list be `x_1 ... x_n`.\n\nPrint `(1*x_1 + 2*x_2 + ... + n*x_n) mod 1000000007`.\n\n## Input\nThe first line contains `n`. The second line contains the `n` numbers.\n\n## Output\nPrint the value described above.\n\n## Constraints\n- `1 <= n <= 16000`\n- `0 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5\n3 5 6 7 8\n",
+      "output": "88\n"
+    },
+    {
+      "input": "1\n1\n",
+      "output": "1\n"
+    }
+  ]
+}

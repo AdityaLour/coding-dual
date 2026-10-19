@@ -1,0 +1,25 @@
+{
+  "slug": "longest-distinct-run",
+  "title": "Longest Run Without a Repeat",
+  "topic": "two-pointers-window",
+  "difficulty": "Easy",
+  "rating": 1100,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "sliding window",
+    "hashing"
+  ],
+  "statement": "A turnstile logged the badge number of each of `n` visitors in the order they arrived. Find the longest block of consecutive visitors in which no badge number appears twice.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers, the badge numbers in order.\n\n## Output\nPrint the length of the longest block of consecutive entries whose values are all different.\n\n## Constraints\n- `1 <= n <= 100000`\n- `0 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "7\n4 7 4 9 2 7 9\n",
+      "output": "4\n"
+    },
+    {
+      "input": "3\n5 5 5\n",
+      "output": "1\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "banana-rate",
+  "title": "Slowest Pace That Still Finishes",
+  "topic": "binary-search",
+  "difficulty": "Medium",
+  "rating": 1250,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "binary search",
+    "answer search"
+  ],
+  "statement": "There are `n` piles of books, and pile `i` has `p_i` books. You have exactly `h` hours. Each hour you choose one pile that still has books and read up to `k` books from it; if the pile has fewer than `k` books, you read the rest and the hour ends anyway. You choose `k` once and keep it for all hours. Find the smallest `k` that lets you finish all piles within `h` hours.\n\n## Input\nThe first line contains `n` and `h`. The second line contains `n` integers `p_i`.\n\n## Output\nPrint the smallest integer `k` such that all piles can be finished in at most `h` hours.\n\n## Constraints\n- `1 <= n <= 20000`\n- `n <= h <= 10^9`\n- `1 <= p_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "4 8\n3 6 7 11\n",
+      "output": "4\n"
+    },
+    {
+      "input": "3 3\n5 5 5\n",
+      "output": "5\n"
+    }
+  ]
+}

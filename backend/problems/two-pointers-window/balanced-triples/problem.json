@@ -1,0 +1,25 @@
+{
+  "slug": "balanced-triples",
+  "title": "Balanced Triples",
+  "topic": "two-pointers-window",
+  "difficulty": "Medium",
+  "rating": 1450,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "two pointers",
+    "sorting"
+  ],
+  "statement": "`n` accounts each hold a balance, which may be negative. Count the triples of different positions `i < j < k` whose three balances add up to exactly zero. Equal values at different positions form different triples.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers, the balances.\n\n## Output\nPrint the number of triples `i < j < k` with `a_i + a_j + a_k = 0`.\n\n## Constraints\n- `3 <= n <= 1000`\n- `-10^9 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "6\n-1 0 1 2 -1 -4\n",
+      "output": "3\n"
+    },
+    {
+      "input": "5\n0 0 0 0 0\n",
+      "output": "10\n"
+    }
+  ]
+}

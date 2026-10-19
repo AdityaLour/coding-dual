@@ -1,0 +1,25 @@
+{
+  "slug": "stair-ways",
+  "title": "Climbing with Broken Steps",
+  "topic": "dynamic-programming",
+  "difficulty": "Easy",
+  "rating": 900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "dp",
+    "counting"
+  ],
+  "statement": "A staircase has steps numbered `1` to `n`, and you start on the ground (step `0`). In one move you climb `1`, `2` or `3` steps. Some steps are broken and you may not land on them (you may jump over them). Count the ways to reach step `n`. Two ways differ if the sequences of steps you land on differ.\n\nPrint the answer modulo `1000000007`.\n\n## Input\nThe first line contains `n` and `k`, the number of broken steps. The second line contains the `k` broken step numbers (it is absent when `k = 0`). Step `n` is never broken.\n\n## Output\nPrint the number of ways modulo `1000000007`.\n\n## Constraints\n- `1 <= n <= 100000`\n- `0 <= k <= min(n - 1, 25000)`\n",
+  "samples": [
+    {
+      "input": "5 0\n",
+      "output": "13\n"
+    },
+    {
+      "input": "4 1\n2\n",
+      "output": "3\n"
+    }
+  ]
+}

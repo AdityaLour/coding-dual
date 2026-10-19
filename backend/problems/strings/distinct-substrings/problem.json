@@ -1,0 +1,25 @@
+{
+  "slug": "distinct-substrings",
+  "title": "How Many Different Pieces",
+  "topic": "strings",
+  "difficulty": "Hard",
+  "rating": 1900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "strings",
+    "suffix automaton"
+  ],
+  "statement": "A piece of a word is any block of one or more consecutive letters. Count the different pieces: two pieces that spell the same letters are counted once, wherever they appear.\n\n## Input\nOne line containing the word `s`.\n\n## Output\nPrint the number of distinct pieces of `s`.\n\n## Constraints\n- `1 <= |s| <= 50000`\n- `s` contains only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "aab\n",
+      "output": "5\n"
+    },
+    {
+      "input": "abc\n",
+      "output": "6\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "pair-sum-count",
+  "title": "Pairs Reaching the Target",
+  "topic": "two-pointers-window",
+  "difficulty": "Easy",
+  "rating": 950,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "two pointers",
+    "sorting"
+  ],
+  "statement": "A row of `n` price tags is already sorted from smallest to largest. Count the pairs of positions `i < j` whose two values add up to exactly `S`. Equal values at different positions form different pairs.\n\n## Input\nThe first line contains `n` and `S`. The second line contains `n` integers in non-decreasing order.\n\n## Output\nPrint the number of such pairs. The answer can be larger than 32 bits.\n\n## Constraints\n- `1 <= n <= 100000`\n- `-10^9 <= a_i <= 10^9`\n- `-2 * 10^9 <= S <= 2 * 10^9`\n- `a_1 <= a_2 <= ... <= a_n`\n",
+  "samples": [
+    {
+      "input": "5 6\n1 2 3 3 5\n",
+      "output": "2\n"
+    },
+    {
+      "input": "4 10\n5 5 5 5\n",
+      "output": "6\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "kth-largest-stream",
+  "title": "Podium Watch",
+  "topic": "heaps",
+  "difficulty": "Easy",
+  "rating": 900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "heaps",
+    "streams"
+  ],
+  "statement": "Scores arrive one at a time: `a_1, a_2, ..., a_n`. After each new score, once at least `k` scores have arrived, look at all scores received so far and find the `k`-th largest one (equal scores count separately).\n\nPrint the sum of these `k`-th largest values, over every moment from the `k`-th arrival to the last one.\n\n## Input\nThe first line contains `n` and `k`. The second line contains `a_1 ... a_n`.\n\n## Output\nPrint the sum.\n\n## Constraints\n- `1 <= k <= n <= 16000`\n- `1 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "6 2\n5 1 8 3 9 2\n",
+      "output": "27\n"
+    },
+    {
+      "input": "1 1\n7\n",
+      "output": "7\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "bridges-count",
+  "title": "Roads That Cannot Fail",
+  "topic": "graphs",
+  "difficulty": "Hard",
+  "rating": 1650,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "graphs",
+    "dfs",
+    "bridges"
+  ],
+  "statement": "A region has `n` towns and `m` two-way roads. A road is critical if closing it increases the number of groups of towns that can reach each other. Count the critical roads. The region may already be split into several groups.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `m` lines contains the two towns joined by a road. No road is listed twice and no road joins a town to itself.\n\n## Output\nPrint the number of critical roads.\n\n## Constraints\n- `1 <= n <= 15000`\n- `0 <= m <= 15000`\n",
+  "samples": [
+    {
+      "input": "5 5\n1 2\n2 3\n3 1\n3 4\n4 5\n",
+      "output": "2\n"
+    },
+    {
+      "input": "3 3\n1 2\n2 3\n3 1\n",
+      "output": "0\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "shortest-path-unweighted",
+  "title": "Fewest Hops Home",
+  "topic": "graphs",
+  "difficulty": "Easy",
+  "rating": 1000,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "graphs",
+    "bfs"
+  ],
+  "statement": "A city has `n` junctions and `m` two-way roads. You are at junction `1` and want to get to junction `n`. Find the smallest number of roads you must use. If junction `n` cannot be reached, print `-1`. When `n = 1` the answer is `0`.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `m` lines contains the two junctions joined by a road. No road is listed twice.\n\n## Output\nPrint the smallest number of roads, or `-1`.\n\n## Constraints\n- `1 <= n <= 15000`\n- `0 <= m <= 15000`\n",
+  "samples": [
+    {
+      "input": "4 3\n1 2\n2 3\n3 4\n",
+      "output": "3\n"
+    },
+    {
+      "input": "3 1\n1 2\n",
+      "output": "-1\n"
+    }
+  ]
+}

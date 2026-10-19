@@ -1,0 +1,25 @@
+{
+  "slug": "zeros-of-product",
+  "title": "Trailing Zeros of a Range",
+  "topic": "bits-math",
+  "difficulty": "Medium",
+  "rating": 1300,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "math",
+    "factorials"
+  ],
+  "statement": "For each query `l r`, multiply all integers from `l` to `r` inclusive and count how many zeros the product ends with in decimal. Print one answer per query, one per line.\n\n## Input\nThe first line contains `q`. Each of the next `q` lines contains `l` and `r`.\n\n## Output\nPrint `q` lines, the answer to each query.\n\n## Constraints\n- `1 <= q <= 4500`\n- `1 <= l <= r <= 10^18`\n",
+  "samples": [
+    {
+      "input": "3\n1 10\n5 5\n6 10\n",
+      "output": "2\n0\n1\n"
+    },
+    {
+      "input": "1\n1 1\n",
+      "output": "0\n"
+    }
+  ]
+}

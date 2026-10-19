@@ -1,0 +1,24 @@
+{
+  "slug": "first-repeat",
+  "title": "First Repeated Value",
+  "topic": "arrays-hashing",
+  "difficulty": "Easy",
+  "rating": 850,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "sets"
+  ],
+  "statement": "Read a list of integers from left to right. Find the first position whose value has already appeared at an earlier position, and report that value. If no value appears twice, report that instead.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers.\n\n## Output\nPrint the repeated value, or the word `NONE` if all values are different.\n\n## Constraints\n- `1 <= n <= 100000`\n- `-10^9 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "6\n4 7 1 7 4 2\n",
+      "output": "7\n"
+    },
+    {
+      "input": "4\n5 8 -2 9\n",
+      "output": "NONE\n"
+    }
+  ]
+}

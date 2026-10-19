@@ -1,0 +1,25 @@
+{
+  "slug": "bouquets",
+  "title": "The Earliest Bouquets",
+  "topic": "binary-search",
+  "difficulty": "Medium",
+  "rating": 1500,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "binary search",
+    "answer search"
+  ],
+  "statement": "A garden has `n` flowers in a row. Flower `i` blooms on day `b_i` and stays in bloom afterwards. A bouquet needs exactly `k` flowers that are next to each other in the row, all of them in bloom, and a flower can be used in only one bouquet. You want to make `m` bouquets. Find the earliest day on which that is possible.\n\n## Input\nThe first line contains `n`, `m` and `k`. The second line contains `n` integers `b_i`.\n\n## Output\nPrint the earliest day by which `m` bouquets can be made. If it can never be done, print `-1`.\n\n## Constraints\n- `1 <= n <= 100000`\n- `1 <= m, k <= n`\n- `1 <= b_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "7 2 3\n1 10 3 10 2 10 10\n",
+      "output": "10\n"
+    },
+    {
+      "input": "4 2 3\n5 5 5 5\n",
+      "output": "-1\n"
+    }
+  ]
+}

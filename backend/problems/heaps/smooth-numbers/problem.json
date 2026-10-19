@@ -1,0 +1,26 @@
+{
+  "slug": "smooth-numbers",
+  "title": "Only These Factors",
+  "topic": "heaps",
+  "difficulty": "Medium",
+  "rating": 1300,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "heaps",
+    "number theory",
+    "pointers"
+  ],
+  "statement": "You are given `m` different primes. A positive integer is called *allowed* if every prime factor of it is one of the given primes. The number `1` has no prime factors, so it is allowed.\n\nList all allowed numbers in increasing order. Print the `n`-th one.\n\n## Input\nThe first line contains `m` and `n`. The second line contains the `m` primes.\n\n## Output\nPrint the `n`-th allowed number. It is guaranteed to be at most `10^15`.\n\n## Constraints\n- `1 <= m <= 25`\n- `1 <= n <= 20000`\n- each prime is between `2` and `97`\n",
+  "samples": [
+    {
+      "input": "3 10\n2 3 5\n",
+      "output": "12\n"
+    },
+    {
+      "input": "1 5\n2\n",
+      "output": "16\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "palindromic-run",
+  "title": "The Longest Mirror Phrase",
+  "topic": "strings",
+  "difficulty": "Medium",
+  "rating": 1400,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "strings",
+    "palindromes"
+  ],
+  "statement": "A block of consecutive letters is a mirror if it reads the same from left to right and from right to left. Find the length of the longest mirror block inside the given word.\n\n## Input\nOne line containing the word `s`.\n\n## Output\nPrint the length of the longest mirror block.\n\n## Constraints\n- `1 <= |s| <= 1000`\n- `s` contains only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "abacdfgdcaba\n",
+      "output": "3\n"
+    },
+    {
+      "input": "bb\n",
+      "output": "2\n"
+    }
+  ]
+}

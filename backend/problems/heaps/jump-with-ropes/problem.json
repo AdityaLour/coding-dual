@@ -1,0 +1,25 @@
+{
+  "slug": "jump-with-ropes",
+  "title": "Ropes and Bricks",
+  "topic": "heaps",
+  "difficulty": "Hard",
+  "rating": 1650,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "heaps",
+    "greedy"
+  ],
+  "statement": "You walk along `n` towers with heights `h_0 ... h_{n-1}`, starting on tower `0`. To step from tower `i` to tower `i + 1`:\n\n- if `h_{i+1} <= h_i`, you just walk;\n- otherwise the climb is `h_{i+1} - h_i`, and you either spend that many bricks, or use one rope (a rope covers a climb of any size).\n\nYou own `b` bricks and `r` ropes. Print the index of the farthest tower you can reach.\n\n## Input\nThe first line contains `n`, `b` and `r`. The second line contains `h_0 ... h_{n-1}`.\n\n## Output\nPrint the largest reachable index.\n\n## Constraints\n- `1 <= n <= 16000`\n- `0 <= b <= 2 * 10^13`\n- `0 <= r <= n`\n- `1 <= h_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5 5 1\n4 2 7 6 9\n",
+      "output": "4\n"
+    },
+    {
+      "input": "1 0 0\n5\n",
+      "output": "0\n"
+    }
+  ]
+}

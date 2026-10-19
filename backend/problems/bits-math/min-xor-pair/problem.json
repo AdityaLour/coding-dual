@@ -1,0 +1,26 @@
+{
+  "slug": "min-xor-pair",
+  "title": "Most Alike Pair",
+  "topic": "bits-math",
+  "difficulty": "Medium",
+  "rating": 1300,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "bits",
+    "xor",
+    "sorting"
+  ],
+  "statement": "Two numbers are \"alike\" when their bitwise XOR is small. Among all pairs of positions `i < j`, find the smallest value of `a_i XOR a_j`.\n\n## Input\nThe first line contains `n`. The second line contains `a_1 ... a_n`.\n\n## Output\nPrint the smallest XOR of a pair.\n\n## Constraints\n- `2 <= n <= 16000`\n- `0 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "4\n0 2 5 7\n",
+      "output": "2\n"
+    },
+    {
+      "input": "2\n3 3\n",
+      "output": "0\n"
+    }
+  ]
+}

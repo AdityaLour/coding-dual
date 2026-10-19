@@ -1,0 +1,25 @@
+{
+  "slug": "latin-completions",
+  "title": "Finish the Latin Square",
+  "topic": "backtracking",
+  "difficulty": "Medium",
+  "rating": 1400,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "backtracking",
+    "constraint search"
+  ],
+  "statement": "An `n x n` grid must be filled with the numbers `1..n` so that every row and every column contains each number exactly once. Some cells are already filled; the cells with `0` are empty. The given numbers may already break the rule.\n\nCount the ways to fill all empty cells so that the whole grid is valid. If the given numbers already break the rule, the answer is `0`.\n\n## Input\nThe first line contains `n`. Each of the next `n` lines contains `n` integers (`0` for an empty cell).\n\n## Output\nPrint the number of valid completions.\n\n## Constraints\n- `1 <= n <= 5`\n- When `n = 5`, at least 5 cells are filled.\n",
+  "samples": [
+    {
+      "input": "3\n1 0 0\n0 0 0\n0 0 0\n",
+      "output": "4\n"
+    },
+    {
+      "input": "2\n1 0\n0 0\n",
+      "output": "1\n"
+    }
+  ]
+}

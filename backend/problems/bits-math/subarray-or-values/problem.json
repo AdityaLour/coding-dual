@@ -1,0 +1,26 @@
+{
+  "slug": "subarray-or-values",
+  "title": "How Many Different ORs",
+  "topic": "bits-math",
+  "difficulty": "Hard",
+  "rating": 1600,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "bits",
+    "or",
+    "subarrays"
+  ],
+  "statement": "Take every non-empty contiguous block of the list `a_1 ... a_n` and compute the bitwise OR of its elements. Print how many different values appear among all these ORs.\n\n## Input\nThe first line contains `n`. The second line contains `a_1 ... a_n`.\n\n## Output\nPrint the number of different OR values.\n\n## Constraints\n- `1 <= n <= 16000`\n- `0 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "3\n1 2 4\n",
+      "output": "6\n"
+    },
+    {
+      "input": "1\n0\n",
+      "output": "1\n"
+    }
+  ]
+}

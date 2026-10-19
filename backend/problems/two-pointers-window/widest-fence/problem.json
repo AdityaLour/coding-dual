@@ -1,0 +1,25 @@
+{
+  "slug": "widest-fence",
+  "title": "The Widest Fenced Yard",
+  "topic": "two-pointers-window",
+  "difficulty": "Medium",
+  "rating": 1400,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "two pointers",
+    "greedy"
+  ],
+  "statement": "`n` posts stand in a straight line, one unit apart, with heights `h_1, ..., h_n`. A rope is stretched between two different posts `i < j` and a tarp is hung on it; the tarp can only be as tall as the shorter of the two posts, and it spans the distance `j - i`. The area covered is `min(h_i, h_j) * (j - i)`. Find the largest area that any pair of posts can cover.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers, the heights of the posts in order.\n\n## Output\nPrint the largest possible area.\n\n## Constraints\n- `2 <= n <= 100000`\n- `0 <= h_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "6\n3 9 2 8 4 5\n",
+      "output": "20\n"
+    },
+    {
+      "input": "2\n7 1\n",
+      "output": "1\n"
+    }
+  ]
+}

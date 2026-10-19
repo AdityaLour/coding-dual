@@ -1,0 +1,26 @@
+{
+  "slug": "hire-workers",
+  "title": "Hiring at a Fair Rate",
+  "topic": "sorting-greedy",
+  "difficulty": "Hard",
+  "rating": 1800,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "greedy",
+    "heap",
+    "sorting"
+  ],
+  "statement": "A company wants to hire exactly `k` of `n` workers. Worker `i` has quality `q_i` and asks for at least `w_i` money. The pay must be fair: every hired worker is paid in proportion to quality, so the pay of worker `i` is `r * q_i` for one common rate `r` (which need not be an integer). Each hired worker must get at least what they ask, so `r * q_i >= w_i` for all hired workers.\n\nChoose the `k` workers and the rate to make the total pay as small as possible. The total `r * (sum of q_i)` may be fractional; print it rounded up to the next integer.\n\n## Input\nThe first line contains `n` and `k`. Each of the next `n` lines contains `q_i` and `w_i`.\n\n## Output\nPrint the smallest possible total pay, rounded up to an integer.\n\n## Constraints\n- `1 <= k <= n <= 11000`\n- `1 <= q_i, w_i <= 10^6`\n",
+  "samples": [
+    {
+      "input": "3 2\n10 70\n20 50\n5 30\n",
+      "output": "105\n"
+    },
+    {
+      "input": "2 2\n3 4\n6 7\n",
+      "output": "12\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "rebuild-postorder",
+  "title": "Recover the Tree From Two Walks",
+  "topic": "trees",
+  "difficulty": "Medium",
+  "rating": 1500,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "trees",
+    "stack",
+    "construction"
+  ],
+  "statement": "A binary tree has `n` nodes with different values. You are given its preorder walk (root, then the left subtree, then the right subtree) and its inorder walk (the left subtree, then the root, then the right subtree). These two walks identify the tree uniquely.\n\nLet `q_1 ... q_n` be the postorder walk of the tree (the left subtree, then the right subtree, then the root). Print `(1*q_1 + 2*q_2 + ... + n*q_n) mod 1000000007`.\n\n## Input\nThe first line contains `n`. The second line contains the preorder walk. The third line contains the inorder walk.\n\n## Output\nPrint the value described above.\n\n## Constraints\n- `1 <= n <= 8000`\n- `1 <= value <= 10^9`, all values different\n- The two walks belong to one binary tree.\n",
+  "samples": [
+    {
+      "input": "5\n3 9 20 15 7\n9 3 15 20 7\n",
+      "output": "155\n"
+    },
+    {
+      "input": "1\n42\n42\n",
+      "output": "42\n"
+    }
+  ]
+}

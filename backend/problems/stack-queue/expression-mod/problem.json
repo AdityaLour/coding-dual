@@ -1,0 +1,25 @@
+{
+  "slug": "expression-mod",
+  "title": "Calculator With Brackets",
+  "topic": "stack-queue",
+  "difficulty": "Hard",
+  "rating": 1650,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "stack",
+    "parsing"
+  ],
+  "statement": "An arithmetic expression is built from non-negative integers, the operators `+`, `-` and `*`, and round brackets. As usual, `*` is done before `+` and `-`, operators of the same level are done from left to right, and brackets are done first. The expression has no spaces and no unary minus. Compute its value and print it modulo `1000000007`; the printed number must be between `0` and `1000000006`, even if the true value is negative.\n\n## Input\nOne line containing the expression.\n\n## Output\nPrint the value of the expression modulo `1000000007`.\n\n## Constraints\n- The expression has at most `100000` characters\n- Every integer is between `0` and `10^9` and is written without leading zeros (except for the number `0` itself)\n- The expression is valid\n",
+  "samples": [
+    {
+      "input": "2+3*(4-1)\n",
+      "output": "11\n"
+    },
+    {
+      "input": "1-2-3\n",
+      "output": "1000000003\n"
+    }
+  ]
+}

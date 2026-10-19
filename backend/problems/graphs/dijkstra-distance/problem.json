@@ -1,0 +1,26 @@
+{
+  "slug": "dijkstra-distance",
+  "title": "Cheapest Route Across Town",
+  "topic": "graphs",
+  "difficulty": "Medium",
+  "rating": 1400,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "graphs",
+    "dijkstra",
+    "heap"
+  ],
+  "statement": "A country has `n` cities and `m` two-way roads. Each road has a toll. Find the smallest total toll you must pay to travel from city `1` to city `n`. If city `n` cannot be reached, print `-1`. When `n = 1` the answer is `0`.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `m` lines contains `u`, `v` and the toll `w` of one road. No pair of cities is joined twice.\n\n## Output\nPrint the smallest total toll, or `-1`.\n\n## Constraints\n- `1 <= n <= 9000`\n- `0 <= m <= 9000`\n- `1 <= w <= 10^6`\n",
+  "samples": [
+    {
+      "input": "4 5\n1 2 1\n2 4 10\n1 3 4\n3 4 3\n2 3 1\n",
+      "output": "5\n"
+    },
+    {
+      "input": "3 1\n1 2 5\n",
+      "output": "-1\n"
+    }
+  ]
+}

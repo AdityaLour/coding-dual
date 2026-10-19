@@ -1,0 +1,25 @@
+{
+  "slug": "stock-k-transactions",
+  "title": "At Most k Trades",
+  "topic": "dynamic-programming",
+  "difficulty": "Hard",
+  "rating": 1600,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "dp",
+    "arrays"
+  ],
+  "statement": "You know the price of a stock on each of `n` days. You may complete at most `k` trades. A trade means buying one share on some day and selling it on a later day. You can hold at most one share at a time, so a new trade can only start after the previous one has been sold. Find the largest total profit (it is `0` if you make no trades).\n\n## Input\nThe first line contains `n` and `k`. The second line contains the `n` prices.\n\n## Output\nPrint the largest total profit.\n\n## Constraints\n- `1 <= n <= 15000`\n- `1 <= k <= 20`\n- `0 <= price <= 10^6`\n",
+  "samples": [
+    {
+      "input": "6 2\n3 2 6 5 0 3\n",
+      "output": "7\n"
+    },
+    {
+      "input": "5 1\n7 6 4 3 1\n",
+      "output": "0\n"
+    }
+  ]
+}

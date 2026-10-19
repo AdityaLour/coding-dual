@@ -1,0 +1,25 @@
+{
+  "slug": "longest-zero-sum",
+  "title": "Longest Zero-Sum Subarray",
+  "topic": "arrays-hashing",
+  "difficulty": "Medium",
+  "rating": 1300,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "prefix-sums",
+    "hashing"
+  ],
+  "statement": "Find the longest subarray (a block of consecutive elements) whose sum is exactly `0`, and report its length. If no subarray adds up to `0`, report `0`.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers.\n\n## Output\nPrint the length of the longest subarray with sum `0`.\n\n## Constraints\n- `1 <= n <= 100000`\n- `-10^9 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "7\n5 1 -1 3 2 -2 -3\n",
+      "output": "6\n"
+    },
+    {
+      "input": "3\n1 2 3\n",
+      "output": "0\n"
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "slug": "closest-gap",
+  "title": "The Two Closest Values",
+  "topic": "sorting-greedy",
+  "difficulty": "Easy",
+  "rating": 900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "sorting"
+  ],
+  "statement": "Among `n` numbers, find the smallest difference `|a_i - a_j|` over all pairs of different positions `i != j`. Equal values at different positions give a difference of `0`.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers.\n\n## Output\nPrint the smallest absolute difference between two numbers at different positions.\n\n## Constraints\n- `2 <= n <= 60000`\n- `-10^9 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5\n9 1 17 5 12\n",
+      "output": "3\n"
+    },
+    {
+      "input": "3\n4 8 4\n",
+      "output": "0\n"
+    }
+  ]
+}

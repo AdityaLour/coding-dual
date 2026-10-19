@@ -1,0 +1,25 @@
+{
+  "slug": "rotation-match",
+  "title": "Spun Around the Ring",
+  "topic": "strings",
+  "difficulty": "Medium",
+  "rating": 1250,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "strings",
+    "pattern matching"
+  ],
+  "statement": "Two words are written around circular rings. Word `b` is a spin of word `a` if you can cut `a` at some point and swap the two pieces to get exactly `b`. For example, `cdeab` is a spin of `abcde`. A word counts as a spin of itself (cut at the very start).\n\n## Input\nThe first line contains `a`. The second line contains `b`.\n\n## Output\nPrint `YES` if `b` is a spin of `a`, otherwise print `NO`.\n\n## Constraints\n- `1 <= |a|, |b| <= 95000`\n- Both words contain only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "abcde\ncdeab\n",
+      "output": "YES\n"
+    },
+    {
+      "input": "abcde\nabced\n",
+      "output": "NO\n"
+    }
+  ]
+}

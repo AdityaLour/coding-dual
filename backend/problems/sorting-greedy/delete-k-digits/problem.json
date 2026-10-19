@@ -1,0 +1,26 @@
+{
+  "slug": "delete-k-digits",
+  "title": "Strike Out Digits",
+  "topic": "sorting-greedy",
+  "difficulty": "Medium",
+  "rating": 1450,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "greedy",
+    "stack",
+    "strings"
+  ],
+  "statement": "You are given a string of `n` decimal digits and a number `k`. Delete exactly `k` digits from it, keeping the remaining digits in their original order. The remaining digits form a number; leading zeros are allowed and do not change its value. Make this number as small as possible.\n\nThe result can have up to about 190 000 digits, so print its value modulo `1000000007`. If no digit remains, the value is `0`.\n\n## Input\nThe first line contains `n` and `k`. The second line contains the digit string, with no spaces.\n\n## Output\nPrint the smallest possible value, taken modulo `1000000007`.\n\n## Constraints\n- `1 <= n <= 189000`\n- `0 <= k <= n`\n",
+  "samples": [
+    {
+      "input": "5 2\n53412\n",
+      "output": "312\n"
+    },
+    {
+      "input": "4 2\n1000\n",
+      "output": "0\n"
+    }
+  ]
+}

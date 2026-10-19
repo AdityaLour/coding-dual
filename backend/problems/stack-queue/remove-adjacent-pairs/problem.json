@@ -1,0 +1,25 @@
+{
+  "slug": "remove-adjacent-pairs",
+  "title": "Cancel the Neighbours",
+  "topic": "stack-queue",
+  "difficulty": "Medium",
+  "rating": 1200,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "stack",
+    "strings"
+  ],
+  "statement": "A word is written in lowercase letters. As long as the word contains two equal letters next to each other, you may delete that pair; the letters on both sides then become neighbours. The final word does not depend on the order of deletions. Find the final word.\n\n## Input\nOne line containing the word `s`.\n\n## Output\nPrint the final word. If nothing is left, print `EMPTY`.\n\n## Constraints\n- `1 <= |s| <= 100000`\n- `s` contains only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "abbaca\n",
+      "output": "ca\n"
+    },
+    {
+      "input": "abba\n",
+      "output": "EMPTY\n"
+    }
+  ]
+}

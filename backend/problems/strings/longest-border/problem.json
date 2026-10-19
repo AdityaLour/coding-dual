@@ -1,0 +1,25 @@
+{
+  "slug": "longest-border",
+  "title": "Same Start, Same Finish",
+  "topic": "strings",
+  "difficulty": "Medium",
+  "rating": 1550,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "strings",
+    "prefix function"
+  ],
+  "statement": "A border of a word is a block that is both a prefix and a suffix of it, and that is shorter than the whole word. For example, `abcab` has the border `ab`. Borders of one word may overlap: `aaaa` has the borders `a`, `aa` and `aaa`. Find the length of the longest border.\n\n## Input\nOne line containing the word `s`.\n\n## Output\nPrint the length of the longest border of `s`. If the word has no border, print `0`.\n\n## Constraints\n- `1 <= |s| <= 100000`\n- `s` contains only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "abcab\n",
+      "output": "2\n"
+    },
+    {
+      "input": "aaaa\n",
+      "output": "3\n"
+    }
+  ]
+}

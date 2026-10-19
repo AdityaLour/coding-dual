@@ -1,0 +1,25 @@
+{
+  "slug": "total-spread",
+  "title": "Total Spread of Every Window",
+  "topic": "two-pointers-window",
+  "difficulty": "Hard",
+  "rating": 1600,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "sliding window",
+    "monotonic deque"
+  ],
+  "statement": "A sensor reports `n` temperature readings in order. For any block of exactly `k` consecutive readings, its spread is the largest reading in the block minus the smallest one. Add up the spreads of all `n - k + 1` blocks of length `k`.\n\n## Input\nThe first line contains `n` and `k`. The second line contains `n` integers, the readings in order.\n\n## Output\nPrint the sum of the spreads of all blocks of `k` consecutive readings. The answer can be larger than 32 bits.\n\n## Constraints\n- `1 <= k <= n <= 100000`\n- `-10^9 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5 3\n1 5 2 8 3\n",
+      "output": "16\n"
+    },
+    {
+      "input": "4 1\n9 -2 7 7\n",
+      "output": "0\n"
+    }
+  ]
+}

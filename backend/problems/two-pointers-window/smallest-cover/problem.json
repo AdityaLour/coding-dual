@@ -1,0 +1,25 @@
+{
+  "slug": "smallest-cover",
+  "title": "Smallest Covering Stretch",
+  "topic": "two-pointers-window",
+  "difficulty": "Hard",
+  "rating": 1700,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "sliding window",
+    "strings"
+  ],
+  "statement": "A text `s` is made of lowercase letters, and a word `t` is given. Find the shortest block of consecutive characters of `s` that contains every letter of `t` at least as many times as `t` itself does. For example, if `t` is `aab`, the block needs at least two `a` and at least one `b`; other letters in the block are allowed.\n\n## Input\nThe first line contains the text `s`. The second line contains the word `t`.\n\n## Output\nPrint the length of the shortest such block. If no block works, print `-1`.\n\n## Constraints\n- `1 <= |t| <= |s| <= 90000`\n- `s` and `t` contain only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "xabbcaxbca\nabc\n",
+      "output": "3\n"
+    },
+    {
+      "input": "aab\nabb\n",
+      "output": "-1\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "anagram-windows",
+  "title": "Scrambled Copies in a Text",
+  "topic": "strings",
+  "difficulty": "Medium",
+  "rating": 1350,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "strings",
+    "sliding window"
+  ],
+  "statement": "A text `s` and a word `t` are given. A block of `s` is a scrambled copy of `t` if it has the same length as `t` and its letters can be rearranged to spell `t`. Count the starting positions in `s` where a scrambled copy of `t` begins. Blocks may overlap.\n\n## Input\nThe first line contains `s`. The second line contains `t`.\n\n## Output\nPrint the number of positions `i` such that the block of `|t|` letters starting at `i` is a scrambled copy of `t`.\n\n## Constraints\n- `1 <= |t| <= |s| <= 95000`\n- Both strings contain only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "cbaebabacd\nabc\n",
+      "output": "2\n"
+    },
+    {
+      "input": "aaaa\naa\n",
+      "output": "3\n"
+    }
+  ]
+}

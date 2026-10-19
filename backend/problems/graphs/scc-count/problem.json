@@ -1,0 +1,26 @@
+{
+  "slug": "scc-count",
+  "title": "Mutual Reach Groups",
+  "topic": "graphs",
+  "difficulty": "Hard",
+  "rating": 1700,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "graphs",
+    "dfs",
+    "scc"
+  ],
+  "statement": "A city has `n` stops and `m` one-way streets. Two stops are in the same zone when you can drive from the first to the second and also from the second back to the first. Every stop belongs to exactly one zone. Count the zones.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `m` lines contains `u` and `v`, a one-way street from stop `u` to stop `v`. No street is listed twice and `u != v`.\n\n## Output\nPrint the number of zones.\n\n## Constraints\n- `1 <= n <= 15000`\n- `0 <= m <= 15000`\n",
+  "samples": [
+    {
+      "input": "5 5\n1 2\n2 3\n3 1\n3 4\n4 5\n",
+      "output": "3\n"
+    },
+    {
+      "input": "3 0\n",
+      "output": "3\n"
+    }
+  ]
+}

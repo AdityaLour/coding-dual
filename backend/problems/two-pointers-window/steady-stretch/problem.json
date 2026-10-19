@@ -1,0 +1,25 @@
+{
+  "slug": "steady-stretch",
+  "title": "Longest Steady Stretch",
+  "topic": "two-pointers-window",
+  "difficulty": "Hard",
+  "rating": 1750,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "sliding window",
+    "monotonic deque"
+  ],
+  "statement": "A river gauge logged the water level for `n` consecutive days. A stretch of days is called steady if the highest and the lowest level inside it differ by at most `d`. Find the length of the longest steady stretch.\n\n## Input\nThe first line contains `n` and `d`. The second line contains `n` integers, the level on each day in order.\n\n## Output\nPrint the length of the longest block of consecutive days in which the largest level minus the smallest level is at most `d`.\n\n## Constraints\n- `1 <= n <= 100000`\n- `0 <= d <= 2 * 10^9`\n- `-10^9 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "6 3\n4 2 6 7 5 9\n",
+      "output": "3\n"
+    },
+    {
+      "input": "4 0\n5 5 6 6\n",
+      "output": "2\n"
+    }
+  ]
+}

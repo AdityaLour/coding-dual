@@ -1,0 +1,26 @@
+{
+  "slug": "lca-queries",
+  "title": "Closest Shared Boss",
+  "topic": "trees",
+  "difficulty": "Hard",
+  "rating": 1600,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "trees",
+    "binary lifting",
+    "lca"
+  ],
+  "statement": "A company is a tree with `n` employees numbered `1..n`; employee `1` is the boss of everyone, and every other employee `i` has a direct manager `p_i`. For two employees, their closest shared boss is the lowest employee who is a manager (direct or indirect) of both, where an employee counts as a manager of themselves.\n\nYou get `q` queries, each with two employees. To keep the output short, print the sum of the closest shared bosses' numbers over all queries.\n\n## Input\nThe first line contains `n` and `q`. The second line contains `p_2 ... p_n` (it is absent when `n = 1`). Then `q` lines follow, each with two employees `u` and `v`.\n\n## Output\nPrint the sum of the numbers of the closest shared bosses.\n\n## Constraints\n- `1 <= n <= 12000`\n- `1 <= q <= 8000`\n- The managers form a tree rooted at employee `1`.\n",
+  "samples": [
+    {
+      "input": "5 3\n1 1 2 2\n4 5\n4 3\n2 4\n",
+      "output": "5\n"
+    },
+    {
+      "input": "1 2\n1 1\n1 1\n",
+      "output": "2\n"
+    }
+  ]
+}

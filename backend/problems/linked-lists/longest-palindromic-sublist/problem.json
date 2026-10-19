@@ -1,0 +1,26 @@
+{
+  "slug": "longest-palindromic-sublist",
+  "title": "Mirror Stretch",
+  "topic": "linked-lists",
+  "difficulty": "Hard",
+  "rating": 1600,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "linked list",
+    "palindromes",
+    "manacher"
+  ],
+  "statement": "A linked list is stored in `n` numbered nodes. Node `i` holds the value `v_i` and points to node `nxt_i` (`0` means no next node). The list starts at node `head` and passes through all `n` nodes exactly once.\n\nFind the longest block of consecutive nodes whose values read the same forwards and backwards. Print its length.\n\n## Input\nThe first line contains `n` and `head`. The second line contains `v_1 ... v_n`. The third line contains `nxt_1 ... nxt_n`.\n\n## Output\nPrint the length of the longest such block.\n\n## Constraints\n- `1 <= n <= 20000` (the whole input is at most about 200 KB)\n- `0 <= v_i <= 10^6`\n",
+  "samples": [
+    {
+      "input": "5 1\n1 2 1 1 3\n2 3 4 5 0\n",
+      "output": "3\n"
+    },
+    {
+      "input": "1 1\n5\n0\n",
+      "output": "1\n"
+    }
+  ]
+}

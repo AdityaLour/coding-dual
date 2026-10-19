@@ -1,0 +1,25 @@
+{
+  "slug": "trapped-water",
+  "title": "Rain Between the Walls",
+  "topic": "stack-queue",
+  "difficulty": "Medium",
+  "rating": 1500,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "stack",
+    "two pointers"
+  ],
+  "statement": "A line of walls stands on flat ground; wall `i` has height `h_i` and every wall is one unit wide with no gaps between walls. After heavy rain, water collects in the dips: the water above wall `i` rises to the smaller of the tallest wall on its left and the tallest wall on its right (counting wall `i` itself), and stays only if that is higher than the wall. Find the total volume of water, counting one unit of volume per unit of height above each wall.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers, the heights.\n\n## Output\nPrint the total volume of trapped water. The answer can be larger than 32 bits.\n\n## Constraints\n- `1 <= n <= 100000`\n- `0 <= h_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "9\n0 1 0 2 1 0 1 3 2\n",
+      "output": "5\n"
+    },
+    {
+      "input": "4\n3 0 0 3\n",
+      "output": "6\n"
+    }
+  ]
+}

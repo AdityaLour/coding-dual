@@ -1,0 +1,26 @@
+{
+  "slug": "largest-concat",
+  "title": "The Biggest Glued Number",
+  "topic": "sorting-greedy",
+  "difficulty": "Medium",
+  "rating": 1400,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "sorting",
+    "greedy",
+    "strings"
+  ],
+  "statement": "You have `n` non-negative integers written in decimal. Glue them together in any order, writing them one after another with nothing between, to form one long number. Find the order that makes this long number as large as possible.\n\nThe long number can have up to about 190 000 digits, so print its value modulo `1000000007`. Leading zeros do not matter for the value.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers.\n\n## Output\nPrint the largest possible long number, taken modulo `1000000007`.\n\n## Constraints\n- `1 <= n <= 17000`\n- `0 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5\n3 30 34 5 9\n",
+      "output": "9534330\n"
+    },
+    {
+      "input": "2\n10 2\n",
+      "output": "210\n"
+    }
+  ]
+}

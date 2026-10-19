@@ -1,0 +1,25 @@
+{
+  "slug": "first-unique-char",
+  "title": "First Letter That Stands Alone",
+  "topic": "strings",
+  "difficulty": "Easy",
+  "rating": 900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "strings",
+    "counting"
+  ],
+  "statement": "A word is written in lowercase letters. A position is lonely if its letter does not appear anywhere else in the word. Find the first lonely position.\n\n## Input\nOne line containing the word `s`.\n\n## Output\nPrint the 1-based position of the first lonely letter. If every letter appears at least twice, print `-1`.\n\n## Constraints\n- `1 <= |s| <= 100000`\n- `s` contains only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "swiss\n",
+      "output": "2\n"
+    },
+    {
+      "input": "aabb\n",
+      "output": "-1\n"
+    }
+  ]
+}

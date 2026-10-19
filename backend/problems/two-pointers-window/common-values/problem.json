@@ -1,0 +1,25 @@
+{
+  "slug": "common-values",
+  "title": "Shared Between Two Lists",
+  "topic": "two-pointers-window",
+  "difficulty": "Easy",
+  "rating": 1000,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "two pointers",
+    "sorting"
+  ],
+  "statement": "Two clubs each keep a membership list sorted by member ID, and an ID may appear several times within one list. Count how many different IDs appear in both lists.\n\n## Input\nThe first line contains `n` and `m`, the lengths of the two lists. The second line contains the `n` IDs of the first list in non-decreasing order. The third line contains the `m` IDs of the second list in non-decreasing order.\n\n## Output\nPrint the number of distinct values that occur in both lists.\n\n## Constraints\n- `1 <= n, m <= 50000`\n- `0 <= value <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5 4\n1 2 2 4 9\n2 2 4 7\n",
+      "output": "2\n"
+    },
+    {
+      "input": "3 3\n1 2 3\n4 5 6\n",
+      "output": "0\n"
+    }
+  ]
+}

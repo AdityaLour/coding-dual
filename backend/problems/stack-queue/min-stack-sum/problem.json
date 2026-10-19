@@ -1,0 +1,25 @@
+{
+  "slug": "min-stack-sum",
+  "title": "The Stack That Knows Its Minimum",
+  "topic": "stack-queue",
+  "difficulty": "Medium",
+  "rating": 1300,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "stack",
+    "design"
+  ],
+  "statement": "Maintain a stack of integers that starts empty and supports three commands:\n- `push x` puts `x` on top of the stack;\n- `pop` removes the top element;\n- `min` asks for the smallest element currently in the stack.\n\n`pop` and `min` are only given when the stack is not empty. Add up the answers to all `min` commands.\n\n## Input\nThe first line contains `q`, the number of commands. Each of the next `q` lines is one command in the form shown above.\n\n## Output\nPrint the sum of the answers to all `min` commands, or `0` if there are none. The answer can be larger than 32 bits.\n\n## Constraints\n- `1 <= q <= 100000`\n- `-10^9 <= x <= 10^9`\n",
+  "samples": [
+    {
+      "input": "6\npush 3\npush 1\nmin\npop\nmin\npush 5\n",
+      "output": "4\n"
+    },
+    {
+      "input": "4\npush -2\npush -2\npop\nmin\n",
+      "output": "-2\n"
+    }
+  ]
+}

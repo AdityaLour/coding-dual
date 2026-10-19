@@ -1,0 +1,26 @@
+{
+  "slug": "partition-k-equal",
+  "title": "Equal Teams by Strength",
+  "topic": "backtracking",
+  "difficulty": "Hard",
+  "rating": 1650,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "backtracking",
+    "bitmask",
+    "dp"
+  ],
+  "statement": "There are `n` players, and player `i` has strength `a_i`. Split all players into exactly `k` non-empty teams so that every team has the same total strength. Every player joins exactly one team.\n\n## Input\nThe first line contains `n` and `k`. The second line contains the `n` strengths.\n\n## Output\nPrint `YES` if such a split exists, otherwise print `NO`.\n\n## Constraints\n- `1 <= k <= n <= 15`\n- `1 <= a_i <= 10^4`\n",
+  "samples": [
+    {
+      "input": "4 2\n4 3 2 3\n",
+      "output": "YES\n"
+    },
+    {
+      "input": "5 2\n1 1 1 1 6\n",
+      "output": "NO\n"
+    }
+  ]
+}

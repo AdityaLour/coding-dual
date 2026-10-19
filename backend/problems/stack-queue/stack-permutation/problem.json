@@ -1,0 +1,25 @@
+{
+  "slug": "stack-permutation",
+  "title": "Can the Trolley Do It",
+  "topic": "stack-queue",
+  "difficulty": "Easy",
+  "rating": 1150,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "stack",
+    "simulation"
+  ],
+  "statement": "Numbered wagons `1, 2, ..., n` arrive at a dead-end siding in this order. Each wagon can either be pushed onto the siding (a stack), or the wagon on top of the siding can be pulled out to the exit. Wagons can only leave from the top. A leaving order is a list of the wagons in the order they reach the exit. Given a list of all `n` wagons, decide whether it is a possible leaving order.\n\n## Input\nThe first line contains `n`. The second line contains `n` different integers from `1` to `n`, the wanted leaving order.\n\n## Output\nPrint `YES` if the wagons can leave in that order, otherwise print `NO`.\n\n## Constraints\n- `1 <= n <= 100000`\n",
+  "samples": [
+    {
+      "input": "5\n4 5 3 2 1\n",
+      "output": "YES\n"
+    },
+    {
+      "input": "4\n3 1 2 4\n",
+      "output": "NO\n"
+    }
+  ]
+}

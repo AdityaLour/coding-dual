@@ -1,0 +1,25 @@
+{
+  "slug": "kth-smallest-bst",
+  "title": "The k-th Smallest in a Search Tree",
+  "topic": "trees",
+  "difficulty": "Medium",
+  "rating": 1250,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "trees",
+    "bst"
+  ],
+  "statement": "A binary search tree has `n` nodes numbered `1..n`; node `1` is the root. Node `i` holds a value `v_i` (all values are different), and you are given its left and right child (`0` means none). For every node, all values in its left subtree are smaller and all values in its right subtree are larger.\n\nFind the `k`-th smallest value in the tree (counting from 1).\n\n## Input\nThe first line contains `n` and `k`. The next `n` lines give `v_i`, the left child and the right child of node `i`.\n\n## Output\nPrint the `k`-th smallest value.\n\n## Constraints\n- `1 <= k <= n <= 8000`\n- `1 <= v_i <= 10^9`\n- The input is a valid binary search tree rooted at node `1`.\n",
+  "samples": [
+    {
+      "input": "3 2\n2 2 3\n1 0 0\n3 0 0\n",
+      "output": "2\n"
+    },
+    {
+      "input": "4 4\n5 0 3\n9 0 0\n7 4 2\n6 0 0\n",
+      "output": "9\n"
+    }
+  ]
+}

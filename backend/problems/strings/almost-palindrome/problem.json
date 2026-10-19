@@ -1,0 +1,25 @@
+{
+  "slug": "almost-palindrome",
+  "title": "One Letter Away From a Mirror",
+  "topic": "strings",
+  "difficulty": "Easy",
+  "rating": 1100,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "strings",
+    "two pointers"
+  ],
+  "statement": "A word reads the same forwards and backwards if it is a palindrome. You may delete at most one letter of the given word (or none). Can the remaining letters, in their original order, form a palindrome?\n\n## Input\nOne line containing the word `s`.\n\n## Output\nPrint `YES` if a palindrome can be obtained by deleting at most one letter, otherwise print `NO`.\n\n## Constraints\n- `1 <= |s| <= 100000`\n- `s` contains only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "abca\n",
+      "output": "YES\n"
+    },
+    {
+      "input": "abcd\n",
+      "output": "NO\n"
+    }
+  ]
+}

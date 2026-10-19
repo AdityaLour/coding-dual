@@ -1,0 +1,25 @@
+{
+  "slug": "single-counter-wait",
+  "title": "One Window, Long Queue",
+  "topic": "stack-queue",
+  "difficulty": "Easy",
+  "rating": 1000,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "queue",
+    "simulation"
+  ],
+  "statement": "A service window serves customers one at a time in the order they arrive. Customer `i` arrives at time `a_i` and needs `s_i` units of service. The window starts serving a customer as soon as it is free and that customer has arrived. A customer's waiting time is the gap between arriving and being served. Compute the total waiting time of all customers.\n\n## Input\nThe first line contains `n`. Each of the next `n` lines contains `a_i` and `s_i`. Customers are listed in the order they arrive, so `a_1 <= a_2 <= ... <= a_n`.\n\n## Output\nPrint the sum of the waiting times of all customers. The answer can be larger than 32 bits.\n\n## Constraints\n- `1 <= n <= 20000`\n- `0 <= a_i <= 10^9`\n- `1 <= s_i <= 10^6`\n",
+  "samples": [
+    {
+      "input": "3\n0 5\n1 2\n10 3\n",
+      "output": "4\n"
+    },
+    {
+      "input": "2\n5 4\n5 4\n",
+      "output": "4\n"
+    }
+  ]
+}

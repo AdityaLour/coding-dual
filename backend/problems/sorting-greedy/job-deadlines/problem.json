@@ -1,0 +1,26 @@
+{
+  "slug": "job-deadlines",
+  "title": "One Job per Hour",
+  "topic": "sorting-greedy",
+  "difficulty": "Medium",
+  "rating": 1500,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "greedy",
+    "heap",
+    "sorting"
+  ],
+  "statement": "You start at time `0` and can do one job at a time. Every job takes exactly one hour. Job `i` must be finished by time `d_i` (so a job done in the hour `[t-1, t]` is on time when `t <= d_i`) and pays `p_i`. A job that is not finished by its deadline pays nothing and is skipped. Choose which jobs to do and in what order to earn as much as possible.\n\n## Input\nThe first line contains `n`. Each of the next `n` lines contains `d_i` and `p_i`.\n\n## Output\nPrint the largest total pay.\n\n## Constraints\n- `1 <= n <= 8000`\n- `1 <= d_i <= 10^9`\n- `1 <= p_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "4\n2 100\n1 19\n2 27\n1 25\n",
+      "output": "127\n"
+    },
+    {
+      "input": "3\n1 5\n1 9\n1 7\n",
+      "output": "9\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "merge-k-sorted",
+  "title": "Merge the Queues",
+  "topic": "heaps",
+  "difficulty": "Medium",
+  "rating": 1200,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "heaps",
+    "merge"
+  ],
+  "statement": "There are `k` lines of people, each already sorted by ticket number in non-decreasing order. Merge all the lines into one line sorted in non-decreasing order. Let the merged line be `x_1 ... x_N`.\n\nPrint `(1*x_1 + 2*x_2 + ... + N*x_N) mod 1000000007`.\n\n## Input\nThe first line contains `k`. Each of the next `k` lines starts with `m_i`, the size of that line, followed by its `m_i` numbers in non-decreasing order.\n\n## Output\nPrint the value described above.\n\n## Constraints\n- `1 <= k <= 8000`\n- `1 <= m_i`, and the sizes add up to at most `15000`\n- `0 <= x <= 10^9`\n",
+  "samples": [
+    {
+      "input": "3\n3 1 4 9\n2 2 3\n3 0 5 6\n",
+      "output": "184\n"
+    },
+    {
+      "input": "1\n1 5\n",
+      "output": "5\n"
+    }
+  ]
+}

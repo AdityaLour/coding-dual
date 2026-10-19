@@ -1,0 +1,25 @@
+{
+  "slug": "unique-subsets-sum",
+  "title": "Distinct Bags of Beads",
+  "topic": "backtracking",
+  "difficulty": "Easy",
+  "rating": 1150,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "backtracking",
+    "counting"
+  ],
+  "statement": "You have `n` beads, and bead `i` has the number `a_i` on it. Beads with the same number look identical. Pick a bag of beads (at least one) whose numbers add up to exactly `S`. Two bags are the same when they contain the same count of beads for every number. Count the different bags.\n\n## Input\nThe first line contains `n` and `S`. The second line contains `a_1 ... a_n`.\n\n## Output\nPrint the number of different bags with total exactly `S`.\n\n## Constraints\n- `1 <= n <= 18`\n- `1 <= a_i <= 20`\n- `1 <= S <= 360`\n",
+  "samples": [
+    {
+      "input": "5 4\n1 1 2 2 3\n",
+      "output": "3\n"
+    },
+    {
+      "input": "3 3\n1 1 1\n",
+      "output": "1\n"
+    }
+  ]
+}

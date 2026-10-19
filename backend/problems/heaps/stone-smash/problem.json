@@ -1,0 +1,25 @@
+{
+  "slug": "stone-smash",
+  "title": "Stone Smash",
+  "topic": "heaps",
+  "difficulty": "Easy",
+  "rating": 950,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "heaps",
+    "simulation"
+  ],
+  "statement": "You have `n` stones with weights `w_1 ... w_n`. Repeat while at least two stones remain: take the two heaviest stones (any two if there is a tie) and smash them together.\n\n- If they have equal weights, both vanish.\n- Otherwise the lighter one vanishes and the heavier one keeps the weight difference.\n\nPrint the weight of the last stone, or `0` if no stone remains.\n\n## Input\nThe first line contains `n`. The second line contains `w_1 ... w_n`.\n\n## Output\nPrint one integer.\n\n## Constraints\n- `1 <= n <= 16000`\n- `1 <= w_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "6\n2 7 4 1 8 1\n",
+      "output": "1\n"
+    },
+    {
+      "input": "1\n5\n",
+      "output": "5\n"
+    }
+  ]
+}

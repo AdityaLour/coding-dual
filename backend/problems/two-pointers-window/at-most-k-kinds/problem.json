@@ -1,0 +1,25 @@
+{
+  "slug": "at-most-k-kinds",
+  "title": "At Most K Kinds",
+  "topic": "two-pointers-window",
+  "difficulty": "Medium",
+  "rating": 1300,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "sliding window",
+    "hashing"
+  ],
+  "statement": "A conveyor belt carries `n` items in a row, and each item has a type number. A packing box can hold items of at most `k` different types. Find the longest block of consecutive items that fits in one box.\n\n## Input\nThe first line contains `n` and `k`. The second line contains `n` integers, the type of each item in order.\n\n## Output\nPrint the length of the longest block of consecutive items that contains at most `k` different types.\n\n## Constraints\n- `1 <= k <= n <= 100000`\n- `0 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "7 2\n1 2 1 3 3 2 2\n",
+      "output": "4\n"
+    },
+    {
+      "input": "4 1\n9 9 8 8\n",
+      "output": "2\n"
+    }
+  ]
+}

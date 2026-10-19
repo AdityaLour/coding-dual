@@ -1,0 +1,25 @@
+{
+  "slug": "knapsack-01",
+  "title": "Fill the Backpack",
+  "topic": "dynamic-programming",
+  "difficulty": "Medium",
+  "rating": 1350,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "dp",
+    "knapsack"
+  ],
+  "statement": "A backpack holds at most `W` kilograms. There are `n` items, each with a weight and a value, and each item can be taken at most once. Find the largest total value that fits in the backpack.\n\n## Input\nThe first line contains `n` and `W`. Each of the next `n` lines contains the weight and value of one item.\n\n## Output\nPrint the largest total value.\n\n## Constraints\n- `1 <= n <= 100`\n- `1 <= W <= 5000`\n- `1 <= weight <= 5000`\n- `1 <= value <= 10^6`\n",
+  "samples": [
+    {
+      "input": "3 50\n10 60\n20 100\n30 120\n",
+      "output": "220\n"
+    },
+    {
+      "input": "2 5\n6 10\n7 20\n",
+      "output": "0\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "shortest-enough-stretch",
+  "title": "Shortest Stretch That Is Enough",
+  "topic": "two-pointers-window",
+  "difficulty": "Medium",
+  "rating": 1200,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "two pointers",
+    "sliding window"
+  ],
+  "statement": "A solar panel produced a positive amount of energy in each of `n` consecutive hours. Find the smallest number of consecutive hours whose total output is at least `S`.\n\n## Input\nThe first line contains `n` and `S`. The second line contains `n` positive integers, the output of each hour.\n\n## Output\nPrint the length of the shortest block of consecutive hours whose total is at least `S`. If no block reaches `S`, print `0`.\n\n## Constraints\n- `1 <= n <= 100000`\n- `1 <= a_i <= 10^9`\n- `1 <= S <= 10^15`\n",
+  "samples": [
+    {
+      "input": "6 7\n2 1 5 2 3 2\n",
+      "output": "2\n"
+    },
+    {
+      "input": "3 100\n10 20 30\n",
+      "output": "0\n"
+    }
+  ]
+}

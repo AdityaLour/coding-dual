@@ -1,0 +1,26 @@
+{
+  "slug": "lru-cache",
+  "title": "Keep the Recent",
+  "topic": "linked-lists",
+  "difficulty": "Medium",
+  "rating": 1350,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "linked list",
+    "hash map",
+    "design"
+  ],
+  "statement": "A cache holds at most `c` key-value pairs. You get `q` operations in order:\n\n- `1 key` (get): if the key is in the cache, the result is its value and the key becomes the most recently used one; otherwise the result is `-1`.\n- `2 key value` (put): if the key is in the cache, its value is replaced and the key becomes the most recently used one. Otherwise the pair is added as the most recently used one; if the cache now holds more than `c` pairs, the least recently used pair is removed.\n\nLet `r_1, r_2, ...` be the results of the get operations in order. Compute `h` by starting with `h = 0` and, for each result, setting `h = (h * 1000003 + r + 1) mod 1000000007`. Print `h`.\n\n## Input\nThe first line contains `c` and `q`. Each of the next `q` lines is one operation.\n\n## Output\nPrint `h`.\n\n## Constraints\n- `1 <= c <= 5000`\n- `1 <= q <= 10000`\n- `1 <= key, value <= 10^6`\n",
+  "samples": [
+    {
+      "input": "2 9\n2 1 1\n2 2 2\n1 1\n2 3 3\n1 2\n2 4 4\n1 1\n1 3\n1 4\n",
+      "output": "317245355\n"
+    },
+    {
+      "input": "1 2\n2 5 7\n1 5\n",
+      "output": "8\n"
+    }
+  ]
+}

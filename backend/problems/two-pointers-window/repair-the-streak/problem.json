@@ -1,0 +1,24 @@
+{
+  "slug": "repair-the-streak",
+  "title": "Repair the Streak",
+  "topic": "two-pointers-window",
+  "difficulty": "Medium",
+  "rating": 1350,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "sliding window"
+  ],
+  "statement": "A game logs the result of each of `n` rounds as `1` for a win and `0` for a loss. A coach may overturn at most `k` of the losses, turning them into wins. After overturning, what is the longest streak of consecutive wins that can be achieved?\n\n## Input\nThe first line contains `n` and `k`. The second line contains `n` values, each `0` or `1`.\n\n## Output\nPrint the length of the longest streak of consecutive `1`s possible after changing at most `k` zeros to ones.\n\n## Constraints\n- `1 <= n <= 100000`\n- `0 <= k <= n`\n",
+  "samples": [
+    {
+      "input": "8 2\n1 0 0 1 1 0 1 0\n",
+      "output": "5\n"
+    },
+    {
+      "input": "5 0\n1 1 0 1 1\n",
+      "output": "2\n"
+    }
+  ]
+}

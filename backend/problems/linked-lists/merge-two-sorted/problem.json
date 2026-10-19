@@ -1,0 +1,25 @@
+{
+  "slug": "merge-two-sorted",
+  "title": "Zip Two Sorted Chains",
+  "topic": "linked-lists",
+  "difficulty": "Easy",
+  "rating": 1150,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "linked list",
+    "merge"
+  ],
+  "statement": "Two linked lists are stored in one pool of `n` numbered nodes. Node `i` holds the value `v_i` and points to node `nxt_i` (`0` means no next node). The first list starts at node `h1`, the second at node `h2`; either may be empty (then its head is `0`). Every node belongs to exactly one list, and the values in each list are in non-decreasing order.\n\nMerge the two lists into one sorted list. If the merged values are `x_1 ... x_n`, print `(1*x_1 + 2*x_2 + ... + n*x_n) mod 1000000007`.\n\n## Input\nThe first line contains `n`, `h1` and `h2`. The second line contains `v_1 ... v_n`. The third line contains `nxt_1 ... nxt_n`.\n\n## Output\nPrint the value described above.\n\n## Constraints\n- `1 <= n <= 13000`\n- `0 <= v_i <= 10^6`\n",
+  "samples": [
+    {
+      "input": "5 1 4\n1 4 9 2 3\n2 3 0 5 0\n",
+      "output": "75\n"
+    },
+    {
+      "input": "2 0 1\n7 8\n0 0\n",
+      "output": "7\n"
+    }
+  ]
+}

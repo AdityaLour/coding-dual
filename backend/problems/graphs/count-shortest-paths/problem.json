@@ -1,0 +1,26 @@
+{
+  "slug": "count-shortest-paths",
+  "title": "How Many Quickest Routes",
+  "topic": "graphs",
+  "difficulty": "Medium",
+  "rating": 1500,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "graphs",
+    "bfs",
+    "counting"
+  ],
+  "statement": "A city has `n` junctions and `m` two-way roads. Count the shortest routes from junction `1` to junction `n`, where length means the number of roads. Two routes are different if they pass through different roads or junctions in order. Print the count modulo `1000000007`.\n\nIf junction `n` cannot be reached, print `0`. If `n = 1`, there is exactly one route (the empty one).\n\n## Input\nThe first line contains `n` and `m`. Each of the next `m` lines contains the two junctions joined by a road. No road is listed twice.\n\n## Output\nPrint the number of shortest routes modulo `1000000007`.\n\n## Constraints\n- `1 <= n <= 15000`\n- `0 <= m <= 15000`\n",
+  "samples": [
+    {
+      "input": "4 4\n1 2\n1 3\n2 4\n3 4\n",
+      "output": "2\n"
+    },
+    {
+      "input": "3 1\n1 2\n",
+      "output": "0\n"
+    }
+  ]
+}

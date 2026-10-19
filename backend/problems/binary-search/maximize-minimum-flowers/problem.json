@@ -1,0 +1,26 @@
+{
+  "slug": "maximize-minimum-flowers",
+  "title": "Water the Shortest Plants",
+  "topic": "binary-search",
+  "difficulty": "Hard",
+  "rating": 1750,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "binary search",
+    "answer search",
+    "greedy"
+  ],
+  "statement": "A garden has `n` plants in a row with heights `a_1, ..., a_n`. You can water the garden at most `k` times. One watering chooses `w` plants that are next to each other (a block of exactly `w` consecutive plants inside the row) and makes each of them one unit taller. You may choose different blocks each time, and blocks may overlap. After all waterings, the smallest plant should be as tall as possible. Find that largest possible height of the smallest plant.\n\n## Input\nThe first line contains `n`, `w` and `k`. The second line contains `n` integers `a_i`.\n\n## Output\nPrint the largest possible height of the shortest plant after at most `k` waterings.\n\n## Constraints\n- `1 <= w <= n <= 20000`\n- `0 <= k <= 10^9`\n- `1 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5 2 3\n2 2 3 1 4\n",
+      "output": "3\n"
+    },
+    {
+      "input": "3 3 0\n5 7 6\n",
+      "output": "5\n"
+    }
+  ]
+}

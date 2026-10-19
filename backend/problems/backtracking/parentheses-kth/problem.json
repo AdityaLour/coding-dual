@@ -1,0 +1,26 @@
+{
+  "slug": "parentheses-kth",
+  "title": "The k-th Bracket String",
+  "topic": "backtracking",
+  "difficulty": "Medium",
+  "rating": 1450,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "backtracking",
+    "strings",
+    "counting"
+  ],
+  "statement": "A bracket string is valid when every `(` is matched by a later `)`. List all valid strings with exactly `n` pairs of brackets in dictionary order, where `(` comes before `)`. For example, for `n = 2` the list is `(())`, `()()`.\n\nPrint the `k`-th string in that list (counting from 1).\n\n## Input\nOne line with `n` and `k`.\n\n## Output\nPrint the `k`-th valid string.\n\n## Constraints\n- `1 <= n <= 14`\n- `1 <= k <=` the number of valid strings with `n` pairs\n",
+  "samples": [
+    {
+      "input": "3 1\n",
+      "output": "((()))\n"
+    },
+    {
+      "input": "3 5\n",
+      "output": "()()()\n"
+    }
+  ]
+}

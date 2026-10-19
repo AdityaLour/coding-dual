@@ -1,0 +1,26 @@
+{
+  "slug": "free-edges",
+  "title": "Toll Roads With Free Passes",
+  "topic": "graphs",
+  "difficulty": "Hard",
+  "rating": 1800,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "graphs",
+    "dijkstra",
+    "dp"
+  ],
+  "statement": "A country has `n` cities and `m` two-way toll roads. You have `k` free passes. Using a pass on a road lets you drive that road without paying; you may use at most `k` passes in total on your trip from city `1` to city `n`. Find the smallest total toll you must pay. If city `n` cannot be reached, print `-1`. When `n = 1` the answer is `0`.\n\n## Input\nThe first line contains `n`, `m` and `k`. Each of the next `m` lines contains `u`, `v` and the toll `w` of one road. No pair of cities is joined twice.\n\n## Output\nPrint the smallest total toll, or `-1`.\n\n## Constraints\n- `1 <= n <= 2000`\n- `0 <= m <= 4000`\n- `0 <= k <= 5`\n- `1 <= w <= 10^6`\n",
+  "samples": [
+    {
+      "input": "4 4 1\n1 2 5\n2 4 5\n1 3 1\n3 4 20\n",
+      "output": "1\n"
+    },
+    {
+      "input": "3 1 2\n1 2 7\n",
+      "output": "-1\n"
+    }
+  ]
+}

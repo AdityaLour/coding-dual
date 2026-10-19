@@ -1,0 +1,26 @@
+{
+  "slug": "detect-cycle-entry",
+  "title": "Where Does the Loop Start",
+  "topic": "linked-lists",
+  "difficulty": "Medium",
+  "rating": 1200,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "linked list",
+    "cycle",
+    "floyd"
+  ],
+  "statement": "`n` numbered nodes each point to a next node: node `i` points to `nxt_i` (`0` means no next node). Start at node `head` and keep following the pointers. Either you reach a node with no next node, or you walk forever around a cycle. Some nodes may never be reached from `head`.\n\nIf the walk ends, print `-1`. Otherwise print two numbers: the first node of the cycle that the walk reaches, and the length of the cycle.\n\n## Input\nThe first line contains `n` and `head`. The second line contains `nxt_1 ... nxt_n`.\n\n## Output\nPrint `-1`, or the entry node and the cycle length separated by a space.\n\n## Constraints\n- `1 <= n <= 27000`\n- `1 <= head <= n`\n- `0 <= nxt_i <= n`\n",
+  "samples": [
+    {
+      "input": "6 1\n2 3 4 2 0 0\n",
+      "output": "2 3\n"
+    },
+    {
+      "input": "1 1\n0\n",
+      "output": "-1\n"
+    }
+  ]
+}

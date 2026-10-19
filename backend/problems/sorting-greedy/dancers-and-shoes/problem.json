@@ -1,0 +1,26 @@
+{
+  "slug": "dancers-and-shoes",
+  "title": "Cookies for the Hungry Children",
+  "topic": "sorting-greedy",
+  "difficulty": "Easy",
+  "rating": 1000,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "greedy",
+    "sorting",
+    "two pointers"
+  ],
+  "statement": "`n` children each have a hunger level `g_i`: a child is happy only with a cookie of size at least `g_i`. There are `m` cookies, cookie `j` has size `s_j`. Every child gets at most one cookie and every cookie goes to at most one child. Find the largest number of children that can be made happy.\n\n## Input\nThe first line contains `n` and `m`. The second line contains the `n` hunger levels. The third line contains the `m` cookie sizes.\n\n## Output\nPrint the largest possible number of happy children.\n\n## Constraints\n- `1 <= n, m <= 50000`\n- `1 <= g_i, s_j <= 10^9`\n",
+  "samples": [
+    {
+      "input": "3 2\n1 2 3\n1 1\n",
+      "output": "1\n"
+    },
+    {
+      "input": "2 3\n1 2\n1 2 3\n",
+      "output": "2\n"
+    }
+  ]
+}

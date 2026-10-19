@@ -1,0 +1,26 @@
+{
+  "slug": "lis-count",
+  "title": "How Many Longest Climbs",
+  "topic": "dynamic-programming",
+  "difficulty": "Hard",
+  "rating": 1800,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "dp",
+    "fenwick tree",
+    "counting"
+  ],
+  "statement": "Given a sequence of `n` integers, consider its strictly increasing subsequences (they keep the original order and may skip elements). Count how many different strictly increasing subsequences have the maximum possible length. Two subsequences are different if they use different positions, even when the values are equal.\n\nPrint the count modulo `1000000007`.\n\n## Input\nThe first line contains `n`. The second line contains `a_1 ... a_n`.\n\n## Output\nPrint the number of longest strictly increasing subsequences modulo `1000000007`.\n\n## Constraints\n- `1 <= n <= 20000`\n- `1 <= a_i <= 99999`\n",
+  "samples": [
+    {
+      "input": "5\n1 3 5 4 7\n",
+      "output": "2\n"
+    },
+    {
+      "input": "5\n2 2 2 2 2\n",
+      "output": "5\n"
+    }
+  ]
+}

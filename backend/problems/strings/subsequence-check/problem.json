@@ -1,0 +1,25 @@
+{
+  "slug": "subsequence-check",
+  "title": "Hidden Inside the Long Text",
+  "topic": "strings",
+  "difficulty": "Easy",
+  "rating": 850,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "strings",
+    "two pointers"
+  ],
+  "statement": "A word `s` and a text `t` are given. The word is hidden inside the text if you can delete some letters of `t` (possibly none) and be left with exactly `s`, keeping the order of the remaining letters.\n\n## Input\nThe first line contains `s`. The second line contains `t`.\n\n## Output\nPrint `YES` if `s` is hidden inside `t`, otherwise print `NO`.\n\n## Constraints\n- `1 <= |s|, |t| <= 90000`\n- Both strings contain only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "ace\nabcde\n",
+      "output": "YES\n"
+    },
+    {
+      "input": "bca\nabc\n",
+      "output": "NO\n"
+    }
+  ]
+}

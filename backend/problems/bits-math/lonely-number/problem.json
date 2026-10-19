@@ -1,0 +1,25 @@
+{
+  "slug": "lonely-number",
+  "title": "The Odd One Out",
+  "topic": "bits-math",
+  "difficulty": "Easy",
+  "rating": 900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "bits",
+    "xor"
+  ],
+  "statement": "A list of `n` numbers (`n` is odd) contains exactly one number that appears once. Every other number appears exactly twice, in any positions. Print the number that appears once.\n\n## Input\nThe first line contains `n`. The second line contains the `n` numbers.\n\n## Output\nPrint the number that appears once.\n\n## Constraints\n- `1 <= n <= 16999`, `n` is odd\n- `0 <= a_i <= 2^31 - 1`\n",
+  "samples": [
+    {
+      "input": "5\n4 1 2 1 2\n",
+      "output": "4\n"
+    },
+    {
+      "input": "1\n9\n",
+      "output": "9\n"
+    }
+  ]
+}

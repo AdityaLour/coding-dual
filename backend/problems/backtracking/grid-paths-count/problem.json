@@ -1,0 +1,26 @@
+{
+  "slug": "grid-paths-count",
+  "title": "Every Way Through the Maze",
+  "topic": "backtracking",
+  "difficulty": "Easy",
+  "rating": 1050,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "backtracking",
+    "grid",
+    "dfs"
+  ],
+  "statement": "A grid has open cells `.` and walls `#`. You start in the top-left cell and want to reach the bottom-right cell. Each step moves to a side-adjacent open cell (up, down, left or right). You may not enter the same cell twice, and the walk ends the moment you reach the bottom-right cell. Count the different walks.\n\nIf the grid is a single cell, the start is the end, and there is exactly one (empty) walk.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `n` lines is a string of `m` characters.\n\n## Output\nPrint the number of different walks. The top-left and bottom-right cells are always open.\n\n## Constraints\n- `1 <= n, m <= 5`\n",
+  "samples": [
+    {
+      "input": "2 2\n..\n..\n",
+      "output": "2\n"
+    },
+    {
+      "input": "3 3\n...\n...\n...\n",
+      "output": "12\n"
+    }
+  ]
+}

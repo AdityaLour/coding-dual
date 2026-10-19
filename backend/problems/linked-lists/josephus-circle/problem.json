@@ -1,0 +1,26 @@
+{
+  "slug": "josephus-circle",
+  "title": "Every k-th Leaves the Circle",
+  "topic": "linked-lists",
+  "difficulty": "Medium",
+  "rating": 1400,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "circular list",
+    "josephus",
+    "recurrence"
+  ],
+  "statement": "`n` people stand in a circle in the given order; person `i` carries the number `a_i`. Counting starts at the first person and goes around the circle: the first person says `1`, the next says `2`, and so on. The person who says `k` leaves the circle, and counting restarts from the next person with `1`. This repeats until one person is left.\n\nPrint the number carried by the last person.\n\n## Input\nThe first line contains `n` and `k`. The second line contains `a_1 ... a_n`.\n\n## Output\nPrint the number carried by the survivor.\n\n## Constraints\n- `1 <= n <= 16000`\n- `1 <= k <= 10^9`\n- `1 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5 2\n10 20 30 40 50\n",
+      "output": "30\n"
+    },
+    {
+      "input": "1 5\n7\n",
+      "output": "7\n"
+    }
+  ]
+}

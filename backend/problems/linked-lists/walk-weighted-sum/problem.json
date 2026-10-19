@@ -1,0 +1,25 @@
+{
+  "slug": "walk-weighted-sum",
+  "title": "Walk the Chain",
+  "topic": "linked-lists",
+  "difficulty": "Easy",
+  "rating": 900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "linked list",
+    "traversal"
+  ],
+  "statement": "A linked list is stored in `n` numbered nodes. Node `i` holds the value `v_i` and points to node `nxt_i` (`0` means there is no next node). The list starts at node `head` and passes through all `n` nodes exactly once.\n\nWalk the list from the head. If the values in walking order are `x_1, x_2, ..., x_n`, print `(1*x_1 + 2*x_2 + ... + n*x_n) mod 1000000007`.\n\n## Input\nThe first line contains `n` and `head`. The second line contains `v_1 ... v_n`. The third line contains `nxt_1 ... nxt_n`.\n\n## Output\nPrint the value described above.\n\n## Constraints\n- `1 <= n <= 13000`\n- `0 <= v_i <= 10^6`\n",
+  "samples": [
+    {
+      "input": "3 2\n10 20 30\n0 3 1\n",
+      "output": "110\n"
+    },
+    {
+      "input": "1 1\n5\n0\n",
+      "output": "5\n"
+    }
+  ]
+}

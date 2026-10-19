@@ -1,0 +1,25 @@
+{
+  "slug": "pin-segments",
+  "title": "Pins on the Number Line",
+  "topic": "sorting-greedy",
+  "difficulty": "Medium",
+  "rating": 1350,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "greedy",
+    "sorting"
+  ],
+  "statement": "You have `n` closed segments `[l_i, r_i]` on a number line. Place pins at integer positions so that every segment contains at least one pin. A pin sitting exactly on an end of a segment counts as being inside it. Find the smallest number of pins.\n\n## Input\nThe first line contains `n`. Each of the next `n` lines contains `l_i` and `r_i`.\n\n## Output\nPrint the smallest number of pins.\n\n## Constraints\n- `1 <= n <= 8000`\n- `0 <= l_i <= r_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "4\n1 3\n2 5\n4 7\n6 8\n",
+      "output": "2\n"
+    },
+    {
+      "input": "3\n1 2\n2 3\n3 4\n",
+      "output": "2\n"
+    }
+  ]
+}

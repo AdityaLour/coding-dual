@@ -1,0 +1,25 @@
+{
+  "slug": "gcd-of-all-but-one",
+  "title": "Everyone Except One",
+  "topic": "bits-math",
+  "difficulty": "Easy",
+  "rating": 1050,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "gcd",
+    "prefix"
+  ],
+  "statement": "For each position `i`, take the greatest common divisor of all the numbers except `a_i`. Print the sum of these `n` values.\n\n## Input\nThe first line contains `n`. The second line contains `a_1 ... a_n`.\n\n## Output\nPrint the sum.\n\n## Constraints\n- `2 <= n <= 16000`\n- `1 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "3\n6 9 12\n",
+      "output": "12\n"
+    },
+    {
+      "input": "2\n4 6\n",
+      "output": "10\n"
+    }
+  ]
+}

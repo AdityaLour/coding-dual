@@ -1,0 +1,26 @@
+{
+  "slug": "subset-xor-max",
+  "title": "Strongest Combination",
+  "topic": "bits-math",
+  "difficulty": "Hard",
+  "rating": 1750,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "bits",
+    "xor basis",
+    "linear algebra"
+  ],
+  "statement": "Choose any subset of the numbers `a_1 ... a_n` (possibly empty, possibly all) and take the bitwise XOR of the chosen numbers; the empty subset gives `0`. Print the largest XOR you can get.\n\n## Input\nThe first line contains `n`. The second line contains `a_1 ... a_n`.\n\n## Output\nPrint the largest XOR of a subset.\n\n## Constraints\n- `1 <= n <= 9000`\n- `0 <= a_i < 2^60`\n",
+  "samples": [
+    {
+      "input": "3\n3 10 5\n",
+      "output": "15\n"
+    },
+    {
+      "input": "1\n0\n",
+      "output": "0\n"
+    }
+  ]
+}

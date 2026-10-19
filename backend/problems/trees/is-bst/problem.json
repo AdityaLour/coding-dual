@@ -1,0 +1,25 @@
+{
+  "slug": "is-bst",
+  "title": "Is This a Search Tree",
+  "topic": "trees",
+  "difficulty": "Easy",
+  "rating": 1100,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "trees",
+    "bst"
+  ],
+  "statement": "A binary tree has `n` nodes numbered `1..n`; node `1` is the root. Node `i` holds the value `v_i`, and you are given its left and right child (`0` means none). The tree is a binary search tree when, for every node, all values in its left subtree are strictly smaller than its value and all values in its right subtree are strictly larger.\n\n## Input\nThe first line contains `n`. The next `n` lines give `v_i`, the left child and the right child of node `i`.\n\n## Output\nPrint `YES` if the tree is a binary search tree, otherwise `NO`.\n\n## Constraints\n- `1 <= n <= 8000`\n- `1 <= v_i <= 10^9`\n- The input is a valid binary tree rooted at node `1`.\n",
+  "samples": [
+    {
+      "input": "3\n2 2 3\n1 0 0\n3 0 0\n",
+      "output": "YES\n"
+    },
+    {
+      "input": "3\n2 2 3\n3 0 0\n1 0 0\n",
+      "output": "NO\n"
+    }
+  ]
+}

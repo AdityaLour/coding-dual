@@ -1,0 +1,25 @@
+{
+  "slug": "card-game-last",
+  "title": "The Last Card Standing",
+  "topic": "stack-queue",
+  "difficulty": "Medium",
+  "rating": 1250,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "queue",
+    "math"
+  ],
+  "statement": "A deck has `n` cards numbered `1` to `n`, with card `1` on top and card `n` at the bottom. Repeat this until one card is left: throw away the top card, then move the new top card to the bottom of the deck. Which card is left at the end?\n\n## Input\nOne line containing `n`.\n\n## Output\nPrint the number of the last remaining card.\n\n## Constraints\n- `1 <= n <= 10^18`\n",
+  "samples": [
+    {
+      "input": "5\n",
+      "output": "2\n"
+    },
+    {
+      "input": "8\n",
+      "output": "8\n"
+    }
+  ]
+}

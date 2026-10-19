@@ -1,0 +1,25 @@
+{
+  "slug": "longest-increasing",
+  "title": "Longest Climb in the Sequence",
+  "topic": "dynamic-programming",
+  "difficulty": "Medium",
+  "rating": 1300,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "dp",
+    "binary search"
+  ],
+  "statement": "Given a sequence of `n` integers, find the length of its longest strictly increasing subsequence. A subsequence keeps the original order but may skip elements.\n\n## Input\nThe first line contains `n`. The second line contains `a_1 ... a_n`.\n\n## Output\nPrint the length of the longest strictly increasing subsequence.\n\n## Constraints\n- `1 <= n <= 30000`\n- `1 <= a_i <= 99999`\n",
+  "samples": [
+    {
+      "input": "8\n10 9 2 5 3 7 101 18\n",
+      "output": "4\n"
+    },
+    {
+      "input": "5\n7 7 7 7 7\n",
+      "output": "1\n"
+    }
+  ]
+}

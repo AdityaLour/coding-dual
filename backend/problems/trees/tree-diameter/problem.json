@@ -1,0 +1,25 @@
+{
+  "slug": "tree-diameter",
+  "title": "The Longest Walk in the Forest",
+  "topic": "trees",
+  "difficulty": "Medium",
+  "rating": 1400,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "trees",
+    "bfs"
+  ],
+  "statement": "A tree has `n` nodes and `n - 1` edges. The distance between two nodes is the number of edges on the path between them. Find the largest distance between any two nodes.\n\n## Input\nThe first line contains `n`. Each of the next `n - 1` lines contains the two nodes joined by an edge.\n\n## Output\nPrint the largest distance.\n\n## Constraints\n- `1 <= n <= 15000`\n- The edges form a tree.\n",
+  "samples": [
+    {
+      "input": "5\n1 2\n1 3\n3 4\n4 5\n",
+      "output": "4\n"
+    },
+    {
+      "input": "1\n",
+      "output": "0\n"
+    }
+  ]
+}

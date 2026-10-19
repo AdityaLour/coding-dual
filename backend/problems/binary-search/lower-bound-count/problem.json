@@ -1,0 +1,25 @@
+{
+  "slug": "lower-bound-count",
+  "title": "How Many Are Not Above",
+  "topic": "binary-search",
+  "difficulty": "Easy",
+  "rating": 850,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "binary search",
+    "sorting"
+  ],
+  "statement": "A sorted list of `n` numbers is given, followed by `q` questions. For each question value `x`, find how many numbers in the list are less than or equal to `x`. Print the total of the answers to all questions.\n\n## Input\nThe first line contains `n` and `q`. The second line contains `n` integers in non-decreasing order. The third line contains the `q` question values.\n\n## Output\nPrint the sum of the answers to all questions. The answer can be larger than 32 bits.\n\n## Constraints\n- `1 <= n, q <= 100000`\n- `-10^9 <= a_i, x_j <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5 3\n1 3 3 7 9\n0 3 10\n",
+      "output": "8\n"
+    },
+    {
+      "input": "3 2\n5 5 5\n5 4\n",
+      "output": "3\n"
+    }
+  ]
+}

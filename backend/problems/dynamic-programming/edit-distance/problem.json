@@ -1,0 +1,25 @@
+{
+  "slug": "edit-distance",
+  "title": "Turn One Word into Another",
+  "topic": "dynamic-programming",
+  "difficulty": "Medium",
+  "rating": 1400,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "dp",
+    "strings"
+  ],
+  "statement": "You may change a word with three kinds of steps, each costing 1: insert a letter anywhere, delete a letter, or replace a letter with another one. Find the smallest number of steps that turns the word `s` into the word `t`.\n\n## Input\nTwo lines: `s` and `t`, lowercase letters.\n\n## Output\nPrint the smallest number of steps.\n\n## Constraints\n- `1 <= |s|, |t| <= 400`\n",
+  "samples": [
+    {
+      "input": "kitten\nsitting\n",
+      "output": "3\n"
+    },
+    {
+      "input": "flaw\nlawn\n",
+      "output": "2\n"
+    }
+  ]
+}

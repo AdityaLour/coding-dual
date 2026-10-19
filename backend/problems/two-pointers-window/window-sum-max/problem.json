@@ -1,0 +1,25 @@
+{
+  "slug": "window-sum-max",
+  "title": "Best Stretch of Days",
+  "topic": "two-pointers-window",
+  "difficulty": "Easy",
+  "rating": 800,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "sliding window",
+    "prefix sums"
+  ],
+  "statement": "A shop wrote down its profit for each of `n` days; a day can show a loss, which is a negative number. Pick exactly `k` consecutive days so that their total profit is as large as possible.\n\n## Input\nThe first line contains `n` and `k`. The second line contains `n` integers, the profit of each day in order.\n\n## Output\nPrint the largest total profit over all windows of `k` consecutive days.\n\n## Constraints\n- `1 <= k <= n <= 100000`\n- `-10^9 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "6 3\n2 -1 4 -2 3 1\n",
+      "output": "5\n"
+    },
+    {
+      "input": "4 2\n-5 -2 -9 -3\n",
+      "output": "-7\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "tree-width",
+  "title": "The Widest Generation",
+  "topic": "trees",
+  "difficulty": "Easy",
+  "rating": 1000,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "trees",
+    "bfs"
+  ],
+  "statement": "A binary tree has `n` nodes numbered `1..n`, and node `1` is the root. For every node you are given its left child and right child, where `0` means there is no such child. The nodes at the same distance from the root form one generation. Find the largest number of nodes in a single generation.\n\n## Input\nThe first line contains `n`. The next `n` lines give the left and right child of node `1`, node `2`, ..., node `n`.\n\n## Output\nPrint the size of the largest generation.\n\n## Constraints\n- `1 <= n <= 12000`\n- The input is a valid binary tree rooted at node `1`.\n",
+  "samples": [
+    {
+      "input": "5\n2 3\n4 5\n0 0\n0 0\n0 0\n",
+      "output": "2\n"
+    },
+    {
+      "input": "3\n2 0\n3 0\n0 0\n",
+      "output": "1\n"
+    }
+  ]
+}

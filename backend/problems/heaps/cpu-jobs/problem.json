@@ -1,0 +1,25 @@
+{
+  "slug": "cpu-jobs",
+  "title": "Shortest Job Next",
+  "topic": "heaps",
+  "difficulty": "Medium",
+  "rating": 1400,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "heaps",
+    "simulation"
+  ],
+  "statement": "A single processor runs `n` jobs. Job `i` arrives at time `a_i` and needs `d_i` units of time. The processor runs one job at a time and never interrupts a job once it has started.\n\nWhenever the processor becomes free, it looks at the jobs that have already arrived (`a_i` at most the current time) and are not yet done. It starts the one with the smallest `d_i` (if several tie, any of them gives the same total). If no job has arrived, it waits until the next arrival and then decides again.\n\nA job's waiting time is its start time minus its arrival time. Print the total waiting time of all jobs.\n\n## Input\nThe first line contains `n`. Each of the next `n` lines contains `a_i` and `d_i`. The jobs are not sorted.\n\n## Output\nPrint the total waiting time.\n\n## Constraints\n- `1 <= n <= 8000`\n- `0 <= a_i <= 10^9`\n- `1 <= d_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "4\n0 7\n2 4\n4 1\n5 4\n",
+      "output": "16\n"
+    },
+    {
+      "input": "1\n5 3\n",
+      "output": "0\n"
+    }
+  ]
+}

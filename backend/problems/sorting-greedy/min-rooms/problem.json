@@ -1,0 +1,25 @@
+{
+  "slug": "min-rooms",
+  "title": "Rooms for the Meetings",
+  "topic": "sorting-greedy",
+  "difficulty": "Medium",
+  "rating": 1250,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "sorting",
+    "greedy"
+  ],
+  "statement": "There are `n` meetings. Meeting `i` occupies a room from time `s_i` up to, but not including, time `e_i`. A meeting may start at the exact moment another one ends in the same room. Find the smallest number of rooms that lets every meeting happen.\n\n## Input\nThe first line contains `n`. Each of the next `n` lines contains `s_i` and `e_i`.\n\n## Output\nPrint the smallest number of rooms.\n\n## Constraints\n- `1 <= n <= 8000`\n- `0 <= s_i < e_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "3\n0 30\n5 10\n15 20\n",
+      "output": "2\n"
+    },
+    {
+      "input": "2\n1 2\n2 3\n",
+      "output": "1\n"
+    }
+  ]
+}

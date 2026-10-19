@@ -1,0 +1,26 @@
+{
+  "slug": "topo-order-lex",
+  "title": "Earliest Build Order",
+  "topic": "graphs",
+  "difficulty": "Medium",
+  "rating": 1300,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "graphs",
+    "topological sort",
+    "heap"
+  ],
+  "statement": "A project has `n` tasks and `m` rules \"task `u` must be done before task `v`\". All tasks are done one at a time. Among all valid orders, take the one that is smallest when compared as a sequence of task numbers (compare the first tasks, then the second tasks, and so on). \n\nIf the rules contradict each other and no valid order exists, print `CYCLE`. Otherwise let `p_1 ... p_n` be that smallest order and print `(1*p_1 + 2*p_2 + ... + n*p_n) mod 1000000007`.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `m` lines contains `u` and `v` (a rule: `u` before `v`).\n\n## Output\nPrint `CYCLE`, or the value described above.\n\n## Constraints\n- `1 <= n <= 15000`\n- `0 <= m <= 15000`\n- no rule is listed twice and `u != v`\n",
+  "samples": [
+    {
+      "input": "4 3\n4 1\n3 1\n2 4\n",
+      "output": "24\n"
+    },
+    {
+      "input": "2 2\n1 2\n2 1\n",
+      "output": "CYCLE\n"
+    }
+  ]
+}

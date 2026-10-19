@@ -1,0 +1,25 @@
+{
+  "slug": "max-weight-independent",
+  "title": "Guards Who Cannot Be Neighbours",
+  "topic": "trees",
+  "difficulty": "Medium",
+  "rating": 1450,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "trees",
+    "dp"
+  ],
+  "statement": "A tree has `n` nodes, and node `i` has a weight `w_i`. Choose a set of nodes so that no two chosen nodes are joined by an edge. Find the largest possible total weight of the chosen nodes.\n\n## Input\nThe first line contains `n`. The second line contains `w_1 ... w_n`. Each of the next `n - 1` lines contains the two nodes joined by an edge.\n\n## Output\nPrint the largest possible total weight.\n\n## Constraints\n- `1 <= n <= 8000`\n- `1 <= w_i <= 10^9`\n- The edges form a tree.\n",
+  "samples": [
+    {
+      "input": "5\n1 5 2 4 3\n1 2\n1 3\n2 4\n2 5\n",
+      "output": "9\n"
+    },
+    {
+      "input": "1\n9\n",
+      "output": "9\n"
+    }
+  ]
+}

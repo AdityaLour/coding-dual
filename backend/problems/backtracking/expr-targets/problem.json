@@ -1,0 +1,26 @@
+{
+  "slug": "expr-targets",
+  "title": "Plus, Minus or Glue",
+  "topic": "backtracking",
+  "difficulty": "Medium",
+  "rating": 1350,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "backtracking",
+    "strings",
+    "recursion"
+  ],
+  "statement": "You are given a string of digits. Between every two neighbouring digits you choose one of three things: write `+`, write `-`, or write nothing (gluing the digits into one longer number). The first number has no sign in front. This gives an arithmetic expression.\n\nA number may not have leading zeros unless it is exactly the single digit `0`; an expression that contains a number like `05` or `007` is not allowed. Count the allowed expressions whose value equals `T`.\n\n## Input\nThe first line contains the digit string. The second line contains `T`.\n\n## Output\nPrint the number of allowed expressions with value `T`.\n\n## Constraints\n- `1 <= length <= 11`\n- `|T| <= 10^12`\n",
+  "samples": [
+    {
+      "input": "123\n6\n",
+      "output": "1\n"
+    },
+    {
+      "input": "105\n5\n",
+      "output": "1\n"
+    }
+  ]
+}

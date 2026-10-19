@@ -1,0 +1,25 @@
+{
+  "slug": "max-talks",
+  "title": "Talks One Person Can Attend",
+  "topic": "sorting-greedy",
+  "difficulty": "Medium",
+  "rating": 1300,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "greedy",
+    "sorting"
+  ],
+  "statement": "A conference has `n` talks. Talk `i` runs from time `s_i` up to, but not including, time `e_i`. You can attend a talk only from its start to its end, and you cannot be in two talks at once. You can leave one talk and enter another at the same moment. Find the largest number of talks you can attend.\n\n## Input\nThe first line contains `n`. Each of the next `n` lines contains `s_i` and `e_i`.\n\n## Output\nPrint the largest number of talks you can attend.\n\n## Constraints\n- `1 <= n <= 8000`\n- `0 <= s_i < e_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "4\n1 4\n3 5\n0 6\n5 7\n",
+      "output": "2\n"
+    },
+    {
+      "input": "3\n1 2\n2 3\n3 4\n",
+      "output": "3\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "count-occurrences",
+  "title": "How Many Times Does It Appear",
+  "topic": "strings",
+  "difficulty": "Medium",
+  "rating": 1450,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "strings",
+    "pattern matching"
+  ],
+  "statement": "A text `s` and a pattern `p` are given. Count how many positions of `s` start an exact copy of `p`. Copies may overlap: in `aaaa` the pattern `aa` starts at three positions.\n\n## Input\nThe first line contains `s`. The second line contains `p`.\n\n## Output\nPrint the number of starting positions where `p` occurs in `s`.\n\n## Constraints\n- `1 <= |p| <= |s| <= 100000`\n- `|s| + |p| <= 190000`\n- Both strings contain only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "aaaa\naa\n",
+      "output": "3\n"
+    },
+    {
+      "input": "abababa\naba\n",
+      "output": "3\n"
+    }
+  ]
+}

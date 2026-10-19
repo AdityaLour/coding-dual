@@ -1,0 +1,25 @@
+{
+  "slug": "intersection-of-lists",
+  "title": "Where the Chains Meet",
+  "topic": "linked-lists",
+  "difficulty": "Easy",
+  "rating": 1100,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "linked list",
+    "intersection"
+  ],
+  "statement": "Two linked lists are stored in one pool of `n` numbered nodes. Node `i` holds the value `v_i` and points to node `nxt_i` (`0` means no next node). The first list starts at node `h1` and the second at node `h2`. Every node belongs to at least one of the lists. The lists may merge: from some node on, they can share the same nodes up to the end.\n\nPrint the number of the first node that belongs to both lists (the first one reached when walking the first list), or `-1` if the lists never share a node. Equal values do not mean the same node.\n\n## Input\nThe first line contains `n`, `h1` and `h2`. The second line contains `v_1 ... v_n`. The third line contains `nxt_1 ... nxt_n`.\n\n## Output\nPrint one integer.\n\n## Constraints\n- `2 <= n <= 13000`\n- `1 <= h1, h2 <= n`\n- `0 <= v_i <= 10^6`\n- there are no cycles\n",
+  "samples": [
+    {
+      "input": "5 1 4\n1 2 3 1 2\n2 3 0 5 2\n",
+      "output": "2\n"
+    },
+    {
+      "input": "2 1 2\n1 1\n0 0\n",
+      "output": "-1\n"
+    }
+  ]
+}

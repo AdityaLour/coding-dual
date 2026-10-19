@@ -1,0 +1,25 @@
+{
+  "slug": "matching-brackets",
+  "title": "Do the Brackets Match",
+  "topic": "stack-queue",
+  "difficulty": "Easy",
+  "rating": 900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "stack",
+    "strings"
+  ],
+  "statement": "A line is made only of the characters `(`, `)`, `[`, `]`, `{` and `}`. It is balanced if every opening bracket is closed by a bracket of the same kind, and brackets are closed in the correct order: the most recently opened bracket must be closed first.\n\n## Input\nOne line containing the bracket string `s`.\n\n## Output\nPrint `YES` if the string is balanced, otherwise print `NO`.\n\n## Constraints\n- `1 <= |s| <= 100000`\n",
+  "samples": [
+    {
+      "input": "([]{})\n",
+      "output": "YES\n"
+    },
+    {
+      "input": "([)]\n",
+      "output": "NO\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "max-coins-path",
+  "title": "Richest Route Through the Grid",
+  "topic": "dynamic-programming",
+  "difficulty": "Easy",
+  "rating": 1000,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "dp",
+    "grid"
+  ],
+  "statement": "A grid holds an integer in every cell (it can be negative). You start in the top-left cell and finish in the bottom-right cell. Each move goes one cell right or one cell down. Your score is the sum of all the cells you visit, including the first and the last. Find the largest possible score.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `n` lines contains `m` integers.\n\n## Output\nPrint the largest possible score.\n\n## Constraints\n- `1 <= n, m <= 200`\n- `-99 <= value <= 99`\n",
+  "samples": [
+    {
+      "input": "2 3\n1 2 3\n4 5 6\n",
+      "output": "16\n"
+    },
+    {
+      "input": "2 2\n-1 -2\n-3 -4\n",
+      "output": "-7\n"
+    }
+  ]
+}

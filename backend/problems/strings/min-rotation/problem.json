@@ -1,0 +1,25 @@
+{
+  "slug": "min-rotation",
+  "title": "Alphabetically First Spin",
+  "topic": "strings",
+  "difficulty": "Hard",
+  "rating": 1700,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "strings",
+    "two pointers"
+  ],
+  "statement": "Cutting a word at some point and swapping the two pieces gives a spin of the word; the word itself is also a spin. For example, the spins of `bca` are `bca`, `cab` and `abc`. Among all spins of the given word, find the one that comes first in alphabetical (dictionary) order.\n\n## Input\nOne line containing the word `s`.\n\n## Output\nPrint the alphabetically smallest spin of `s`.\n\n## Constraints\n- `1 <= |s| <= 100000`\n- `s` contains only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "bca\n",
+      "output": "abc\n"
+    },
+    {
+      "input": "cbacba\n",
+      "output": "acbacb\n"
+    }
+  ]
+}

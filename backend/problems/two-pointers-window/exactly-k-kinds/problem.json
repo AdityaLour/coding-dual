@@ -1,0 +1,25 @@
+{
+  "slug": "exactly-k-kinds",
+  "title": "Exactly K Kinds",
+  "topic": "two-pointers-window",
+  "difficulty": "Hard",
+  "rating": 1650,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "sliding window",
+    "counting"
+  ],
+  "statement": "A long shelf holds `n` books in a row, and each book has a genre number. A stretch is any block of one or more consecutive books. Count the stretches that contain exactly `k` different genres. Two stretches covering different positions are different, even if they list the same genres.\n\n## Input\nThe first line contains `n` and `k`. The second line contains `n` integers, the genre of each book in order.\n\n## Output\nPrint the number of stretches that contain exactly `k` different genres. The answer can be larger than 32 bits.\n\n## Constraints\n- `1 <= k <= n <= 100000`\n- `0 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5 2\n1 2 1 2 3\n",
+      "output": "7\n"
+    },
+    {
+      "input": "4 1\n7 7 7 7\n",
+      "output": "10\n"
+    }
+  ]
+}

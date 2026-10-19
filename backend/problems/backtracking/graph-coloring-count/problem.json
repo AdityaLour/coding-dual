@@ -1,0 +1,26 @@
+{
+  "slug": "graph-coloring-count",
+  "title": "Paint the Network",
+  "topic": "backtracking",
+  "difficulty": "Medium",
+  "rating": 1500,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "backtracking",
+    "graphs",
+    "counting"
+  ],
+  "statement": "A connected network has `n` nodes and `m` links. Paint every node with one of `k` colors so that the two ends of every link get different colors. Count the valid ways to paint (two ways differ if some node gets a different color).\n\n## Input\nThe first line contains `n`, `k` and `m`. Each of the next `m` lines contains the two nodes (numbered from 1) joined by one link. The network is connected and has no repeated links or self-links.\n\n## Output\nPrint the number of valid ways to paint the nodes.\n\n## Constraints\n- `1 <= n <= 10`\n- `1 <= k <= 4`\n- `n - 1 <= m <= n(n-1)/2`\n",
+  "samples": [
+    {
+      "input": "3 3 3\n1 2\n2 3\n1 3\n",
+      "output": "6\n"
+    },
+    {
+      "input": "3 2 2\n1 2\n2 3\n",
+      "output": "2\n"
+    }
+  ]
+}

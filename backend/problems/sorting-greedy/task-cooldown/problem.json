@@ -1,0 +1,26 @@
+{
+  "slug": "task-cooldown",
+  "title": "Cooldown Scheduler",
+  "topic": "sorting-greedy",
+  "difficulty": "Hard",
+  "rating": 1600,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "greedy",
+    "math",
+    "sorting"
+  ],
+  "statement": "There are `m` kinds of tasks, and `c_i` tasks of kind `i` must be done. Each task takes exactly one time slot, and only one task can run per slot. A slot can also be left idle. After a task of some kind runs, at least `k` other slots (idle or running other kinds) must pass before the next task of the same kind may run. Tasks can be done in any order.\n\nFind the smallest number of time slots needed, counted from the first slot until the last task finishes.\n\n## Input\nThe first line contains `m` and `k`. The second line contains `c_1 ... c_m`.\n\n## Output\nPrint the smallest number of time slots.\n\n## Constraints\n- `1 <= m <= 15000`\n- `0 <= k <= 10^9`\n- `1 <= c_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "2 2\n3 3\n",
+      "output": "8\n"
+    },
+    {
+      "input": "3 1\n2 2 2\n",
+      "output": "6\n"
+    }
+  ]
+}

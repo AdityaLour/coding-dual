@@ -1,0 +1,25 @@
+{
+  "slug": "tree-height",
+  "title": "How Tall Is the Family Tree",
+  "topic": "trees",
+  "difficulty": "Easy",
+  "rating": 900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "trees",
+    "bfs"
+  ],
+  "statement": "A binary tree has `n` nodes numbered `1..n`, and node `1` is the root. For every node you are given its left child and right child, where `0` means there is no such child. The height of the tree is the number of nodes on the longest path that starts at the root and goes down to a leaf. A tree with only a root has height `1`.\n\n## Input\nThe first line contains `n`. The next `n` lines give the left and right child of node `1`, node `2`, ..., node `n`.\n\n## Output\nPrint the height of the tree.\n\n## Constraints\n- `1 <= n <= 12000`\n- The input is a valid binary tree rooted at node `1`.\n",
+  "samples": [
+    {
+      "input": "5\n2 3\n4 5\n0 0\n0 0\n0 0\n",
+      "output": "3\n"
+    },
+    {
+      "input": "1\n0 0\n",
+      "output": "1\n"
+    }
+  ]
+}

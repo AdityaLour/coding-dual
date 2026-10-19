@@ -1,0 +1,26 @@
+{
+  "slug": "shipping-capacity",
+  "title": "Smallest Truck That Works",
+  "topic": "binary-search",
+  "difficulty": "Medium",
+  "rating": 1400,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "binary search",
+    "answer search",
+    "greedy"
+  ],
+  "statement": "`n` packages wait on a belt in a fixed order, with weights `w_1, ..., w_n`. Every day the truck carries a block of consecutive packages from the front of the belt, in order, and the total weight of the block cannot exceed the truck capacity `c`. All packages must be delivered within `D` days. Find the smallest capacity `c` that makes this possible.\n\n## Input\nThe first line contains `n` and `D`. The second line contains `n` integers `w_i`.\n\n## Output\nPrint the smallest capacity `c` for which all packages can be delivered within `D` days.\n\n## Constraints\n- `1 <= D <= n <= 100000`\n- `1 <= w_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "6 3\n5 2 4 3 7 1\n",
+      "output": "8\n"
+    },
+    {
+      "input": "3 3\n10 20 30\n",
+      "output": "30\n"
+    }
+  ]
+}

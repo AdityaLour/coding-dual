@@ -1,0 +1,26 @@
+{
+  "slug": "max-independent-set",
+  "title": "Largest Group of Strangers",
+  "topic": "backtracking",
+  "difficulty": "Hard",
+  "rating": 1700,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "backtracking",
+    "bitmask",
+    "graphs"
+  ],
+  "statement": "In a group of `n` people some pairs know each other. Pick as many people as possible so that no two picked people know each other.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `m` lines contains two people (numbered from 1) who know each other. No pair is listed twice.\n\n## Output\nPrint the largest possible number of picked people.\n\n## Constraints\n- `1 <= n <= 20`\n- `0 <= m <= n(n-1)/2`\n",
+  "samples": [
+    {
+      "input": "5 5\n1 2\n2 3\n3 4\n4 5\n5 1\n",
+      "output": "2\n"
+    },
+    {
+      "input": "4 3\n1 2\n1 3\n1 4\n",
+      "output": "3\n"
+    }
+  ]
+}

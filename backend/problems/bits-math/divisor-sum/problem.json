@@ -1,0 +1,25 @@
+{
+  "slug": "divisor-sum",
+  "title": "Total Divisor Count",
+  "topic": "bits-math",
+  "difficulty": "Hard",
+  "rating": 1700,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "number theory",
+    "sqrt trick"
+  ],
+  "statement": "Let `d(i)` be the number of divisors of `i`. For each query `n`, print `d(1) + d(2) + ... + d(n)`.\n\n## Input\nThe first line contains `q`. Each of the next `q` lines contains one number `n`.\n\n## Output\nPrint `q` lines, the answer for each query.\n\n## Constraints\n- `1 <= q <= 10`\n- `1 <= n <= 10^10`\n",
+  "samples": [
+    {
+      "input": "3\n1\n10\n100\n",
+      "output": "1\n27\n482\n"
+    },
+    {
+      "input": "1\n2\n",
+      "output": "3\n"
+    }
+  ]
+}

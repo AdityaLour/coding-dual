@@ -1,0 +1,25 @@
+{
+  "slug": "max-path-sum",
+  "title": "The Richest Trail",
+  "topic": "trees",
+  "difficulty": "Hard",
+  "rating": 1650,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "trees",
+    "dp"
+  ],
+  "statement": "A binary tree has `n` nodes numbered `1..n`; node `1` is the root. Node `i` holds a value `v_i` that may be negative, and you are given its left and right child (`0` means none). A trail is a path through the tree that follows edges, visits each node at most once, can start and end at any nodes, and contains at least one node. Its score is the sum of the values on it.\n\nFind the largest score of any trail.\n\n## Input\nThe first line contains `n`. The next `n` lines give `v_i`, the left child and the right child of node `i`.\n\n## Output\nPrint the largest score.\n\n## Constraints\n- `1 <= n <= 8000`\n- `-10^6 <= v_i <= 10^6`\n- The input is a valid binary tree rooted at node `1`.\n",
+  "samples": [
+    {
+      "input": "3\n1 2 3\n2 0 0\n3 0 0\n",
+      "output": "6\n"
+    },
+    {
+      "input": "3\n-10 2 3\n9 0 0\n-5 0 0\n",
+      "output": "9\n"
+    }
+  ]
+}

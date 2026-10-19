@@ -1,0 +1,25 @@
+{
+  "slug": "next-bigger-sum",
+  "title": "Next Taller Neighbour",
+  "topic": "stack-queue",
+  "difficulty": "Medium",
+  "rating": 1400,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "stack",
+    "monotonic stack"
+  ],
+  "statement": "People stand in a line, looking to the right. For each person, find the first person standing to their right who is strictly taller. Write down that person's height, or `0` if nobody to the right is taller. Add up the written numbers.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers, the heights in line order.\n\n## Output\nPrint the sum of the written numbers. The answer can be larger than 32 bits.\n\n## Constraints\n- `1 <= n <= 100000`\n- `1 <= h_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5\n2 1 5 3 4\n",
+      "output": "14\n"
+    },
+    {
+      "input": "3\n4 4 4\n",
+      "output": "0\n"
+    }
+  ]
+}

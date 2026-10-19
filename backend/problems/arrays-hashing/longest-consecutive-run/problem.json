@@ -1,0 +1,24 @@
+{
+  "slug": "longest-consecutive-run",
+  "title": "Longest Consecutive Run",
+  "topic": "arrays-hashing",
+  "difficulty": "Medium",
+  "rating": 1350,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "sets"
+  ],
+  "statement": "Find the longest run of consecutive integers `x, x+1, x+2, ..., x+L-1` such that every number of the run appears somewhere in the list. The numbers can appear in any order and repeated values are ignored. Report `L`.\n\nFor example, in `100 4 200 1 3 2 101` the numbers `1 2 3 4` form a run of length 4.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers.\n\n## Output\nPrint the length of the longest run.\n\n## Constraints\n- `1 <= n <= 100000`\n- `-10^9 <= a_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "7\n100 4 200 1 3 2 101\n",
+      "output": "4\n"
+    },
+    {
+      "input": "3\n5 5 5\n",
+      "output": "1\n"
+    }
+  ]
+}

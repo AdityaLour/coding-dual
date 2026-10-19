@@ -1,0 +1,26 @@
+{
+  "slug": "count-quadruples-zero",
+  "title": "Four Lists Sum To Zero",
+  "topic": "arrays-hashing",
+  "difficulty": "Hard",
+  "rating": 1600,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "counting",
+    "meet-in-the-middle",
+    "hashing"
+  ],
+  "statement": "You are given four lists `A`, `B`, `C` and `D`, each holding `n` integers. Count the quadruples of positions `(i, j, k, l)` with `A_i + B_j + C_k + D_l = 0`. Different positions count separately, even when the values are equal.\n\n## Input\nThe first line contains `n`. The next four lines contain the lists `A`, `B`, `C` and `D`, each with `n` integers.\n\n## Output\nPrint the number of quadruples. The answer can be larger than 32 bits.\n\n## Constraints\n- `1 <= n <= 400`\n- `-10^9 <= value <= 10^9`\n",
+  "samples": [
+    {
+      "input": "2\n1 -1\n2 -2\n3 -3\n-4 4\n",
+      "output": "2\n"
+    },
+    {
+      "input": "2\n0 0\n0 0\n0 0\n0 0\n",
+      "output": "16\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "nim-with-limit",
+  "title": "Take at Most k",
+  "topic": "bits-math",
+  "difficulty": "Medium",
+  "rating": 1400,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "game theory",
+    "xor",
+    "grundy"
+  ],
+  "statement": "Two players play several independent games. In one game there are `m` piles of stones and a limit `k`. The players alternate; on a turn, a player picks one pile and removes between `1` and `k` stones from it (at most the pile size). A player who cannot move loses. Both play perfectly and the first player moves first.\n\nFor every game print `F` if the first player wins and `S` if the second player wins.\n\n## Input\nThe first line contains `t`. Each game has two lines: the first contains `m` and `k`, the second contains the pile sizes.\n\n## Output\nPrint one line of `t` characters, the result of each game in order.\n\n## Constraints\n- `1 <= t <= 3000`\n- the total number of piles over all games is at most `13000`\n- `1 <= m`, `1 <= k <= 10^9`\n- `0 <= pile size <= 10^9`\n",
+  "samples": [
+    {
+      "input": "2\n3 2\n1 2 3\n2 1\n5 5\n",
+      "output": "FS\n"
+    },
+    {
+      "input": "1\n1 3\n4\n",
+      "output": "S\n"
+    }
+  ]
+}

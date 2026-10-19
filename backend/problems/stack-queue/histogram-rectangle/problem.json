@@ -1,0 +1,25 @@
+{
+  "slug": "histogram-rectangle",
+  "title": "Biggest Billboard",
+  "topic": "stack-queue",
+  "difficulty": "Hard",
+  "rating": 1700,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "stack",
+    "monotonic stack"
+  ],
+  "statement": "A row of `n` bars stands side by side, each one unit wide, with heights `h_1, ..., h_n`. A billboard must be an axis-aligned rectangle that lies completely inside the bars, so it covers some run of consecutive bars and is no taller than the shortest of them. Find the largest possible area of such a rectangle.\n\n## Input\nThe first line contains `n`. The second line contains `n` integers, the heights.\n\n## Output\nPrint the largest area. The answer can be larger than 32 bits.\n\n## Constraints\n- `1 <= n <= 100000`\n- `0 <= h_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "6\n2 1 5 6 2 3\n",
+      "output": "10\n"
+    },
+    {
+      "input": "3\n4 4 4\n",
+      "output": "12\n"
+    }
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "slug": "grid-islands-largest",
+  "title": "Biggest Block of Rock",
+  "topic": "graphs",
+  "difficulty": "Easy",
+  "rating": 1100,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "graphs",
+    "grid",
+    "bfs"
+  ],
+  "statement": "A map is a grid of cells: `#` is rock and `.` is empty. Two rock cells belong to the same block if you can walk from one to the other through rock cells, moving up, down, left or right. Find the number of cells in the largest block. If there is no rock, print `0`.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `n` lines is a string of `m` characters.\n\n## Output\nPrint the size of the largest block.\n\n## Constraints\n- `1 <= n, m <= 300`\n",
+  "samples": [
+    {
+      "input": "3 4\n##..\n#..#\n..##\n",
+      "output": "3\n"
+    },
+    {
+      "input": "2 2\n..\n..\n",
+      "output": "0\n"
+    }
+  ]
+}

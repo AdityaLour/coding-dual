@@ -1,0 +1,25 @@
+{
+  "slug": "count-palindromes",
+  "title": "Every Mirror Inside the Word",
+  "topic": "strings",
+  "difficulty": "Hard",
+  "rating": 1750,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "strings",
+    "palindromes"
+  ],
+  "statement": "A block of consecutive letters is a mirror if it reads the same forwards and backwards; a single letter is a mirror. Count all mirror blocks in the given word. Blocks at different positions are counted separately, even when they spell the same letters.\n\n## Input\nOne line containing the word `s`.\n\n## Output\nPrint the number of mirror blocks. The answer can be larger than 32 bits.\n\n## Constraints\n- `1 <= |s| <= 66000`\n- `s` contains only lowercase letters `a` to `z`\n",
+  "samples": [
+    {
+      "input": "aaa\n",
+      "output": "6\n"
+    },
+    {
+      "input": "abba\n",
+      "output": "6\n"
+    }
+  ]
+}

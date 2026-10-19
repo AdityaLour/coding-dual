@@ -1,0 +1,26 @@
+{
+  "slug": "mst-weight",
+  "title": "Cheapest Cable Network",
+  "topic": "graphs",
+  "difficulty": "Medium",
+  "rating": 1450,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "graphs",
+    "union find",
+    "greedy"
+  ],
+  "statement": "A company wants to connect `n` offices with cables. There are `m` possible cables; cable `i` joins two offices and costs `w_i`. Choose some cables so that every office can reach every other one through the chosen cables, and the total cost is as small as possible. It is guaranteed that connecting all offices is possible.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `m` lines contains `u`, `v` and `w`.\n\n## Output\nPrint the smallest total cost.\n\n## Constraints\n- `1 <= n <= 9000`\n- `n - 1 <= m <= 9000`\n- `1 <= w <= 10^6`\n- no two cables join the same pair of offices, and `u != v`\n",
+  "samples": [
+    {
+      "input": "4 5\n1 2 1\n2 3 2\n3 4 3\n1 4 4\n1 3 5\n",
+      "output": "6\n"
+    },
+    {
+      "input": "2 1\n1 2 7\n",
+      "output": "7\n"
+    }
+  ]
+}

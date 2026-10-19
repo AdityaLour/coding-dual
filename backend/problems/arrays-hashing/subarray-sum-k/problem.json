@@ -1,0 +1,25 @@
+{
+  "slug": "subarray-sum-k",
+  "title": "Subarrays With Sum K",
+  "topic": "arrays-hashing",
+  "difficulty": "Medium",
+  "rating": 1300,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "prefix-sums",
+    "hashing"
+  ],
+  "statement": "A subarray is a block of consecutive elements. Count how many non-empty subarrays have a sum exactly equal to `k`. Values can be negative. Subarrays at different positions count separately even when they hold the same numbers.\n\n## Input\nThe first line contains `n` and `k`. The second line contains `n` integers.\n\n## Output\nPrint the number of subarrays whose sum equals `k`. The answer can be larger than 32 bits.\n\n## Constraints\n- `1 <= n <= 100000`\n- `-10^9 <= a_i <= 10^9`\n- `-10^14 <= k <= 10^14`\n",
+  "samples": [
+    {
+      "input": "5 7\n3 4 -1 1 7\n",
+      "output": "4\n"
+    },
+    {
+      "input": "3 0\n0 0 0\n",
+      "output": "6\n"
+    }
+  ]
+}

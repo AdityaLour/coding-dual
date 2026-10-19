@@ -1,0 +1,26 @@
+{
+  "slug": "linear-recurrence",
+  "title": "Far Away Terms",
+  "topic": "bits-math",
+  "difficulty": "Hard",
+  "rating": 1650,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "matrix power",
+    "recurrence",
+    "modular"
+  ],
+  "statement": "A sequence is defined by `a_n = c_1*a_{n-1} + c_2*a_{n-2} + ... + c_k*a_{n-k}` for `n >= k`, with given first terms `a_0 ... a_{k-1}`. Everything is taken modulo `1000000007`.\n\nFor each query `n`, print `a_n` modulo `1000000007`.\n\n## Input\nThe first line contains `k` and `q`. The second line contains `c_1 ... c_k`. The third line contains `a_0 ... a_{k-1}`. Each of the next `q` lines contains one index `n`.\n\n## Output\nPrint `q` lines, the answer for each query.\n\n## Constraints\n- `1 <= k <= 6`\n- `1 <= q <= 300`\n- `0 <= c_i, a_i < 1000000007`\n- `0 <= n <= 10^18`\n",
+  "samples": [
+    {
+      "input": "2 4\n1 1\n0 1\n10\n0\n1\n90\n",
+      "output": "55\n0\n1\n210345902\n"
+    },
+    {
+      "input": "1 2\n2\n1\n5\n0\n",
+      "output": "32\n1\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "matrix-chain",
+  "title": "Cheapest Way to Multiply a Chain",
+  "topic": "dynamic-programming",
+  "difficulty": "Hard",
+  "rating": 1650,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "dp",
+    "intervals"
+  ],
+  "statement": "You must multiply a chain of `n` matrices in the given order. Matrix `i` has `d_{i-1}` rows and `d_i` columns. Multiplying a matrix of size `a x b` by one of size `b x c` costs `a * b * c` and gives a matrix of size `a x c`. Matrix multiplication is associative, so you may choose the order (the brackets) freely.\n\nFind the smallest total cost to multiply the whole chain. A chain of one matrix costs `0`.\n\n## Input\nThe first line contains `n`. The second line contains `d_0 ... d_n`.\n\n## Output\nPrint the smallest total cost.\n\n## Constraints\n- `1 <= n <= 90`\n- `1 <= d_i <= 100`\n",
+  "samples": [
+    {
+      "input": "3\n10 30 5 60\n",
+      "output": "4500\n"
+    },
+    {
+      "input": "2\n5 10 3\n",
+      "output": "150\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "connected-components",
+  "title": "How Many Islands of Friends",
+  "topic": "graphs",
+  "difficulty": "Easy",
+  "rating": 900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "graphs",
+    "union find"
+  ],
+  "statement": "There are `n` people and `m` friendships (each friendship joins two different people). Two people are in the same group if they are friends or are linked through a chain of friends. Count the groups. A person with no friends forms a group alone.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `m` lines contains two people (numbered from 1) who are friends. No friendship is listed twice.\n\n## Output\nPrint the number of groups.\n\n## Constraints\n- `1 <= n <= 15000`\n- `0 <= m <= 15000`\n",
+  "samples": [
+    {
+      "input": "5 3\n1 2\n2 3\n4 5\n",
+      "output": "2\n"
+    },
+    {
+      "input": "4 0\n",
+      "output": "4\n"
+    }
+  ]
+}

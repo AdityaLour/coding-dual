@@ -1,0 +1,25 @@
+{
+  "slug": "bipartite-check",
+  "title": "Two Teams, No Rivals Inside",
+  "topic": "graphs",
+  "difficulty": "Medium",
+  "rating": 1200,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "graphs",
+    "bfs"
+  ],
+  "statement": "There are `n` students and `m` pairs of rivals. You want to split all students into two teams so that no two rivals are on the same team. Decide whether it is possible. Students without rivals can join any team.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `m` lines contains two students (numbered from 1) who are rivals. No pair is listed twice and no student is their own rival.\n\n## Output\nPrint `YES` if the split is possible, otherwise `NO`.\n\n## Constraints\n- `1 <= n <= 15000`\n- `0 <= m <= 15000`\n",
+  "samples": [
+    {
+      "input": "3 3\n1 2\n2 3\n1 3\n",
+      "output": "NO\n"
+    },
+    {
+      "input": "4 4\n1 2\n2 3\n3 4\n4 1\n",
+      "output": "YES\n"
+    }
+  ]
+}

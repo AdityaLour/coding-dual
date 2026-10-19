@@ -1,0 +1,25 @@
+{
+  "slug": "fewest-items-to-cover",
+  "title": "Fewest Boxes to Fill the Order",
+  "topic": "sorting-greedy",
+  "difficulty": "Easy",
+  "rating": 950,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "greedy",
+    "sorting"
+  ],
+  "statement": "A warehouse has `n` boxes, and box `i` holds `c_i` items. An order asks for at least `S` items in total. You may take whole boxes only. Find the smallest number of boxes whose contents add up to at least `S`.\n\n## Input\nThe first line contains `n` and `S`. The second line contains `n` integers `c_i`.\n\n## Output\nPrint the smallest number of boxes that together hold at least `S` items. If even all boxes together hold fewer than `S`, print `-1`.\n\n## Constraints\n- `1 <= n <= 100000`\n- `1 <= c_i <= 10^9`\n- `1 <= S <= 10^15`\n",
+  "samples": [
+    {
+      "input": "5 20\n4 9 1 7 5\n",
+      "output": "3\n"
+    },
+    {
+      "input": "2 100\n10 20\n",
+      "output": "-1\n"
+    }
+  ]
+}

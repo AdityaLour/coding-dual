@@ -1,0 +1,25 @@
+{
+  "slug": "prime-range-count",
+  "title": "Primes in a Window",
+  "topic": "bits-math",
+  "difficulty": "Medium",
+  "rating": 1450,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "sieve",
+    "number theory"
+  ],
+  "statement": "For each query `l r`, count the prime numbers between `l` and `r`, both ends included. The numbers can be huge, but the window `[l, r]` is short.\n\n## Input\nThe first line contains `q`. Each of the next `q` lines contains `l` and `r`.\n\n## Output\nPrint `q` lines, the count for each query.\n\n## Constraints\n- `1 <= q <= 3`\n- `1 <= l <= r <= 10^10`\n- `r - l + 1 <= 10^6`\n",
+  "samples": [
+    {
+      "input": "3\n1 10\n10 30\n9999999967 10000000000\n",
+      "output": "4\n6\n1\n"
+    },
+    {
+      "input": "1\n1 1\n",
+      "output": "0\n"
+    }
+  ]
+}

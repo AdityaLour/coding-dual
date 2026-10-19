@@ -1,0 +1,26 @@
+{
+  "slug": "k-machines",
+  "title": "Rooms in Parallel",
+  "topic": "sorting-greedy",
+  "difficulty": "Hard",
+  "rating": 1700,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "greedy",
+    "sorting",
+    "binary search"
+  ],
+  "statement": "A studio has `k` identical rooms and receives `n` booking requests. Request `i` wants a room from time `s_i` up to, but not including, time `e_i`. A room can host one request at a time, and a new request may start at the exact moment the previous one in that room ends. You may reject any request.\n\nFind the largest number of requests that can be accepted.\n\n## Input\nThe first line contains `n` and `k`. Each of the next `n` lines contains `s_i` and `e_i`.\n\n## Output\nPrint the largest number of accepted requests.\n\n## Constraints\n- `1 <= k <= n <= 8000`\n- `0 <= s_i < e_i <= 10^9`\n",
+  "samples": [
+    {
+      "input": "5 2\n1 4\n2 5\n4 7\n5 8\n6 9\n",
+      "output": "4\n"
+    },
+    {
+      "input": "3 1\n1 2\n2 3\n3 4\n",
+      "output": "3\n"
+    }
+  ]
+}

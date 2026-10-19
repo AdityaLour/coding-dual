@@ -1,0 +1,25 @@
+{
+  "slug": "subset-count",
+  "title": "Ways to Hit the Total",
+  "topic": "backtracking",
+  "difficulty": "Easy",
+  "rating": 950,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "backtracking",
+    "recursion"
+  ],
+  "statement": "You have `n` coins with positive values. Choose any group of coins (possibly a single coin) whose values add up to exactly `S`. Two groups are different if they use different coins, even when the coins have equal values. Count the groups.\n\n## Input\nThe first line contains `n` and `S`. The second line contains the `n` values.\n\n## Output\nPrint the number of groups whose values sum to exactly `S`.\n\n## Constraints\n- `1 <= n <= 16`\n- `1 <= a_i <= 100`\n- `1 <= S <= 1600`\n",
+  "samples": [
+    {
+      "input": "4 5\n1 2 3 4\n",
+      "output": "2\n"
+    },
+    {
+      "input": "3 2\n1 1 1\n",
+      "output": "3\n"
+    }
+  ]
+}

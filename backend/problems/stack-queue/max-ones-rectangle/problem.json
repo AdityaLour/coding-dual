@@ -1,0 +1,26 @@
+{
+  "slug": "max-ones-rectangle",
+  "title": "Largest Clear Lot",
+  "topic": "stack-queue",
+  "difficulty": "Hard",
+  "rating": 1750,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 40,
+  "tags": [
+    "stack",
+    "matrix",
+    "monotonic stack"
+  ],
+  "statement": "A city map is a grid of `n` rows and `m` columns. Each cell is either `1` (free ground) or `0` (built over). Find the largest rectangle, made of whole cells and aligned with the grid, in which every cell is free ground.\n\n## Input\nThe first line contains `n` and `m`. Each of the next `n` lines contains a string of `m` characters, each `0` or `1`, with no spaces.\n\n## Output\nPrint the area (number of cells) of the largest rectangle that contains only `1`s. If there is no `1`, print `0`.\n\n## Constraints\n- `1 <= n, m <= 400`\n",
+  "samples": [
+    {
+      "input": "3 4\n1011\n1111\n0111\n",
+      "output": "6\n"
+    },
+    {
+      "input": "2 2\n00\n00\n",
+      "output": "0\n"
+    }
+  ]
+}

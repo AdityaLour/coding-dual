@@ -1,0 +1,25 @@
+{
+  "slug": "missing-number",
+  "title": "Missing Number",
+  "topic": "arrays-hashing",
+  "difficulty": "Easy",
+  "rating": 1000,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "math",
+    "sets"
+  ],
+  "statement": "A list holds `n - 1` different integers, each between `1` and `n`. Exactly one number from that range is missing. Find it.\n\n## Input\nThe first line contains `n`. The second line contains the `n - 1` integers in any order. The second line is empty when `n = 1`.\n\n## Output\nPrint the missing integer.\n\n## Constraints\n- `1 <= n <= 30000`\n",
+  "samples": [
+    {
+      "input": "5\n3 1 5 2\n",
+      "output": "4\n"
+    },
+    {
+      "input": "2\n2\n",
+      "output": "1\n"
+    }
+  ]
+}

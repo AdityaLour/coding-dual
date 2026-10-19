@@ -1,0 +1,25 @@
+{
+  "slug": "k-closest-points",
+  "title": "Nearest Neighbours",
+  "topic": "heaps",
+  "difficulty": "Easy",
+  "rating": 1050,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "heaps",
+    "geometry"
+  ],
+  "statement": "There are `n` points on a plane. Pick the `k` points closest to the origin `(0, 0)` by straight-line distance. If several points are at the same distance, it does not matter which are picked, since only the total matters.\n\nPrint the sum of the squared distances `x^2 + y^2` of the `k` picked points.\n\n## Input\nThe first line contains `n` and `k`. Each of the next `n` lines contains `x` and `y`.\n\n## Output\nPrint the sum.\n\n## Constraints\n- `1 <= k <= n <= 10000`\n- `-10^6 <= x, y <= 10^6`\n",
+  "samples": [
+    {
+      "input": "5 3\n1 3\n-2 2\n5 8\n0 1\n-2 -1\n",
+      "output": "14\n"
+    },
+    {
+      "input": "1 1\n0 0\n",
+      "output": "0\n"
+    }
+  ]
+}

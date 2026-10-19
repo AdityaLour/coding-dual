@@ -1,0 +1,26 @@
+{
+  "slug": "longest-divisible-subarray",
+  "title": "Longest Subarray Divisible By M",
+  "topic": "arrays-hashing",
+  "difficulty": "Medium",
+  "rating": 1500,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 25,
+  "tags": [
+    "prefix-sums",
+    "modular-arithmetic",
+    "hashing"
+  ],
+  "statement": "Find the longest subarray (a block of consecutive elements, at least one) whose sum is divisible by `m`, and report its length. A sum of `0` is divisible by every `m`. Values can be negative. If no subarray qualifies, report `0`.\n\n## Input\nThe first line contains `n` and `m`. The second line contains `n` integers.\n\n## Output\nPrint the length of the longest subarray whose sum is divisible by `m`.\n\n## Constraints\n- `1 <= n <= 100000`\n- `-10^9 <= a_i <= 10^9`\n- `1 <= m <= 10^9`\n",
+  "samples": [
+    {
+      "input": "6 5\n3 1 4 1 5 9\n",
+      "output": "5\n"
+    },
+    {
+      "input": "3 7\n1 2 3\n",
+      "output": "0\n"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "slug": "floor-roots-sum",
+  "title": "Whole Part of Square Roots",
+  "topic": "binary-search",
+  "difficulty": "Easy",
+  "rating": 900,
+  "timeLimitMs": 2000,
+  "memoryKb": 256000,
+  "minutes": 15,
+  "tags": [
+    "binary search",
+    "math"
+  ],
+  "statement": "For a non-negative integer `v`, its whole square root is the largest integer `r` with `r * r <= v`. You are given `T` numbers. Find the whole square root of each and print the sum of all of them.\n\n## Input\nThe first line contains `T`. The second line contains `T` integers.\n\n## Output\nPrint the sum of the whole square roots of all `T` numbers.\n\n## Constraints\n- `1 <= T <= 10000`\n- `0 <= v <= 10^18`\n",
+  "samples": [
+    {
+      "input": "4\n0 1 15 16\n",
+      "output": "8\n"
+    },
+    {
+      "input": "2\n1000000000000000000 999999999999999999\n",
+      "output": "1999999999\n"
+    }
+  ]
+}
