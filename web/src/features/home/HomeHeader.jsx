@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link, NavLink, useNavigate } from "react-router";
 import Logo from "@/shared/ui/Logo.jsx";
 import DoodleFace from "@/shared/ui/DoodleFace.jsx";
 import { useAuth } from "@/shared/auth/useAuth.js";
+import { useMyRank } from "@/features/leaderboard/useMyRank.js";
 import s from "./HomeHeader.module.css";
 
 // Site header for signed-in pages. Sits over the top of the hero.
@@ -10,6 +11,7 @@ export default function HomeHeader({ player }) {
   const navigate = useNavigate();
   const { logout, signedOut } = useAuth();
   const [state, setState] = useState("idle"); // "idle" | "leaving" | "failed"
+  const rank = useMyRank(player.name);
 
   async function handleLogout() {
     setState("leaving");
@@ -26,9 +28,10 @@ export default function HomeHeader({ player }) {
     <header className={s.header}>
       <Logo />
       <nav className={s.nav} aria-label="Account">
-        <Link to="/leaderboard" className={s.link}>
-          Leaderboard
-        </Link>
+        <NavLink to="/leaderboard" className={s.link}>
+          <span className={s.linkText}>Leaderboard</span>
+          {rank !== null && <span className={s.rank}>#{rank}</span>}
+        </NavLink>
         <Link
           to="/profile"
           className={`${s.link} ${s.who}`}

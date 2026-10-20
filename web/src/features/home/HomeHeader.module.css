@@ -30,6 +30,26 @@
   text-underline-offset: 4px;
 }
 
+/* the page you are on gets a line under its name; the rank badge stays clear of it */
+.link[aria-current="page"] {
+  text-decoration: none;
+}
+.link[aria-current="page"] .linkText {
+  border-bottom: 2px solid var(--you);
+  padding-bottom: 3px;
+}
+.linkText {
+  display: inline-block;
+}
+.rank {
+  margin-left: 8px;
+  padding: 2px 7px;
+  border: 1px solid var(--control-border);
+  border-radius: 99px;
+  color: var(--you);
+  font: 600 12px var(--font-code);
+}
+
 .who {
   gap: 10px;
   min-width: 0;

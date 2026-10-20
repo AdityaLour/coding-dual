@@ -21,6 +21,7 @@ const HomePage = lazy(() => import("@/features/home/HomePage.jsx"));
 const DuelPage = lazy(() => import("@/features/duel/DuelPage.jsx"));
 const PracticePage = lazy(() => import("@/features/practice/PracticePage.jsx"));
 const SolvePage = lazy(() => import("@/features/practice/SolvePage.jsx"));
+const LeaderboardPage = lazy(() => import("@/features/leaderboard/LeaderboardPage.jsx"));
 export default function App() {
   return (
     <ErrorBoundary>
@@ -62,14 +63,7 @@ export default function App() {
                 </ComingSoon>
               }
             />
-            <Route
-              path="/leaderboard"
-              element={
-                <ComingSoon title="Leaderboard">
-                  Ratings and the leaderboard arrive once rated duels are live.
-                </ComingSoon>
-              }
-            />
+            <Route path="/leaderboard" element={<LeaderboardPage />} />
             <Route
               path="/profile"
               element={

@@ -133,7 +133,9 @@ export default function ResultScreen({ end, duel, resigned, onAgain, onHome }) {
                   </div>
                 ) : (
                   <p className={`${s.unrated} ${s.rise}`} style={{ "--at": 1200 }}>
-                    No rating change. This duel did not count.
+                    {result.unratedReason === "pairCap"
+                      ? "No rating change. You have played this rival 3 times today, so this duel did not count."
+                      : "No rating change. This duel did not count."}
                   </p>
                 )}
 

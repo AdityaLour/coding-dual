@@ -59,6 +59,7 @@ export function buildResult(end, duel, resigned = false) {
     bar,
     barRatio: limitMs ? tookMs / limitMs : 0,
     rated,
+    unratedReason: end.unratedReason ?? null,
     you: {
       before: end.ratingBefore,
       after: rated ? end.ratingAfter : end.ratingBefore,
