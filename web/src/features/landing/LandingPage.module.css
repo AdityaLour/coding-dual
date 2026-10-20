@@ -3,7 +3,7 @@
 .page {
   position: relative;
   min-height: 100%;
-  overflow-x: clip;
+  overflow: clip; /* also clips the drifting glows, so they never add empty scroll below the footer */
   background: linear-gradient(180deg, #101214 0, #0d0f11 46%, #101214 100%);
 }
 

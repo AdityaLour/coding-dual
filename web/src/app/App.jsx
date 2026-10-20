@@ -21,6 +21,9 @@ const HomePage = lazy(() => import("@/features/home/HomePage.jsx"));
 const DuelPage = lazy(() => import("@/features/duel/DuelPage.jsx"));
 const PracticePage = lazy(() => import("@/features/practice/PracticePage.jsx"));
 const SolvePage = lazy(() => import("@/features/practice/SolvePage.jsx"));
+const PrivacyPage = lazy(() => import("@/features/legal/PrivacyPage.jsx"));
+const TermsPage = lazy(() => import("@/features/legal/TermsPage.jsx"));
+const ContactRoute = lazy(() => import("@/features/legal/ContactRoute.jsx"));
 const DailyPage = lazy(() => import("@/features/daily/DailyPage.jsx"));
 const LeaderboardPage = lazy(() => import("@/features/leaderboard/LeaderboardPage.jsx"));
 const ProfilePage = lazy(() => import("@/features/profile/ProfilePage.jsx"));
@@ -64,6 +67,11 @@ export default function App() {
             <Route path="/profile" element={<ProfilePage />} />
             <Route path="/profile/:tab" element={<ProfilePage />} />
           </Route>
+
+          {/* Open to everyone, signed in or not. */}
+          <Route path="/privacy" element={<PrivacyPage />} />
+          <Route path="/terms" element={<TermsPage />} />
+          <Route path="/contact" element={<ContactRoute />} />
 
           <Route path="*" element={<NotFound />} />
         </Routes>

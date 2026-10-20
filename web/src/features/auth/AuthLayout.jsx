@@ -6,6 +6,7 @@ import JudgeDoodle from "./JudgeDoodle.jsx";
 import FloatingSymbols from "./FloatingSymbols.jsx";
 import ChallengerBanner from "@/shared/ui/ChallengerBanner.jsx";
 import SplitOpen from "./SplitOpen.jsx";
+import SiteFooter from "@/shared/ui/SiteFooter.jsx";
 import { AUTH_COPY, modeFromPath } from "./authCopy.js";
 import { randomHandle } from "./handles.js";
 import s from "./AuthLayout.module.css";
@@ -82,6 +83,7 @@ export default function AuthLayout() {
             <Outlet context={{ values, setField, switchTo }} />
           </div>
         </main>
+        <SiteFooter variant="compact" className={s.footer} />
       </div>
 
       {banner && (

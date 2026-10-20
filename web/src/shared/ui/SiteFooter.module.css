@@ -1,0 +1,107 @@
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 30px;
+}
+.links a {
+  color: var(--text-2);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 150ms;
+}
+.links a:hover {
+  color: var(--text);
+}
+.links a:focus-visible {
+  outline: 2px solid var(--you);
+  outline-offset: 4px;
+}
+
+/* ---------- wordmark: the landing page ---------- */
+.root {
+  container-type: inline-size;
+  position: relative;
+  z-index: 1;
+}
+.big {
+  overflow: hidden;
+  padding: 34px clamp(22px, 4vw, 56px) 0;
+  border-top: 1px solid var(--border);
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px 24px;
+  font-size: 16px;
+}
+.fine {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+/* Cropped by the bottom edge: only the top of the letters shows. */
+.word {
+  display: block;
+  margin: 18px -4px 0;
+  font: 400 33cqw / 0.74 var(--font-display);
+  letter-spacing: -0.05em;
+  white-space: nowrap;
+  transform: translateY(17%);
+  user-select: none;
+}
+.you {
+  color: var(--you);
+}
+.opp {
+  color: var(--opp);
+}
+@container (max-width: 700px) {
+  .big {
+    padding-top: 26px;
+  }
+  .row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .links {
+    gap: 8px 24px;
+  }
+  .word {
+    font-size: 36cqw;
+    margin-top: 22px;
+  }
+}
+
+/* ---------- compact: sign-in and legal pages ---------- */
+.compact {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 24px;
+  padding: 16px clamp(20px, 3vw, 48px);
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ---------- thin line inside the signed-in app ---------- */
+.line {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 16px clamp(16px, 4.5vw, 64px);
+  border-top: 1px solid var(--border);
+  color: var(--muted);
+  font-size: 13.5px;
+}
+.line .links a,
+.compact .links a {
+  color: var(--muted);
+}
+.line .links a:hover,
+.compact .links a:hover {
+  color: var(--text);
+}

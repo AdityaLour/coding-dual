@@ -5,6 +5,7 @@ import Act1 from "./Act1.jsx";
 import Practice from "./Practice.jsx";
 import Rating from "./Rating.jsx";
 import Finale from "./Finale.jsx";
+import SiteFooter from "@/shared/ui/SiteFooter.jsx";
 import { useScrollScene } from "./useScrollScene.js";
 import styles from "./LandingPage.module.css";
 
@@ -39,6 +40,7 @@ export default function LandingPage() {
         <Rating sectionRef={rate} numRef={num} />
         <Finale sectionRef={fin} />
       </main>
+      <SiteFooter variant="wordmark" />
     </div>
   );
 }

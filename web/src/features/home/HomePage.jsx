@@ -1,6 +1,7 @@
 import { useRef } from "react";
 import { Link, Navigate } from "react-router";
 import Logo from "@/shared/ui/Logo.jsx";
+import LegalLinks from "@/shared/ui/LegalLinks.jsx";
 import { useAuth } from "@/shared/auth/useAuth.js";
 import HomeHeader from "./HomeHeader.jsx";
 import HomeHero from "./HomeHero.jsx";
@@ -104,6 +105,7 @@ export default function HomePage() {
       <footer className={s.foot} data-station="end" data-say={SAY.end}>
         <Logo />
         <span>Two coders. One problem.</span>
+        <LegalLinks />
       </footer>
 
       <Journey rootRef={rootRef} firstLine={FIRST_LINE} />

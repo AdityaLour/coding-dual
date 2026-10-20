@@ -137,3 +137,20 @@
     margin-block: auto;
   }
 }
+
+/* The footer sits under the form on wide screens, and as a last row on narrow ones. */
+.footer {
+  position: absolute;
+  z-index: 2;
+  right: clamp(24px, 3vw, 48px);
+  bottom: 8px;
+  padding: 8px 0;
+}
+
+@media (max-width: 900px) {
+  .footer {
+    position: static;
+    grid-column: 1;
+    padding: 12px 24px 20px;
+  }
+}

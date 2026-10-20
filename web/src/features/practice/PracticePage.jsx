@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useAuth } from "@/shared/auth/useAuth.js";
 import { errorMessage } from "@/shared/api/client.js";
 import HomeHeader from "@/features/home/HomeHeader.jsx";
+import { AppFooterLine } from "@/shared/ui/SiteFooter.jsx";
 import { listProblems } from "./api.js";
 import {
   EMPTY_FILTERS,
@@ -123,6 +124,7 @@ export default function PracticePage() {
           </div>
         )}
       </main>
+      <AppFooterLine />
     </div>
   );
 }

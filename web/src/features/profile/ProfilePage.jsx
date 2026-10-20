@@ -3,6 +3,7 @@ import { useNavigate, useParams } from "react-router";
 import { useAuth } from "@/shared/auth/useAuth.js";
 import { usePrefersReducedMotion } from "@/shared/hooks/usePrefersReducedMotion.js";
 import HomeHeader from "@/features/home/HomeHeader.jsx";
+import { AppFooterLine } from "@/shared/ui/SiteFooter.jsx";
 import { listProblems } from "@/features/practice/api.js";
 import { getAccount, getProfile, getRating } from "./api.js";
 import { practiceSummary, tabOf } from "./logic.js";
@@ -17,7 +18,7 @@ import AccountTab from "./account/AccountTab.jsx";
 import { Failed, Skel } from "./Bits.jsx";
 import s from "./Profile.module.css";
 
-const TITLES = { overview: "Profile", rating: "Rating", duels: "Duels", practice: "Practice", account: "Account" };
+const TITLES = { overview: "Your profile", rating: "Your rating", duels: "Your duels", practice: "Your practice", account: "Your account" };
 
 export default function ProfilePage() {
   const { user } = useAuth();
@@ -59,7 +60,7 @@ export default function ProfilePage() {
 
   return (
     <div>
-      <title>{`${TITLES[tab]}`}</title>
+      <title>{TITLES[tab]}</title>
       <meta name="robots" content="noindex" />
       <div className={s.head}>
         <HomeHeader player={{ name: user.username }} />
@@ -86,6 +87,7 @@ export default function ProfilePage() {
           )}
         </section>
       </main>
+      <AppFooterLine />
     </div>
   );
 }

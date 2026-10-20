@@ -2,6 +2,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useAuth } from "@/shared/auth/useAuth.js";
 import { usePrefersReducedMotion } from "@/shared/hooks/usePrefersReducedMotion.js";
 import HomeHeader from "@/features/home/HomeHeader.jsx";
+import { AppFooterLine } from "@/shared/ui/SiteFooter.jsx";
 import { boardOf, footText, leadText, pinView } from "./logic.js";
 import { useBoard } from "./useBoard.js";
 import { readPeriod, writePeriod } from "./period.js";
@@ -147,6 +148,7 @@ export default function LeaderboardPage() {
           </>
         )}
       </main>
+      <AppFooterLine />
     </div>
   );
 }
