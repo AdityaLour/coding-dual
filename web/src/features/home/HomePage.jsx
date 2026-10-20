@@ -58,7 +58,7 @@ export default function HomePage() {
   if (phase === "duel") return <Navigate to="/duel" replace />;
   return (
     <div ref={rootRef} className={s.page}>
-      <title>Home — Boip</title>
+      <title>Home</title>
       <meta name="robots" content="noindex" />
 
       <HomeHeader player={player} />

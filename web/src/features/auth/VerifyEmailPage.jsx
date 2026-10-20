@@ -47,7 +47,7 @@ export default function VerifyEmailPage() {
   if (phase === "checking") {
     return (
       <div className={styles.form} role="status">
-        <title>Confirming your email — Boip</title>
+        <title>Confirming your email</title>
         <h1 className={styles.title}>Confirming your email…</h1>
       </div>
     );
@@ -56,7 +56,7 @@ export default function VerifyEmailPage() {
   if (phase === "offline") {
     return (
       <div className={styles.form}>
-        <title>Can&apos;t connect — Boip</title>
+        <title>Can&apos;t connect</title>
         <h1 className={styles.title}>Couldn&apos;t confirm yet</h1>
         <p className={styles.text}>{errorMessage(new ApiError(0, null))}</p>
         <button
@@ -111,7 +111,7 @@ function ExpiredLink({ form }) {
       onSubmit={handleSubmit}
       noValidate
     >
-      <title>Link expired — Boip</title>
+      <title>Link expired</title>
       <h1 className={styles.title}>This link has expired</h1>
       <p className={styles.text}>
         Confirmation links work once and last 24 hours. Already confirmed?{" "}

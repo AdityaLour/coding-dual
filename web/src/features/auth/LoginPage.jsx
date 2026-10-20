@@ -84,7 +84,7 @@ export default function LoginPage() {
       onSubmit={handleSubmit}
       noValidate
     >
-      <title>Log in — Boip</title>
+      <title>Log in</title>
       <h1 className={styles.title}>Log in</h1>
       <TextField
         label="Email"

@@ -19,7 +19,7 @@ export default class ErrorBoundary extends Component {
     if (!this.state.failed) return this.props.children;
     return (
       <main className={s.page}>
-        <title>Something went wrong — Boip</title>
+        <title>Something went wrong</title>
         <Logo />
         <div className={s.body}>
           <h1 className={s.title}>Something went wrong.</h1>

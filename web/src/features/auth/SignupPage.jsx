@@ -80,7 +80,7 @@ export default function SignupPage() {
       onSubmit={handleSubmit}
       noValidate
     >
-      <title>Create an account — Boip</title>
+      <title>Create an account</title>
       <h1 className={styles.title}>Create an account</h1>
       <TextField
         label="Email"

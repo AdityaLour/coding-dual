@@ -24,7 +24,7 @@ export default function CheckEmail({ email, onChangeEmail }) {
 
   return (
     <div ref={formRef} className={styles.form}>
-      <title>Check your email — Boip</title>
+      <title>Check your email</title>
       <h1 ref={heading} tabIndex={-1} className={styles.title}>
         Check your email
       </h1>

@@ -105,7 +105,7 @@ export default function DuelPage() {
 
   return (
     <>
-      <title>Duel — Boip</title>
+      <title>Duel</title>
       <meta name="robots" content="noindex" />
       <Arena
         setSlot={setSlot}

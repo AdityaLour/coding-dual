@@ -93,7 +93,7 @@ export default function PracticePage() {
 
   return (
     <div className={s.page}>
-      <title>Practice — Boip</title>
+      <title>Practice</title>
       <meta name="robots" content="noindex" />
       <div className={s.head}>
         <HomeHeader player={{ name: user.username }} />

@@ -7,7 +7,7 @@ export default function ServerUnavailable() {
   const { retry } = useAuth();
   return (
     <main className={s.page}>
-      <title>Can't connect — Boip</title>
+      <title>Can't connect</title>
       <Logo />
       <div className={s.body}>
         <h1 className={s.title}>Can&apos;t reach Boip.</h1>

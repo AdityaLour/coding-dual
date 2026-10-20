@@ -79,7 +79,7 @@ export default function WelcomePage() {
       onSubmit={handleSubmit}
       noValidate
     >
-      <title>Pick a username — Boip</title>
+      <title>Pick a username</title>
       <h1 className={styles.title}>Pick a username</h1>
       <p className={styles.text}>
         Signed in as <strong>{user.email}</strong>. This is the name other

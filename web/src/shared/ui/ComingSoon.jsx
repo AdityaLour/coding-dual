@@ -7,7 +7,7 @@ import s from "./ComingSoon.module.css";
 export default function ComingSoon({ title, children }) {
   return (
     <main className={s.page}>
-      <title>{`${title} — Boip`}</title>
+      <title>{`${title}`}</title>
       <meta name="robots" content="noindex" />
       <Logo />
       <div className={s.body}>

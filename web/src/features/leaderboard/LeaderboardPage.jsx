@@ -128,7 +128,7 @@ export default function LeaderboardPage() {
   const { state, retry } = useBoard();
   return (
     <div>
-      <title>Leaderboard — Boip</title>
+      <title>Leaderboard</title>
       <meta name="robots" content="noindex" />
       <div className={s.head}>
         <HomeHeader player={{ name: user.username }} />

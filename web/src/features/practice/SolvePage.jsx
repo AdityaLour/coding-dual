@@ -38,7 +38,7 @@ export default function SolvePage() {
 
   return (
     <div className={s.page}>
-      <title>{ready?.problem ? `${ready.problem.title} — Boip` : "Practice — Boip"}</title>
+      <title>{ready?.problem ? `${ready.problem.title}` : "Practice"}</title>
       <meta name="robots" content="noindex" />
       <div className={s.head}>
         <HomeHeader player={{ name: user.username }} />

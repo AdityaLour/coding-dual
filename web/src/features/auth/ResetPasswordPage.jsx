@@ -51,7 +51,7 @@ export default function ResetPasswordPage() {
   if (expired) {
     return (
       <div className={styles.form}>
-        <title>Link expired — Boip</title>
+        <title>Link expired</title>
         <h1 className={styles.title}>This link has expired</h1>
         <p className={styles.text}>
           Reset links work once and last 30 minutes. Ask for a new one and use
@@ -71,7 +71,7 @@ export default function ResetPasswordPage() {
       onSubmit={handleSubmit}
       noValidate
     >
-      <title>Choose a new password — Boip</title>
+      <title>Choose a new password</title>
       <h1 className={styles.title}>Choose a new password</h1>
       <TextField
         label="New password"

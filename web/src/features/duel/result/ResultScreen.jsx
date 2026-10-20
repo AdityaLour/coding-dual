@@ -82,7 +82,7 @@ export default function ResultScreen({ end, duel, resigned, onAgain, onHome }) {
   const letters = [...result.headline];
   return (
     <div ref={page} onPointerMove={follow} className={`${s.page} ${s[mode]}`} style={{ "--seam-across": seamAcross, "--seam-down": seamDown }}>
-      <title>{`${result.headline[0]}${result.headline.slice(1).toLowerCase()} — Boip`}</title>
+      <title>{`${result.headline[0]}${result.headline.slice(1).toLowerCase()}`}</title>
       <meta name="robots" content="noindex" />
       <div className={s.zoom}>
         <div className={s.thud}>

@@ -28,7 +28,7 @@ export default function ForgotPasswordPage() {
   if (sentTo) {
     return (
       <div className={styles.form}>
-        <title>Check your email — Boip</title>
+        <title>Check your email</title>
         <h1 className={styles.title}>Check your email</h1>
         <p className={styles.text}>
           If <strong>{sentTo}</strong> has a Boip account, we&apos;ve sent it a
@@ -48,7 +48,7 @@ export default function ForgotPasswordPage() {
       onSubmit={handleSubmit}
       noValidate
     >
-      <title>Reset your password — Boip</title>
+      <title>Reset your password</title>
       <h1 className={styles.title}>Reset your password</h1>
       <p className={styles.text}>
         Enter your email and we&apos;ll send you a reset link.
