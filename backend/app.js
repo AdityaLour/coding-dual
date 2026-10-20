@@ -47,6 +47,7 @@ app.use((req, res, next) => {
   next();
 });
 app.use(cors({ origin: process.env.APP_ORIGIN, credentials: true }));
+app.get("/health", (req, res) => res.sendStatus(200));
 // Practice reads its own, larger body (sources up to 20 KB), so it comes before the 10 KB parser.
 const practice = createPractice({
   repo: practiceRepo,
