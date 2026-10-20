@@ -29,4 +29,7 @@
   --radius-sm: 8px;
   --radius-md: 10px;
   --seam-width: 4px;
+
+  /* Quick start, soft landing: the curve for most entrances. */
+  --ease-out: cubic-bezier(0.2, 0.7, 0.2, 1);
 }

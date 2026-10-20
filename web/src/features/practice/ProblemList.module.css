@@ -1,0 +1,134 @@
+.rows {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+}
+.row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 30px 1fr 170px 80px 60px;
+  align-items: center;
+  gap: 0 16px;
+  min-height: 62px;
+  padding: 8px;
+  text-decoration: none;
+  border-bottom: 1px solid var(--border);
+  /* The first dozen rows rise in one after another; later ones are already there. */
+  animation: row-in 420ms var(--ease-out) both;
+  animation-delay: calc(min(var(--i), 14) * 26ms);
+}
+.row::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  bottom: 10px;
+  width: 3px;
+  background: var(--you);
+  border-radius: 2px;
+  transform: scaleY(0);
+  transition: transform 220ms var(--ease-out);
+}
+.row:hover,
+.row:focus-visible {
+  background: linear-gradient(90deg, var(--surface), transparent 70%);
+}
+.row:hover::before,
+.row:focus-visible::before {
+  transform: scaleY(1);
+}
+.title {
+  justify-self: start;
+  font-weight: 600;
+  transition: transform 220ms var(--ease-out);
+}
+.row:hover .title,
+.row:focus-visible .title {
+  transform: translateX(6px);
+}
+.meta {
+  display: contents;
+}
+.topic {
+  color: var(--muted);
+  font-size: 14px;
+}
+.diff {
+  color: var(--text-2);
+  font-size: 14px;
+}
+.rating {
+  text-align: right;
+  color: var(--muted);
+  font: 400 13px var(--font-code);
+}
+
+.mark {
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+}
+.mark svg {
+  width: 20px;
+  height: 20px;
+  color: var(--you);
+}
+.dot {
+  width: 8px;
+  height: 8px;
+  border: 1.5px solid var(--control-border);
+  border-radius: 50%;
+}
+.tried {
+  background: var(--muted);
+  border-color: var(--muted);
+}
+/* A problem you just solved: its tick draws in. */
+.earned svg {
+  animation: tick-in 600ms var(--ease-out) 350ms both;
+}
+
+.empty {
+  padding: 44px 8px;
+  color: var(--muted);
+}
+.empty button {
+  margin-left: 8px;
+}
+
+@keyframes row-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+@keyframes tick-in {
+  0% {
+    clip-path: inset(0 100% 0 0);
+    transform: scale(0.7);
+  }
+  60% {
+    transform: scale(1.18);
+  }
+  100% {
+    clip-path: inset(0);
+    transform: none;
+  }
+}
+
+@media (max-width: 680px) {
+  .row {
+    grid-template-columns: 30px 1fr auto;
+    padding: 12px 4px;
+  }
+  .meta {
+    display: flex;
+    gap: 14px;
+    grid-column: 2 / 4;
+  }
+  .mark {
+    grid-row: 1 / 3;
+  }
+}

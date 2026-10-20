@@ -1,0 +1,35 @@
+/* A full-height workspace on wide screens (each side scrolls on its own); one long page on narrow ones. */
+.page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+.head {
+  position: relative;
+  flex: none;
+  height: 96px;
+}
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  max-width: 560px;
+  padding: 24px clamp(16px, 4.5vw, 64px);
+  color: var(--text-2);
+}
+.message h1 {
+  margin: 0;
+  color: var(--text);
+  font: 400 clamp(28px, 4vw, 40px) / 1.1 var(--font-display);
+}
+.message p {
+  margin: 0;
+}
+
+@media (min-width: 900px) {
+  .page {
+    height: 100dvh;
+    min-height: 0;
+  }
+}

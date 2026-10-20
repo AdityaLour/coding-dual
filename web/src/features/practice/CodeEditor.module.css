@@ -1,0 +1,170 @@
+.toolbar {
+  flex: none;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+}
+.language {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+  color: var(--text-2);
+  font-size: 14px;
+}
+.language select {
+  flex: 1;
+  min-width: 0;
+  max-width: 200px;
+  min-height: 44px;
+  padding: 0 10px;
+  color: var(--text);
+  background: var(--inset);
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-sm);
+  font: 400 14px var(--font-body);
+}
+.spacer {
+  display: none;
+}
+.keys {
+  display: none;
+  align-items: center;
+  gap: 3px;
+  color: var(--muted);
+  font: 400 12.5px var(--font-code);
+}
+.keys kbd {
+  padding: 2px 6px;
+  font: inherit;
+  border: 1px solid var(--control-border);
+  border-radius: 5px;
+}
+.action {
+  min-height: 44px;
+  padding: 0 18px;
+  color: var(--text);
+  background: none;
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-md);
+  font: 700 16px var(--font-body);
+  cursor: pointer;
+  transition: transform 120ms var(--ease-out);
+}
+.action:active {
+  transform: scale(0.97);
+}
+.primary {
+  color: var(--you-ink);
+  background: var(--you);
+  border-color: var(--you);
+}
+.action[aria-disabled="true"] {
+  opacity: 0.6;
+  cursor: progress;
+}
+.action[aria-disabled="true"]:active {
+  transform: none;
+}
+
+.editor {
+  --code-size: 13px;
+  --code-line: 22px;
+  position: relative;
+  flex: 1 1 0;
+  min-height: 300px;
+  overflow: hidden;
+  background: var(--inset);
+}
+/* Loading an old attempt flashes the editor. Two names, so the same animation can run twice in a row. */
+.editor[data-flash="a"] .cm {
+  animation: flash-a 600ms ease;
+}
+.editor[data-flash="b"] .cm {
+  animation: flash-b 600ms ease;
+}
+.cm {
+  height: 100%;
+}
+/* While judging, a bone line runs along the top edge. */
+.scan {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  height: 2px;
+  background: var(--you);
+  transform-origin: left;
+  pointer-events: none;
+  animation: scan 1.3s var(--ease-out) infinite;
+}
+@keyframes scan {
+  0% {
+    opacity: 1;
+    transform: scaleX(0);
+  }
+  70% {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scaleX(1);
+  }
+}
+@keyframes flash-a {
+  from {
+    opacity: 0.3;
+  }
+}
+@keyframes flash-b {
+  from {
+    opacity: 0.3;
+  }
+}
+
+@media (max-width: 560px) {
+  .word {
+    display: none;
+  }
+}
+@media (min-width: 600px) {
+  .editor {
+    --code-size: 14px;
+    --code-line: 24px;
+  }
+  .toolbar {
+    padding: 10px 16px;
+  }
+}
+@media (min-width: 1000px) {
+  .editor {
+    --code-size: 14.5px;
+    --code-line: 25px;
+  }
+  .keys {
+    display: inline-flex;
+  }
+  .spacer {
+    display: block;
+    flex: 1;
+  }
+  .language {
+    flex: none;
+  }
+}
+/* Touch screens: 16px text, or iOS zooms the page in whenever the editor is focused. */
+@media (pointer: coarse) {
+  .editor {
+    --code-size: 16px;
+    --code-line: 24px;
+  }
+  .language select {
+    font-size: 16px;
+  }
+}

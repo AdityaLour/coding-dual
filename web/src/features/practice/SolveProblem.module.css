@@ -1,0 +1,107 @@
+.pane {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  min-height: 0;
+  padding: 18px 16px 40px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--control-border) transparent;
+  animation: pane-in 500ms var(--ease-out) both;
+}
+.back {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: transform 200ms var(--ease-out);
+}
+.back:hover {
+  color: var(--text);
+  transform: translateX(-3px);
+}
+.title {
+  margin: 0;
+  font: 400 clamp(26px, 3vw, 32px) / 1.1 var(--font-display);
+}
+/* Coming from the list the heading fades in as the traveller lands on it. */
+.arriving {
+  animation: fade 350ms ease 220ms both;
+}
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px 14px;
+  margin: 0;
+  font: 400 12px var(--font-code);
+  color: var(--muted);
+}
+.pill {
+  padding: 3px 10px;
+  color: var(--text-2);
+  border: 1px solid var(--control-border);
+  border-radius: 99px;
+  font: 600 12px var(--font-body);
+}
+.samples {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  margin-top: 4px;
+}
+.sample {
+  padding: 12px 14px;
+  overflow-x: auto;
+  background: var(--inset);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.io {
+  margin: 0;
+  font: 400 13px/1.6 var(--font-code);
+  white-space: pre;
+}
+.out {
+  margin-top: 8px;
+  color: var(--you);
+}
+.hint {
+  margin: 0;
+  padding: 12px 14px;
+  color: var(--muted);
+  border: 1px dashed var(--control-border);
+  border-radius: var(--radius-sm);
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+@keyframes pane-in {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}
+
+@media (min-width: 600px) {
+  .pane {
+    padding: 22px 28px 40px;
+  }
+  .samples {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+@media (min-width: 1000px) {
+  .pane {
+    padding: 26px 32px 40px;
+  }
+}

@@ -1,0 +1,33 @@
+.solve {
+  flex: 1;
+  min-height: 0;
+  display: block;
+  border-top: 1px solid var(--border);
+}
+.code {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  min-height: 0;
+  background: var(--surface);
+  border-top: 1px solid var(--border);
+  /* The editor opens like a shutter, left to right. */
+  animation: wipe 650ms var(--ease-out) both;
+}
+@keyframes wipe {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+/* Side by side once there is room; the problem and the editor each scroll on their own. */
+@media (min-width: 900px) {
+  .solve {
+    display: grid;
+    grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  }
+  .code {
+    border-top: 0;
+    border-left: 1px solid var(--border);
+  }
+}

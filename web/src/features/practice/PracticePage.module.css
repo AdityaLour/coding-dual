@@ -1,0 +1,92 @@
+.page {
+  min-height: 100%;
+}
+/* The shared header floats over the top of the page; this keeps room for it. */
+.head {
+  position: relative;
+  height: 96px;
+}
+/* Uses the whole width, lined up with the header. The list is on the left; progress and
+   everything solved sit on the right and stay in view while the list scrolls. */
+.list {
+  max-width: 1680px;
+  margin: 0 auto;
+  padding: 12px clamp(20px, 4.5vw, 64px) 90px;
+}
+.layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  grid-template-areas: "head" "side" "main";
+  gap: 24px 64px;
+}
+.intro {
+  grid-area: head;
+}
+.main {
+  grid-area: main;
+  min-width: 0;
+}
+.side {
+  grid-area: side;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+@media (min-width: 1100px) {
+  .layout {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    grid-template-areas:
+      "head side"
+      "main side";
+    grid-template-rows: auto 1fr;
+  }
+  .side {
+    position: sticky;
+    top: 24px;
+    align-self: start;
+    max-height: calc(100dvh - 48px);
+  }
+}
+.h1 {
+  margin: 0;
+  overflow: clip;
+  font: 400 clamp(40px, 6.4vw, 76px) / 0.95 var(--font-display);
+  letter-spacing: -0.01em;
+}
+.h1 span {
+  display: block;
+  animation: rise 700ms var(--ease-out) both;
+}
+.lead {
+  max-width: 44ch;
+  margin: 14px 0 0;
+  color: var(--muted);
+  animation: fade 600ms ease 250ms both;
+}
+.count {
+  margin: 0 0 8px;
+  color: var(--muted);
+  font: 400 13px var(--font-code);
+}
+.message {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 14px;
+  color: var(--text-2);
+}
+.message p {
+  margin: 0;
+}
+
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes fade {
+  from {
+    opacity: 0;
+  }
+}

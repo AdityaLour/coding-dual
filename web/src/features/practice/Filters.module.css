@@ -1,0 +1,125 @@
+.filters {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 20px;
+}
+.seg {
+  display: inline-flex;
+  overflow: clip;
+  border: 1px solid var(--control-border);
+  border-radius: var(--radius-md);
+}
+.seg button {
+  min-height: 44px;
+  padding: 0 16px;
+  color: var(--text-2);
+  background: none;
+  border: 0;
+  border-right: 1px solid var(--control-border);
+  font: 500 16px var(--font-body);
+  cursor: pointer;
+}
+.seg button:last-child {
+  border-right: 0;
+}
+.seg button[aria-pressed="true"] {
+  color: var(--you-ink);
+  background: var(--you);
+  font-weight: 700;
+}
+.check {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 44px;
+  color: var(--text-2);
+  cursor: pointer;
+}
+.check input {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--you);
+}
+.wrap {
+  position: relative;
+}
+.chips {
+  display: flex;
+  gap: 8px;
+  padding: 2px 0 14px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.chips::-webkit-scrollbar {
+  display: none;
+}
+/* Arrows sit over a fade at each end, so a chip slides under them instead of being cut off. */
+.arrow {
+  position: absolute;
+  top: 2px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 44px;
+  padding: 0;
+  color: var(--text);
+  border: 0;
+  font: 400 30px/1 var(--font-body);
+  cursor: pointer;
+}
+.arrow:hover {
+  color: var(--you);
+}
+.left {
+  left: 0;
+  justify-items: start;
+  padding-left: 6px;
+  background: linear-gradient(90deg, var(--bg) 45%, transparent);
+}
+.right {
+  right: 0;
+  justify-items: end;
+  padding-right: 6px;
+  background: linear-gradient(270deg, var(--bg) 45%, transparent);
+}
+.chip {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 0 14px;
+  color: var(--text-2);
+  background: none;
+  border: 1px solid var(--control-border);
+  border-radius: 99px;
+  font: 400 16px var(--font-body);
+  white-space: nowrap;
+  cursor: pointer;
+  transition: transform 150ms var(--ease-out);
+}
+.chip:active {
+  transform: scale(0.96);
+}
+.chip small {
+  font: 400 12px var(--font-code);
+  color: var(--muted);
+}
+.chip[aria-pressed="true"] {
+  color: var(--you-ink);
+  background: var(--you);
+  border-color: var(--you);
+  font-weight: 700;
+}
+.chip[aria-pressed="true"] small {
+  color: var(--you-ink);
+  opacity: 0.7;
+}

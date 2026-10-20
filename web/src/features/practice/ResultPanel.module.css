@@ -1,0 +1,273 @@
+.panel {
+  flex: none;
+  display: flex;
+  flex-direction: column;
+  height: min(46%, 330px);
+  min-height: 200px;
+  border-top: 1px solid var(--border);
+}
+.tabs {
+  position: relative;
+  display: flex;
+  gap: 2px;
+  padding: 0 10px;
+  border-bottom: 1px solid var(--border);
+}
+.tabs button {
+  min-height: 44px;
+  padding: 0 14px;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  font: 600 16px var(--font-body);
+  cursor: pointer;
+}
+.tabs button[aria-selected="true"] {
+  color: var(--text);
+}
+.tabNote {
+  margin-left: 6px;
+  font: 400 13px var(--font-code);
+  color: var(--muted);
+}
+/* One width, scaled and moved to sit under whichever tab is chosen. */
+.line {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 100px;
+  height: 2px;
+  background: var(--you);
+  transform-origin: left;
+  transition: transform 300ms var(--ease-out);
+}
+.body {
+  flex: 1;
+  min-height: 0;
+  overflow: auto;
+  padding: 14px 16px 20px;
+}
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.stack > * {
+  flex: none;
+  animation: enter 380ms var(--ease-out) both;
+}
+.stack > :nth-child(2) {
+  animation-delay: 60ms;
+}
+.stack > :nth-child(3) {
+  animation-delay: 120ms;
+}
+.stack > :nth-child(n + 4) {
+  animation-delay: 180ms;
+}
+.note {
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.verdict {
+  position: relative;
+  overflow: clip;
+  padding: 14px 16px;
+  background: var(--inset);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+.vtxt {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 4px 14px;
+}
+.vname {
+  font: 400 24px var(--font-display);
+}
+.det {
+  color: var(--muted);
+  font-size: 14px;
+}
+.ms {
+  margin-left: auto;
+  font: 400 13px var(--font-code);
+  color: var(--muted);
+}
+.good .vtxt {
+  color: var(--you);
+}
+/* The bone layer holds a copy of the text in ink. Both are revealed left to right together. */
+.fill {
+  position: absolute;
+  inset: 0;
+  padding: 14px 16px;
+  background: var(--you);
+  animation: sweep 700ms var(--ease-out) 100ms both;
+}
+.fill .vtxt,
+.fill .det,
+.fill .ms {
+  color: var(--you-ink);
+}
+.fill .det,
+.fill .ms {
+  opacity: 0.75;
+}
+.bad {
+  border-color: var(--warn);
+  animation:
+    enter 300ms var(--ease-out) both,
+    shake 420ms 50ms;
+}
+.bad .vname {
+  color: var(--warn);
+}
+.bad .det {
+  color: var(--text-2);
+}
+.after {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.example {
+  overflow: clip;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+}
+.exHead {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  background: var(--inset);
+  font-size: 14px;
+}
+.pass,
+.fail {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+}
+.pass {
+  color: var(--you);
+}
+.pass svg {
+  width: 16px;
+  height: 16px;
+  animation: tick 500ms var(--ease-out) 250ms both;
+}
+.fail {
+  color: var(--warn);
+}
+.exMs {
+  margin-left: auto;
+  font: 400 13px var(--font-code);
+  color: var(--muted);
+}
+.exBody {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.exBody > div {
+  min-width: 0;
+  padding: 8px 12px;
+}
+.exBody > div + div {
+  border-left: 1px solid var(--border);
+}
+.exBody small {
+  display: block;
+  margin-bottom: 2px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.exBody pre {
+  margin: 0;
+  overflow-x: auto;
+  font: 400 13px/1.6 var(--font-code);
+  white-space: pre;
+}
+
+.history {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.history th,
+.history td {
+  padding: 9px 8px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+.history th {
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 500;
+}
+.history tbody tr {
+  animation: enter 380ms var(--ease-out) both;
+  animation-delay: calc(var(--i) * 50ms);
+}
+.accepted {
+  color: var(--you);
+  font-weight: 700;
+}
+.wrong {
+  color: var(--warn);
+  font-weight: 700;
+}
+.history button {
+  min-height: 44px;
+  padding: 0 12px;
+  color: var(--text-2);
+  background: none;
+  border: 1px solid var(--control-border);
+  border-radius: 6px;
+  font: 400 14px var(--font-body);
+  cursor: pointer;
+}
+
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+@keyframes sweep {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+@keyframes shake {
+  20% {
+    transform: translateX(-7px);
+  }
+  45% {
+    transform: translateX(6px);
+  }
+  70% {
+    transform: translateX(-3px);
+  }
+}
+@keyframes tick {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+}
+
+@media (max-width: 899px) {
+  .panel {
+    height: auto;
+    min-height: 220px;
+  }
+  .body {
+    overflow: visible;
+  }
+}

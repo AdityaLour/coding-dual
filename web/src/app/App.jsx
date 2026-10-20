@@ -19,6 +19,8 @@ import NotFound from "./NotFound.jsx";
 // Loaded only when someone opens it: logged-out visitors never download it.
 const HomePage = lazy(() => import("@/features/home/HomePage.jsx"));
 const DuelPage = lazy(() => import("@/features/duel/DuelPage.jsx"));
+const PracticePage = lazy(() => import("@/features/practice/PracticePage.jsx"));
+const SolvePage = lazy(() => import("@/features/practice/SolvePage.jsx"));
 export default function App() {
   return (
     <ErrorBoundary>
@@ -50,14 +52,8 @@ export default function App() {
                 <Route path="/duel" element={<DuelPage />} />
               </Route>{" "}
             </Route>{" "}
-            <Route
-              path="/practice"
-              element={
-                <ComingSoon title="Practice">
-                  Solo practice is coming soon.
-                </ComingSoon>
-              }
-            />
+            <Route path="/practice" element={<PracticePage />} />
+            <Route path="/practice/:slug" element={<SolvePage />} />
             <Route
               path="/daily"
               element={
