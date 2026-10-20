@@ -1,6 +1,6 @@
 import test from "node:test";
 import assert from "node:assert/strict";
-import { runTests } from "./judge.js";
+import { runTests, runExamples } from "./judge.js";
 import { JUDGE_SLOTS } from "./limits.js";
 
 // A stand-in for Judge0 that reports how many calls were in flight at once.
@@ -51,4 +51,20 @@ test("a Judge0 failure frees its slot instead of leaking it", async () => {
   const stats = fakeJudge0();
   assert.equal((await runTests(problem, 71, "print(42)")).verdict, "Accepted");
   assert.equal(stats.calls, 6);
+});
+
+test("runExamples runs only the examples and reports what the program printed", async () => {
+  const stats = fakeJudge0();
+  const withExamples = {
+    ...problem,
+    samples: [
+      { input: "1\n", output: "42\n" },
+      { input: "2\n", output: "43\n" },
+    ],
+  };
+  const outcome = await runExamples(withExamples, 71, "print(42)");
+  assert.equal(stats.calls, 2); // not the 6 hidden tests
+  assert.equal(outcome.verdict, "Wrong Answer"); // the fake prints 42 for both
+  assert.deepEqual(outcome.results.map((r) => r.verdict), ["Accepted", "Wrong Answer"]);
+  assert.equal(outcome.results[0].output, "42\n");
 });

@@ -73,3 +73,10 @@ export const usernameLimit = limiter({
   limit: 20,
   key: byIp,
 });
+// Practice: one budget per signed-in user for everything under /api/practice, polling included.
+// Polling is about 1 request a second while a submission is out, so this leaves room for that.
+export const practiceLimit = limiter({
+  windowMs: MINUTE,
+  limit: 150,
+  key: (req) => `user:${req.user.id}`,
+});

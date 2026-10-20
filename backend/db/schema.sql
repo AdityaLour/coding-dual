@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS practice_submissions;
 DROP TABLE IF EXISTS submissions;
 DROP TABLE IF EXISTS duels;
 DROP TABLE IF EXISTS test_cases;
@@ -112,4 +113,21 @@ CREATE TABLE submissions(
     runtime_ms INT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     INDEX (duel_id)
+);
+
+-- Practice mode: solo submissions. Never touches ratings or duels.
+CREATE TABLE practice_submissions(
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    problem_id INT NOT NULL,
+    FOREIGN KEY (problem_id) REFERENCES problems(id),
+    language_id INT NOT NULL,
+    source TEXT NOT NULL,                        -- at most 20 KB (checked before judging)
+    verdict VARCHAR(40) NOT NULL,                -- 'Judging' until the judge answers
+    failed_test INT NULL,
+    runtime_ms INT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX (user_id, problem_id, created_at),
+    INDEX (user_id, created_at)
 );

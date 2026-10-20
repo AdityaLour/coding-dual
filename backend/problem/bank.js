@@ -1,11 +1,15 @@
 import pool from "../db/connection.js";
 
+// Same bands the authoring tool enforces: Easy 800-1199, Medium 1200-1599, Hard 1600 and up.
+export const difficultyOf = (rating) =>
+  rating < 1200 ? "Easy" : rating < 1600 ? "Medium" : "Hard";
+
 const BAND = 150; // a problem this close to the players' average rating counts as a fit
 const bank = new Map(); // problem id -> problem, with its hidden tests; loaded once at boot
 
 export async function loadBank() {
   const [problems] = await pool.query(
-    `SELECT id, slug, title, statement, rating, time_limit_ms, memory_limit_kb, duel_minutes
+    `SELECT id, slug, title, statement, rating, time_limit_ms, memory_limit_kb, duel_minutes, tags
      FROM problems WHERE active = 1`,
   );
   const [cases] = await pool.query(
@@ -22,6 +26,8 @@ export async function loadBank() {
       timeLimitMs: p.time_limit_ms,
       memoryLimitKb: p.memory_limit_kb,
       minutes: p.duel_minutes,
+      topic: p.tags.split(",")[0], // the seed stores the topic as the first tag
+      difficulty: difficultyOf(p.rating),
       samples: [],
       tests: [],
     });
@@ -42,6 +48,20 @@ export async function loadBank() {
 }
 
 export const getProblem = (id) => bank.get(id);
+export const getProblemBySlug = (slug) =>
+  [...bank.values()].find((p) => p.slug === slug);
+
+// The practice catalogue: what a list page needs, nothing from the hidden tests.
+export const catalogue = () =>
+  [...bank.values()]
+    .map((p) => ({
+      slug: p.slug,
+      title: p.title,
+      topic: p.topic,
+      rating: p.rating,
+      difficulty: p.difficulty,
+    }))
+    .sort((a, b) => a.rating - b.rating || a.title.localeCompare(b.title));
 
 // What a player may see. Hidden tests and the other fields stay on the server.
 export const publicProblem = (p) => ({
@@ -51,6 +71,19 @@ export const publicProblem = (p) => ({
   timeLimitMs: p.timeLimitMs,
   memoryMb: Math.round(p.memoryLimitKb / 1024),
   minutes: p.minutes,
+});
+
+// A problem opened for practice: the statement and examples, never the hidden tests.
+export const practiceProblem = (p) => ({
+  slug: p.slug,
+  title: p.title,
+  topic: p.topic,
+  rating: p.rating,
+  difficulty: p.difficulty,
+  statement: p.statement,
+  samples: p.samples,
+  timeLimitMs: p.timeLimitMs,
+  memoryMb: Math.round(p.memoryLimitKb / 1024),
 });
 
 // Nearest in rating to the two players' average, preferring ones neither played lately.

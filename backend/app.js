@@ -14,8 +14,13 @@ import { startSessionCleanup } from "./utils/session.js";
 import { setUpWebSocket } from "./websocket/socketServer.js";
 import { createUpgradeHandler } from "./websocket/upgrade.js";
 import { resetQueue } from "./websocket/matchMaking.js";
-import { voidStaleDuels } from "./websocket/duels.js";
+import { voidStaleDuels, inActiveDuel } from "./websocket/duels.js";
+import * as bank from "./problem/bank.js";
 import { loadBank } from "./problem/bank.js";
+import { createPractice } from "./practice/practice.js";
+import { repo as practiceRepo } from "./practice/repo.js";
+import { createPracticeRouter } from "./routes/practiceRoutes.js";
+import { runTests, runExamples } from "./websocket/judge.js";
 import { MAX_PAYLOAD } from "./websocket/limits.js";
 
 const app = express();
@@ -29,6 +34,14 @@ app.use((req, res, next) => {
   next();
 });
 app.use(cors({ origin: process.env.APP_ORIGIN, credentials: true }));
+// Practice reads its own, larger body (sources up to 20 KB), so it comes before the 10 KB parser.
+const practice = createPractice({
+  repo: practiceRepo,
+  judge: { runTests, runExamples },
+  bank,
+  inDuel: inActiveDuel,
+});
+app.use("/api/practice", createPracticeRouter(practice));
 app.use(express.json({ limit: "10kb" }));
 app.use(cookieParser());
 app.use(authRoutes);
@@ -55,6 +68,7 @@ async function startServer() {
   console.log("DB Connected");
   await step("redis queue reset", resetQueue);
   await step("stale duel cleanup", voidStaleDuels);
+  await step("stale practice cleanup", practiceRepo.failStale);
   console.log(`Loaded ${await step("problem bank", loadBank)} problems`);
 
   startSessionCleanup();
