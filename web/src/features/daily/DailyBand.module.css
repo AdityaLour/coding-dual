@@ -1,0 +1,54 @@
+.band {
+  flex: none;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 14px clamp(20px, 3vw, 44px);
+  padding: 14px clamp(16px, 4.5vw, 64px);
+  border-top: 1px solid var(--border);
+  background: var(--surface);
+}
+.title {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+.title h1 {
+  margin: 0;
+  font: 400 clamp(22px, 3vw, 30px) / 1 var(--font-display);
+}
+.title span {
+  color: var(--muted);
+  font: 500 14px var(--font-code);
+}
+.streak {
+  margin: 0;
+  color: var(--text-2);
+}
+.streak b {
+  color: var(--text);
+  font: 400 22px var(--font-display);
+}
+.best {
+  margin-left: 10px;
+  color: var(--muted);
+  font-size: 14px;
+}
+.state {
+  margin: 0 0 0 auto;
+  color: var(--text-2);
+}
+.done {
+  color: var(--you);
+}
+.left {
+  font: 700 16px var(--font-code);
+  font-variant-numeric: tabular-nums;
+  color: var(--text);
+}
+@media (max-width: 900px) {
+  .state {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+}

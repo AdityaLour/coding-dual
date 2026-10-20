@@ -15,13 +15,17 @@ import { poll, PollTimeout } from "./poll.js";
 // phase: { kind: "idle" } | { kind: "judging", what } | { kind: "run", ...result }
 //      | { kind: "verdict", ...submission } | { kind: "notice", message }
 // Every phase carries `n`, a counter, so the screen can replay its entrance for each new one.
-export function useSolver(slug) {
+export function useSolver(slug, onAccepted) {
   const [phase, setPhase] = useState({ kind: "idle", n: 0 });
   const [history, setHistory] = useState(null); // null until the first answer
   const [next, setNext] = useState(null); // the next unsolved problem, once this one is accepted
   const busy = useRef(false);
   const serial = useRef(0);
   const stop = useRef(new AbortController());
+  const accepted = useRef(onAccepted); // the newest callback, without making `start` change with it
+  useEffect(() => {
+    accepted.current = onAccepted;
+  });
 
   useEffect(() => {
     const controller = new AbortController();
@@ -60,7 +64,10 @@ export function useSolver(slug) {
           const { source: _kept, ...verdict } = done; // the code itself stays out of the screen state
           put({ kind: "verdict", ...verdict });
           refreshHistory();
-          if (verdict.verdict === "Accepted") findNext();
+          if (verdict.verdict === "Accepted") {
+            findNext();
+            accepted.current?.();
+          }
         }
       } catch (error) {
         if (error?.name === "AbortError") return;

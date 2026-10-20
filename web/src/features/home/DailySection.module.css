@@ -1,0 +1,13 @@
+.streak b {
+  font: 400 1.4em var(--font-display);
+}
+.retry {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: inherit;
+  font: inherit;
+  font-weight: 700;
+  text-decoration: underline;
+  cursor: pointer;
+}

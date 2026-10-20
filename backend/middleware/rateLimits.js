@@ -80,6 +80,12 @@ export const practiceLimit = limiter({
   limit: 150,
   key: (req) => `user:${req.user.id}`,
 });
+// The daily challenge page and the Home strip: a read each, one budget per signed-in user.
+export const dailyLimit = limiter({
+  windowMs: MINUTE,
+  limit: 60,
+  key: (req) => `user:${req.user.id}`,
+});
 // Leaderboard reads: one small budget per signed-in user.
 export const leaderboardLimit = limiter({
   windowMs: MINUTE,

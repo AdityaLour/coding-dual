@@ -6,8 +6,7 @@ import HomeHeader from "./HomeHeader.jsx";
 import HomeHero from "./HomeHero.jsx";
 import MiniEditor from "./MiniEditor.jsx";
 import InviteLink from "./InviteLink.jsx";
-import FlipClock from "./FlipClock.jsx";
-import WeekStrip from "./WeekStrip.jsx";
+import DailySection from "./DailySection.jsx";
 import BoardPreview from "./BoardPreview.jsx";
 import Journey from "./journey/Journey.jsx";
 import SceneDoodle from "./journey/SceneDoodle.jsx";
@@ -90,15 +89,7 @@ export default function HomePage() {
 
         <Section id="daily" station="daily" className={s.dailySec}>
           <Heading id="daily-title">Daily challenge</Heading>
-          <p>
-            One problem for everyone, every day. Launching soon; the daily reset
-            is at midnight.
-          </p>
-          <FlipClock />
-          <WeekStrip />
-          <Link className={s.cta} to="/daily">
-            About the daily challenge
-          </Link>
+          <DailySection />
         </Section>
 
         <Section id="board" station="board">

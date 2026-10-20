@@ -17,6 +17,9 @@ export function useReveal(shownClass, hidingClass) {
       return undefined;
     }
     let hideTimer = 0;
+    // Watch the section around the element, not the element itself: Chrome counts an element's own
+    // clip-path as hidden, and the Daily card starts fully clipped, so it could never be seen to arrive.
+    const watched = el.parentElement ?? el;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -35,7 +38,7 @@ export function useReveal(shownClass, hidingClass) {
       },
       { threshold: 0.35 },
     );
-    observer.observe(el);
+    observer.observe(watched);
     return () => {
       observer.disconnect();
       clearTimeout(hideTimer);

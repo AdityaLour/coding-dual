@@ -16,7 +16,7 @@ const handle = (work) => async (req, res, next) => {
 };
 
 // A signed-in player with a username, like every other game feature.
-function requirePlayer(req, res, next) {
+export function requirePlayer(req, res, next) {
   if (!req.user.username) return res.status(403).json({ message: "Pick a username first." });
   next();
 }

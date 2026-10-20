@@ -1,25 +1,11 @@
-import { useEffect, useState } from "react";
+import { useServerNow } from "@/features/daily/useNow.js";
+import { clockDigits } from "@/features/daily/time.js";
 import s from "./FlipClock.module.css";
 
-function untilMidnight() {
-  const now = new Date();
-  const next = new Date(now);
-  next.setHours(24, 0, 0, 0);
-  const t = Math.floor((next - now) / 1000);
-  return [Math.floor(t / 3600), Math.floor(t / 60) % 60, t % 60]
-    .map((n) => String(n).padStart(2, "0"))
-    .join("");
-}
-
-// Countdown to local midnight; each digit flips when it changes.
-export default function FlipClock() {
-  const [digits, setDigits] = useState(untilMidnight);
-
-  useEffect(() => {
-    const id = setInterval(() => setDigits(untilMidnight()), 1000);
-    return () => clearInterval(id);
-  }, []);
-
+// Countdown to the moment the daily changes; each digit flips when it changes.
+// `until` is that moment (epoch ms) and `skew` corrects a device clock that is off.
+export default function FlipClock({ until, skew }) {
+  const digits = clockDigits(until - useServerNow(skew));
   const cells = [...digits];
   const label = `${digits.slice(0, 2)} hours ${digits.slice(2, 4)} minutes ${digits.slice(4)} seconds`;
 
@@ -27,7 +13,7 @@ export default function FlipClock() {
     <div
       className={s.clock}
       role="timer"
-      aria-label={`Daily reset in ${label}`}
+      aria-label={`Daily changes in ${label}`}
     >
       {cells.map((c, i) => (
         <span key={i} className={s.group} aria-hidden="true">

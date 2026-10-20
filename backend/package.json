@@ -5,10 +5,10 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "node --test websocket/*.test.js practice/*.test.js routes/*.test.js leaderboard/*.test.js profile/*.test.js account/*.test.js utils/*.test.js",
+    "test": "node --test websocket/*.test.js practice/*.test.js daily/*.test.js routes/*.test.js leaderboard/*.test.js profile/*.test.js account/*.test.js utils/*.test.js",
     "problems": "node scripts/problems.js",
     "dev": "nodemon app.js",
-    "test:db": "node --test account/account.integration.js"
+    "test:db": "node --test account/account.integration.js daily/daily.integration.js"
   },
   "keywords": [],
   "author": "",

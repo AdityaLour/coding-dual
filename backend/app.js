@@ -20,6 +20,9 @@ import { loadBank } from "./problem/bank.js";
 import { createPractice } from "./practice/practice.js";
 import { repo as practiceRepo } from "./practice/repo.js";
 import { createPracticeRouter } from "./routes/practiceRoutes.js";
+import { createDaily } from "./daily/daily.js";
+import { repo as dailyRepo } from "./daily/repo.js";
+import { createDailyRouter } from "./routes/dailyRoutes.js";
 import { createLeaderboard } from "./leaderboard/leaderboard.js";
 import { repo as leaderboardRepo } from "./leaderboard/repo.js";
 import { createLeaderboardRouter } from "./routes/leaderboardRoutes.js";
@@ -54,6 +57,7 @@ const practice = createPractice({
 app.use("/api/practice", createPracticeRouter(practice));
 app.use(express.json({ limit: "10kb" }));
 app.use(cookieParser());
+app.use("/api/daily", createDailyRouter(createDaily({ repo: dailyRepo, bank })));
 const leaderboard = createLeaderboard({ repo: leaderboardRepo });
 app.use("/api/leaderboard", createLeaderboardRouter(leaderboard));
 app.use("/api/profile", createProfileRouter(createProfile({ repo: profileRepo, leaderboard, bank })));

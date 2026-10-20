@@ -46,6 +46,8 @@
 }
 
 .dailySec .content {
+  --week-ink: var(--you-ink);
+  --week-paper: var(--you);
   padding: 44px;
   border-radius: 22px;
   background: var(--you);

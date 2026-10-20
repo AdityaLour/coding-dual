@@ -48,6 +48,8 @@ export async function loadBank() {
 }
 
 export const getProblem = (id) => bank.get(id);
+// Every problem id, lowest first: the same order on every server.
+export const problemIds = () => [...bank.keys()].sort((a, b) => a - b);
 export const getProblemBySlug = (slug) =>
   [...bank.values()].find((p) => p.slug === slug);
 

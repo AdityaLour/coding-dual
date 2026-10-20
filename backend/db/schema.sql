@@ -1,3 +1,4 @@
+DROP TABLE IF EXISTS daily_problems;
 DROP TABLE IF EXISTS practice_submissions;
 DROP TABLE IF EXISTS submissions;
 DROP TABLE IF EXISTS duels;
@@ -135,4 +136,11 @@ CREATE TABLE practice_submissions(
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     INDEX (user_id, problem_id, created_at),
     INDEX (user_id, created_at)
+);
+
+-- Daily challenge: which problem was today's, for each IST day. Written the first time anyone asks.
+CREATE TABLE daily_problems(
+    day INT PRIMARY KEY,                         -- IST days since 1970-01-01 (see daily/days.js)
+    problem_id INT NOT NULL,
+    FOREIGN KEY (problem_id) REFERENCES problems(id)
 );

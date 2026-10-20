@@ -16,9 +16,9 @@ const load = (draftKey, languageId) => ({
 });
 
 // One problem, ready to solve: statement, editor, and the result panel.
-export default function SolveView({ problem }) {
+export default function SolveView({ problem, onSolved }) {
   const draftKey = `practice:${problem.slug}`;
-  const solver = useSolver(problem.slug);
+  const solver = useSolver(problem.slug, onSolved);
   const [languageId, setLanguageId] = useState(readLanguage);
   const [doc, setDoc] = useState(() => load(draftKey, languageId));
   const [flash, setFlash] = useState(0);
