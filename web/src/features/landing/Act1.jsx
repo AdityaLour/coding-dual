@@ -35,8 +35,8 @@ export default function Act1({ actRef, stageRef }) {
           <div className={styles.wrap}>
             <div className={styles.top}>
               <h1 className={styles.title}>
-                <span>Same problem.</span>
-                <span>Two players.</span>
+                <span>Same problem.</span>{" "}
+                <span>Two players.</span>{" "}
                 <span>One clock.</span>
               </h1>
               <div className={styles.side}>

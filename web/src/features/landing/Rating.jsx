@@ -9,9 +9,9 @@ export default function Rating({ sectionRef, numRef }) {
         <div className={styles.grid}>
           <div>
             <h2 className={styles.title}>
-              A rating that
+              A rating that{" "}
               <br />
-              moves for
+              moves for{" "}
               <br />
               a reason.
             </h2>

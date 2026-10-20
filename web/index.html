@@ -3,33 +3,44 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Boip: coding duels</title>
-    <meta
-      name="description"
-      content="Get matched with a coder near your skill, solve the same problem, and race to a correct submission. First correct answer wins."
-    />
     <meta name="theme-color" content="#101214" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-
-    <!-- Link previews (WhatsApp, Discord, LinkedIn, X) -->
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Boip" />
-    <meta property="og:title" content="Boip: coding duels" />
-    <meta
-      property="og:description"
-      content="Two coders. One problem. First correct answer wins."
-    />
-    <meta name="twitter:card" content="summary" />
-
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Archivo:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap"
-    />
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <!--preload-->
+    <!-- The build fills this in for each public page: title, description, canonical link, share tags. -->
+    <!--seo--><!--/seo-->
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      // A pre-rendered page is only right for its own address. Anywhere else (the app, login, a
+      // mistyped link) clear it before it can flash, drop its head tags, and keep it out of search.
+      (function () {
+        var root = document.getElementById("root");
+        var path = location.pathname.replace(/\/+$/, "") || "/";
+        if (!root.hasAttribute("data-path") || root.getAttribute("data-path") === path) return;
+        root.textContent = "";
+        var head = document.head;
+        var drop = [];
+        var inside = false;
+        for (var node = head.firstChild; node; node = node.nextSibling) {
+          if (node.nodeType === 8 && node.data === "seo") inside = true;
+          if (inside) drop.push(node);
+          if (node.nodeType === 8 && node.data === "/seo") inside = false;
+        }
+        drop.forEach(function (n) {
+          head.removeChild(n);
+        });
+        var meta = document.createElement("meta");
+        meta.name = "robots";
+        meta.setAttribute("data-guard", "");
+        meta.content = "noindex";
+        head.appendChild(meta);
+      })();
+    </script>
     <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>

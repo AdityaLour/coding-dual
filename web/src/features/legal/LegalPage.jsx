@@ -1,6 +1,7 @@
 import { Link } from "react-router";
 import Logo from "@/shared/ui/Logo.jsx";
 import SiteFooter from "@/shared/ui/SiteFooter.jsx";
+import Seo from "@/shared/seo/Seo.jsx";
 import { CONTACT_EMAIL } from "@/shared/ui/legal.js";
 import { CONTACT, UPDATED, splitContact } from "./content.js";
 import s from "./Legal.module.css";
@@ -17,10 +18,10 @@ function Text({ children }) {
   );
 }
 
-function Shell({ title, children }) {
+function Shell({ path, children }) {
   return (
     <div className={s.page}>
-      <title>{title}</title>
+      <Seo path={path} />
       <div className={s.head}>
         <Logo />
       </div>
@@ -31,9 +32,9 @@ function Shell({ title, children }) {
 }
 
 // Privacy and Terms: a title, a date, and sections of plain text.
-export function LegalPage({ doc }) {
+export function LegalPage({ doc, path }) {
   return (
-    <Shell title={doc.title}>
+    <Shell path={path}>
       <h1 className={s.title}>{doc.title}</h1>
       <p className={s.lead}>{doc.lead}</p>
       <p className={s.updated}>Last updated {UPDATED}</p>
@@ -65,7 +66,7 @@ export function LegalPage({ doc }) {
 
 export function ContactPage() {
   return (
-    <Shell title={CONTACT.title}>
+    <Shell path="/contact">
       <h1 className={s.title}>{CONTACT.title}</h1>
       <p className={s.lead}>{CONTACT.lead}</p>
       <div className={s.contact}>

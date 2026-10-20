@@ -4,7 +4,8 @@ import { API_URL, ApiError, api } from "@/shared/api/client.js";
 import { useAuth } from "@/shared/auth/useAuth.js";
 import { RealtimeContext } from "./useRealtime.js";
 
-const SOCKET_URL = (API_URL || window.location.origin).replace(/^http/, "ws");
+// A function, not a constant: this file is also loaded at build time, where there is no window.
+const socketUrl = () => (API_URL || window.location.origin).replace(/^http/, "ws");
 const RETRY_MIN_MS = 1000;
 const RETRY_MAX_MS = 30_000;
 
@@ -54,7 +55,7 @@ export default function RealtimeProvider() {
     }
 
     function connect() {
-      const ws = new WebSocket(SOCKET_URL);
+      const ws = new WebSocket(socketUrl());
       socket.current = ws;
       ws.onmessage = (event) => {
         let message;

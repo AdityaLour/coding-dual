@@ -10,7 +10,7 @@ export default function Finale({ sectionRef }) {
       <i className={`${styles.band} ${styles.rival}`} />
       <div className={styles.wrap}>
         <h2 className={styles.title}>
-          <span className={styles.a}>Find a</span>
+          <span className={styles.a}>Find a</span>{" "}
           <span className={styles.b}>rival.</span>
         </h2>
         <div className={styles.ctas}>

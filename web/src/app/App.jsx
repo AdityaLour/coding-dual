@@ -1,6 +1,9 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router";
 import LandingPage from "@/features/landing/LandingPage.jsx";
+import PrivacyPage from "@/features/legal/PrivacyPage.jsx";
+import TermsPage from "@/features/legal/TermsPage.jsx";
+import ContactRoute from "@/features/legal/ContactRoute.jsx";
 import AuthLayout from "@/features/auth/AuthLayout.jsx";
 import LoginPage from "@/features/auth/LoginPage.jsx";
 import SignupPage from "@/features/auth/SignupPage.jsx";
@@ -17,13 +20,12 @@ import DuelProvider from "@/features/duel/DuelProvider.jsx";
 import NotFound from "./NotFound.jsx";
 
 // Loaded only when someone opens it: logged-out visitors never download it.
+// (The public pages, landing and legal, are imported above instead: they are pre-rendered, and a
+// page that loads lazily duplicates its <head> tags when the browser attaches to it.)
 const HomePage = lazy(() => import("@/features/home/HomePage.jsx"));
 const DuelPage = lazy(() => import("@/features/duel/DuelPage.jsx"));
 const PracticePage = lazy(() => import("@/features/practice/PracticePage.jsx"));
 const SolvePage = lazy(() => import("@/features/practice/SolvePage.jsx"));
-const PrivacyPage = lazy(() => import("@/features/legal/PrivacyPage.jsx"));
-const TermsPage = lazy(() => import("@/features/legal/TermsPage.jsx"));
-const ContactRoute = lazy(() => import("@/features/legal/ContactRoute.jsx"));
 const DailyPage = lazy(() => import("@/features/daily/DailyPage.jsx"));
 const LeaderboardPage = lazy(() => import("@/features/leaderboard/LeaderboardPage.jsx"));
 const ProfilePage = lazy(() => import("@/features/profile/ProfilePage.jsx"));

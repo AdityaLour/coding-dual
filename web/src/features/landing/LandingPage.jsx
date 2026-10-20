@@ -6,6 +6,7 @@ import Practice from "./Practice.jsx";
 import Rating from "./Rating.jsx";
 import Finale from "./Finale.jsx";
 import SiteFooter from "@/shared/ui/SiteFooter.jsx";
+import Seo from "@/shared/seo/Seo.jsx";
 import { useScrollScene } from "./useScrollScene.js";
 import styles from "./LandingPage.module.css";
 
@@ -30,7 +31,7 @@ export default function LandingPage() {
 
   return (
     <div ref={root} className={styles.page} data-flat={flat}>
-      <title>Boip: coding duels</title>
+      <Seo path="/" />
       <i className={`${styles.glow} ${styles.glowOne}`} aria-hidden="true" />
       <i className={`${styles.glow} ${styles.glowTwo}`} aria-hidden="true" />
 
