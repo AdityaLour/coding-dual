@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { usePrefersReducedMotion } from "@/shared/hooks/usePrefersReducedMotion.js";
 import { DIFFICULTIES } from "./logic.js";
-import { topicName } from "./topics.js";
+import { compareTopics, topicName } from "./topics.js";
 import s from "./Filters.module.css";
 
 // The topic chips in a row that scrolls sideways, with an arrow at each end that appears
@@ -76,7 +76,7 @@ export default function Filters({ filters, onChange, topics }) {
           All topics
         </button>
         {Object.entries(topics)
-          .sort(([a], [b]) => topicName(a).localeCompare(topicName(b)))
+          .sort(([a], [b]) => compareTopics(a, b))
           .map(([slug, { solved, total }]) => (
             <button key={slug} type="button" className={s.chip} aria-pressed={filters.topic === slug} onClick={() => set({ topic: slug })}>
               {topicName(slug)}
