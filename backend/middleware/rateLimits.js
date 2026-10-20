@@ -86,3 +86,34 @@ export const leaderboardLimit = limiter({
   limit: 60,
   key: (req) => `user:${req.user.id}`,
 });
+// Profile reads: opening tabs and paging through duels, one budget per signed-in user.
+export const profileLimit = limiter({
+  windowMs: MINUTE,
+  limit: 120,
+  key: (req) => `user:${req.user.id}`,
+});
+// Account changes. All per signed-in user, so one person can't be hammered from many addresses.
+export const accountLimit = limiter({
+  windowMs: MINUTE,
+  limit: 60,
+  key: (req) => `user:${req.user.id}`,
+});
+// Wrong or invalid attempts at anything that asks for the password: someone on a stolen session
+// must not be able to guess it. Only failed requests count.
+export const passwordAttemptLimit = limiter({
+  windowMs: 15 * MINUTE,
+  limit: 8,
+  key: (req) => `user:${req.user.id}`,
+  skipSuccessfulRequests: true,
+});
+// Anything that sends the email-change mails.
+export const emailChangeLimit = limiter({
+  windowMs: 60 * MINUTE,
+  limit: 5,
+  key: (req) => `user:${req.user.id}`,
+});
+export const emailResendLimit = limiter({
+  windowMs: 60 * MINUTE,
+  limit: 4,
+  key: (req) => `user:${req.user.id}`,
+});

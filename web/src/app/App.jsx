@@ -7,6 +7,7 @@ import SignupPage from "@/features/auth/SignupPage.jsx";
 import ForgotPasswordPage from "@/features/auth/ForgotPasswordPage.jsx";
 import ResetPasswordPage from "@/features/auth/ResetPasswordPage.jsx";
 import VerifyEmailPage from "@/features/auth/VerifyEmailPage.jsx";
+import ConfirmEmailPage from "@/features/auth/ConfirmEmailPage.jsx";
 import WelcomePage from "@/features/auth/WelcomePage.jsx";
 import { GuestOnly, RequireAuth } from "@/shared/auth/RouteGuards.jsx";
 import ComingSoon from "@/shared/ui/ComingSoon.jsx";
@@ -22,6 +23,8 @@ const DuelPage = lazy(() => import("@/features/duel/DuelPage.jsx"));
 const PracticePage = lazy(() => import("@/features/practice/PracticePage.jsx"));
 const SolvePage = lazy(() => import("@/features/practice/SolvePage.jsx"));
 const LeaderboardPage = lazy(() => import("@/features/leaderboard/LeaderboardPage.jsx"));
+const ProfilePage = lazy(() => import("@/features/profile/ProfilePage.jsx"));
+
 export default function App() {
   return (
     <ErrorBoundary>
@@ -41,6 +44,7 @@ export default function App() {
           <Route element={<AuthLayout />}>
             <Route path="/verify-email" element={<VerifyEmailPage />} />
             <Route path="/reset-password" element={<ResetPasswordPage />} />
+            <Route path="/confirm-email" element={<ConfirmEmailPage />} />
             <Route element={<RequireAuth allowMissingUsername />}>
               <Route path="/welcome" element={<WelcomePage />} />
             </Route>
@@ -64,14 +68,8 @@ export default function App() {
               }
             />
             <Route path="/leaderboard" element={<LeaderboardPage />} />
-            <Route
-              path="/profile"
-              element={
-                <ComingSoon title="Profile">
-                  Your profile page is coming soon.
-                </ComingSoon>
-              }
-            />
+            <Route path="/profile" element={<ProfilePage />} />
+            <Route path="/profile/:tab" element={<ProfilePage />} />
           </Route>
 
           <Route path="*" element={<NotFound />} />

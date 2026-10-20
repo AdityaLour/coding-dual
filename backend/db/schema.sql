@@ -37,15 +37,18 @@ CREATE TABLE sessions(
     token_hash CHAR(64) NOT NULL UNIQUE,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     expires_at DATETIME NOT NULL,
+    user_agent VARCHAR(255) NULL,                -- what the Devices list is drawn from
+    last_seen_at DATETIME NULL,
     INDEX (expires_at)
 );
 
--- Single-use links sent by email (verify address, reset password).
+-- Single-use links sent by email (verify address, reset password, change email).
 CREATE TABLE email_tokens(
     id INT AUTO_INCREMENT PRIMARY KEY,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    purpose ENUM('verify', 'reset') NOT NULL,
+    purpose ENUM('verify', 'reset', 'email_change') NOT NULL,
+    new_email VARCHAR(254) NULL,                 -- only for 'email_change': the address it switches to
     token_hash CHAR(64) NOT NULL UNIQUE,
     expires_at DATETIME NOT NULL,
     used_at DATETIME NULL,

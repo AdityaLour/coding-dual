@@ -22,12 +22,19 @@ export function readSessionToken(req) {
   return req.cookies?.[SESSION_COOKIE];
 }
 
+// What the Devices list shows is drawn from this: kept short, and only ever turned into a label.
+const agentOf = (req) => {
+  const agent = req?.get?.("user-agent");
+  return typeof agent === "string" && agent.length > 0 ? agent.slice(0, 255) : null;
+};
+
 // db can be a transaction connection so the session is part of the same commit.
-export async function createSession(userId, db = pool) {
+export async function createSession(userId, db = pool, userAgent = null) {
   const token = newToken();
   await db.execute(
-    "INSERT INTO sessions (user_id, token_hash, expires_at) VALUES (?, ?, DATE_ADD(NOW(), INTERVAL ? SECOND))",
-    [userId, hashToken(token), SESSION_SECONDS],
+    `INSERT INTO sessions (user_id, token_hash, user_agent, last_seen_at, expires_at)
+     VALUES (?, ?, ?, NOW(), DATE_ADD(NOW(), INTERVAL ? SECOND))`,
+    [userId, hashToken(token), userAgent, SESSION_SECONDS],
   );
   return token;
 }
@@ -41,7 +48,7 @@ export async function rotateSession(req, userId, db = pool) {
       hashToken(old),
     ]);
   }
-  return createSession(userId, db);
+  return createSession(userId, db, agentOf(req));
 }
 
 // The one place a raw session token becomes a user. Reused later by the WebSocket upgrade.
@@ -54,6 +61,26 @@ export async function findSessionUser(token) {
     [hashToken(token)],
   );
   return rows[0] ?? null;
+}
+
+// "Last active" for the Devices list, written at most once every 5 minutes per session so an ordinary
+// request costs no extra write. The first touch also fills in the browser for sessions that began
+// before the Devices list existed.
+const TOUCH_EVERY_MS = 5 * 60 * 1000;
+const touched = new Map(); // token hash -> when it was last written
+export function touchSession(token, req) {
+  if (!isTokenShape(token)) return;
+  const hash = hashToken(token);
+  const now = Date.now();
+  if (now - (touched.get(hash) ?? 0) < TOUCH_EVERY_MS) return;
+  if (touched.size > 10_000) touched.clear();
+  touched.set(hash, now);
+  pool
+    .execute("UPDATE sessions SET last_seen_at = NOW(), user_agent = COALESCE(user_agent, ?) WHERE token_hash = ?", [
+      agentOf(req),
+      hash,
+    ])
+    .catch((error) => console.error("Could not record session activity:", error.message));
 }
 
 export async function deleteSession(token) {

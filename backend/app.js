@@ -23,6 +23,13 @@ import { createPracticeRouter } from "./routes/practiceRoutes.js";
 import { createLeaderboard } from "./leaderboard/leaderboard.js";
 import { repo as leaderboardRepo } from "./leaderboard/repo.js";
 import { createLeaderboardRouter } from "./routes/leaderboardRoutes.js";
+import { createProfile } from "./profile/profile.js";
+import { repo as profileRepo } from "./profile/repo.js";
+import { createProfileRouter } from "./routes/profileRoutes.js";
+import { createAccount } from "./account/account.js";
+import { repo as accountRepo } from "./account/repo.js";
+import * as mail from "./utils/mailer.js";
+import { createAccountRouter } from "./routes/accountRoutes.js";
 import { runTests, runExamples } from "./websocket/judge.js";
 import { MAX_PAYLOAD } from "./websocket/limits.js";
 
@@ -47,7 +54,10 @@ const practice = createPractice({
 app.use("/api/practice", createPracticeRouter(practice));
 app.use(express.json({ limit: "10kb" }));
 app.use(cookieParser());
-app.use("/api/leaderboard", createLeaderboardRouter(createLeaderboard({ repo: leaderboardRepo })));
+const leaderboard = createLeaderboard({ repo: leaderboardRepo });
+app.use("/api/leaderboard", createLeaderboardRouter(leaderboard));
+app.use("/api/profile", createProfileRouter(createProfile({ repo: profileRepo, leaderboard, bank })));
+app.use("/api/account", createAccountRouter(createAccount({ repo: accountRepo, mail })));
 app.use(authRoutes);
 app.use(handleErrors);
 

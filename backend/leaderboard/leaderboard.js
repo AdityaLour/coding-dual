@@ -41,13 +41,19 @@ export function createLeaderboard({ repo, now = Date.now, snapshotMs = SNAPSHOT_
     entries: list.slice(0, TOP_N).map((row) => publicEntry(row, userId)),
   });
 
+  // A player's own standing, read fresh, against the ranked lists in the snapshot.
+  async function meOf(userId, snap) {
+    const [user, week] = await Promise.all([
+      repo.userRow(userId),
+      repo.userWeek(userId, snap.week.start, snap.week.end),
+    ]);
+    return user ? standing(user, week, snap.allTime, snap.weekly) : null;
+  }
+
   return {
     async board(userId) {
       const snap = await current();
-      const [user, week] = await Promise.all([
-        repo.userRow(userId),
-        repo.userWeek(userId, snap.week.start, snap.week.end),
-      ]);
+      const me = await meOf(userId, snap);
       return {
         all: section(snap.allTime, userId),
         week: section(snap.weekly, userId),
@@ -57,8 +63,14 @@ export function createLeaderboard({ repo, now = Date.now, snapshotMs = SNAPSHOT_
         placementDuels: PLACEMENT_DUELS,
         generatedAt: snap.at,
         now: now(), // lets the page run the weekly countdown off the server's clock
-        me: user ? standing(user, week, snap.allTime, snap.weekly) : null,
+        me,
       };
+    },
+    // The same standing the leaderboard shows you, plus how many people are ranked.
+    async standingOf(userId) {
+      const snap = await current();
+      const me = await meOf(userId, snap);
+      return me ? { ...me, total: snap.allTime.length } : null;
     },
     // Just the rank, for the small badge in the header: no database read beyond the snapshot.
     async rankOf(userId) {

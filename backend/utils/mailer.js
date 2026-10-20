@@ -52,3 +52,63 @@ export function sendResetEmail(to, token) {
       "If you didn't ask for this, ignore this email; your password hasn't changed.",
   );
 }
+
+// ---------- account changes ----------
+
+// "ada.codes@gmail.com" -> "a***@gmail.com": enough for the owner to recognise it, not enough to use.
+export function maskEmail(email) {
+  const [name, domain] = String(email).split("@");
+  return `${name.slice(0, 1)}***@${domain}`;
+}
+
+// To the NEW address: the link that finishes the change.
+export function sendEmailChangeLink(to, token) {
+  send(
+    to,
+    "Confirm your new Boip email",
+    `Confirm that this is your new email for Boip:\n\n${link("/confirm-email", token)}\n\n` +
+      "This link works once and expires in 1 hour. Until you open it, your account keeps its current email.\n" +
+      "If you didn't ask for this, ignore this email; nothing changes.",
+  );
+}
+
+// To the OLD address, at the moment of the request: the chance to stop a change you didn't make.
+export function sendEmailChangeNotice(to, newEmail) {
+  send(
+    to,
+    "Someone asked to change your Boip email",
+    `A request was made to change the email on your Boip account to ${maskEmail(newEmail)}.\n\n` +
+      "Nothing has changed yet. If this was you, open the link we sent to the new address.\n" +
+      `If it wasn't you, change your password now: ${link("/forgot-password")}`,
+  );
+}
+
+// To the OLD address, once the change is done.
+export function sendEmailChanged(to, newEmail) {
+  send(
+    to,
+    "Your Boip email was changed",
+    `The email on your Boip account is now ${maskEmail(newEmail)}. You can no longer log in with this address.\n\n` +
+      "If this wasn't you, contact support right away.",
+  );
+}
+
+// To an address someone tried to move an account to, when it already belongs to another account.
+export function sendEmailTakenNotice(to) {
+  send(
+    to,
+    "Someone tried to use your email on Boip",
+    "Someone tried to switch another Boip account to this email address, but it already belongs to an account.\n\n" +
+      `Nothing changed. Log in: ${link("/login")}\nIf this wasn't you, you can ignore this email.`,
+  );
+}
+
+export function sendPasswordChangedNotice(to, wasSet) {
+  send(
+    to,
+    wasSet ? "A password was set on your Boip account" : "Your Boip password was changed",
+    `${wasSet ? "A password was added to" : "The password on"} your Boip account ${wasSet ? "so you can also log in with your email" : "was changed"}.\n\n` +
+      "Your other devices were logged out.\n" +
+      `If this wasn't you, reset your password now: ${link("/forgot-password")}`,
+  );
+}
