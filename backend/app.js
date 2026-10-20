@@ -20,6 +20,9 @@ import { loadBank } from "./problem/bank.js";
 import { createPractice } from "./practice/practice.js";
 import { repo as practiceRepo } from "./practice/repo.js";
 import { createPracticeRouter } from "./routes/practiceRoutes.js";
+import { createLeaderboard } from "./leaderboard/leaderboard.js";
+import { repo as leaderboardRepo } from "./leaderboard/repo.js";
+import { createLeaderboardRouter } from "./routes/leaderboardRoutes.js";
 import { runTests, runExamples } from "./websocket/judge.js";
 import { MAX_PAYLOAD } from "./websocket/limits.js";
 
@@ -44,6 +47,7 @@ const practice = createPractice({
 app.use("/api/practice", createPracticeRouter(practice));
 app.use(express.json({ limit: "10kb" }));
 app.use(cookieParser());
+app.use("/api/leaderboard", createLeaderboardRouter(createLeaderboard({ repo: leaderboardRepo })));
 app.use(authRoutes);
 app.use(handleErrors);
 

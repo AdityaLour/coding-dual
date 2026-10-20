@@ -90,6 +90,7 @@ CREATE TABLE duels(
     status ENUM('active', 'finished', 'void') NOT NULL DEFAULT 'active',
     winner_id INT NULL,
     end_reason ENUM('solved', 'timeout', 'forfeit') NULL,
+    rated TINYINT(1) NOT NULL DEFAULT 1,         -- 0 = played but not rated (same pair too often in a day)
     rating_a_before INT NOT NULL,
     rating_b_before INT NOT NULL,
     rating_a_after INT NULL,
@@ -97,7 +98,8 @@ CREATE TABLE duels(
     started_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
     ended_at DATETIME NULL,
     INDEX (player_a, started_at),
-    INDEX (player_b, started_at)
+    INDEX (player_b, started_at),
+    INDEX (status, ended_at)
 );
 
 CREATE TABLE submissions(

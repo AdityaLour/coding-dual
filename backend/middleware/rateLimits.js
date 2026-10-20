@@ -80,3 +80,9 @@ export const practiceLimit = limiter({
   limit: 150,
   key: (req) => `user:${req.user.id}`,
 });
+// Leaderboard reads: one small budget per signed-in user.
+export const leaderboardLimit = limiter({
+  windowMs: MINUTE,
+  limit: 60,
+  key: (req) => `user:${req.user.id}`,
+});
