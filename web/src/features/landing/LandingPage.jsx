@@ -1,46 +1,43 @@
-import { Link } from "react-router";
-import Logo from "@/shared/ui/Logo.jsx";
-import Seam from "@/shared/ui/Seam.jsx";
+import { useCallback, useRef } from "react";
+import { useMediaQuery } from "@/shared/hooks/useMediaQuery.js";
+import { usePrefersReducedMotion } from "@/shared/hooks/usePrefersReducedMotion.js";
+import Act1 from "./Act1.jsx";
+import Practice from "./Practice.jsx";
+import Rating from "./Rating.jsx";
+import Finale from "./Finale.jsx";
+import { useScrollScene } from "./useScrollScene.js";
 import styles from "./LandingPage.module.css";
 
 export default function LandingPage() {
+  const calm = usePrefersReducedMotion();
+  // Too small to pin a whole screen: phones, short landscape windows.
+  const compact = useMediaQuery("(max-width: 900px), (max-height: 559px)");
+  const flat = calm || compact;
+
+  const root = useRef(null);
+  const act = useRef(null);
+  const stage = useRef(null);
+  const prac = useRef(null);
+  const rate = useRef(null);
+  const num = useRef(null);
+  const fin = useRef(null);
+  // The rating number is written straight into the page, so scrolling never re-renders React.
+  const onRating = useCallback((value) => {
+    if (num.current) num.current.textContent = String(value);
+  }, []);
+  useScrollScene({ root, act, stage, prac, rate, fin, onRating }, { flat, calm });
+
   return (
-    <div className={styles.page}>
-      <title>Boip — live 1v1 coding duels</title>
-      <Seam top={74} bottom={60} className={styles.seam} />
+    <div ref={root} className={styles.page} data-flat={flat}>
+      <title>Boip: coding duels</title>
+      <i className={`${styles.glow} ${styles.glowOne}`} aria-hidden="true" />
+      <i className={`${styles.glow} ${styles.glowTwo}`} aria-hidden="true" />
 
-      <header className={styles.header}>
-        <Logo />
-        <nav className={styles.nav} aria-label="Account">
-          <Link to="/login" className={styles.navLink}>
-            Log in
-          </Link>
-          <Link to="/signup" className="btn btn-primary">
-            Sign up
-          </Link>
-        </nav>
-      </header>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Two coders.
-          <br />
-          One problem.
-          <br />
-          First correct answer wins.
-        </h1>
-        <p className={styles.lede}>
-          Get matched with someone near your skill, solve the same problem, and
-          race to a correct submission in C, C++, Java, Python or JavaScript.
-        </p>
-        <div className={styles.actions}>
-          <Link to="/signup" className="btn btn-primary">
-            Create an account
-          </Link>
-          <p className={styles.alt}>
-            Already have one? <Link to="/login">Log in</Link>
-          </p>
-        </div>
+      <main>
+        <Act1 actRef={act} stageRef={stage} />
+        <Practice sectionRef={prac} />
+        <Rating sectionRef={rate} numRef={num} />
+        <Finale sectionRef={fin} />
       </main>
     </div>
   );

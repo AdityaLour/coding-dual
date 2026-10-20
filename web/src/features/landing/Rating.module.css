@@ -1,0 +1,115 @@
+.section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(88px, 10vw, 140px) 0;
+}
+
+.wrap {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 80px);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  gap: clamp(40px, 6vw, 96px);
+  align-items: center;
+}
+
+.title {
+  margin: 0;
+  font: 400 clamp(40px, 5.6vw, 88px) / 0.98 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.lede {
+  max-width: 20em;
+  margin: 24px 0 0;
+  color: var(--text-2);
+  font-size: clamp(19px, 1.5vw, 22px);
+  line-height: 1.6;
+}
+
+.big {
+  margin-top: 40px;
+  color: var(--you);
+  font: 700 clamp(72px, 10.5vw, 172px) / 1 var(--font-code);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+}
+
+.chart {
+  position: relative;
+  padding: 44px clamp(20px, 2.4vw, 40px) 24px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.chart svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.draw {
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--rate, 1));
+}
+
+.dot {
+  opacity: var(--rate, 1);
+}
+
+.example {
+  position: absolute;
+  top: 12px;
+  left: 16px;
+  color: var(--muted);
+  font: 500 11px/1 var(--font-code);
+}
+
+.three {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin: clamp(56px, 7vw, 96px) 0 0;
+  padding: 0;
+  border-top: 1px solid var(--border);
+  list-style: none;
+}
+
+.three li {
+  padding: 28px 32px 0 0;
+  font: 400 clamp(22px, 1.9vw, 28px) / 1.25 var(--font-display);
+  letter-spacing: -0.01em;
+}
+
+.three li + li {
+  padding-left: 32px;
+  border-left: 1px solid var(--border);
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    padding: 0 22px;
+  }
+
+  .grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 40px;
+  }
+
+  .three {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .three li,
+  .three li + li {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--border);
+    border-left: 0;
+    font-size: 20px;
+  }
+}

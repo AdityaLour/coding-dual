@@ -1,0 +1,319 @@
+/* The poster. --d (0 to 1) comes from the page: how far the two halves have slid apart. */
+.band {
+  position: relative;
+  margin-top: clamp(28px, 5vh, 56px);
+  height: clamp(240px, 40vh, 390px);
+  container-type: size;
+  /* The seam leans 10 degrees. --tilt is how far it moves sideways from the middle to the top
+     edge (and the opposite way to the bottom edge); --gap is half the strip between the two
+     halves. The seam lines sit exactly in the middle of that strip. */
+  --tilt: calc(50cqh * tan(10deg));
+  --gap: 14px;
+}
+
+.panel {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: clamp(8px, 1.8vh, 16px);
+  padding: 0 clamp(24px, 4vw, 48px);
+  will-change: transform;
+  transition: background-color 700ms;
+}
+
+.you {
+  background: var(--surface);
+  clip-path: polygon(0 0, 54% 0, 46% 100%, 0 100%);
+  clip-path: polygon(0 0, calc(50% + var(--tilt) - var(--gap)) 0, calc(50% - var(--tilt) - var(--gap)) 100%, 0 100%);
+  transform: translateX(calc(var(--d, 0) * -78vw));
+  animation: fromLeft 1s 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+.you.win {
+  background: #1e1f1b;
+}
+
+.rival {
+  align-items: flex-end;
+  background: var(--opp-bg);
+  clip-path: polygon(56% 0, 100% 0, 100% 100%, 48% 100%);
+  clip-path: polygon(calc(50% + var(--tilt) + var(--gap)) 0, 100% 0, 100% 100%, calc(50% - var(--tilt) + var(--gap)) 100%);
+  text-align: right;
+  transform: translateX(calc(var(--d, 0) * 78vw));
+  animation: fromRight 1s 0.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes fromLeft {
+  from {
+    translate: -90px 0;
+    opacity: 0;
+  }
+  to {
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+
+@keyframes fromRight {
+  from {
+    translate: 90px 0;
+    opacity: 0;
+  }
+  to {
+    translate: 0 0;
+    opacity: 1;
+  }
+}
+
+.who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font: 600 14px/1.4 var(--font-code);
+}
+
+.you .who b {
+  color: var(--you);
+}
+
+.rival .who b {
+  color: var(--opp);
+}
+
+.rival .who {
+  flex-direction: row-reverse;
+}
+
+.chip {
+  padding: 2px 9px;
+  border: 1px solid var(--control-border);
+  border-radius: 99px;
+  color: var(--muted);
+  font: 500 11.5px/1.5 var(--font-code);
+}
+
+.name {
+  font: 400 clamp(52px, min(9vw, 14vh), 136px) / 0.9 var(--font-display);
+  letter-spacing: -0.03em;
+  transition: opacity 600ms;
+}
+
+.you .name {
+  color: var(--you);
+  animation: idle 7s ease-in-out infinite alternate;
+}
+
+.rival .name {
+  color: var(--opp);
+  animation: idle 8s ease-in-out infinite alternate-reverse;
+}
+
+.lose .name {
+  opacity: 0.4;
+}
+
+@keyframes idle {
+  from {
+    translate: 0 -3px;
+  }
+  to {
+    translate: 0 4px;
+  }
+}
+
+.segs {
+  display: flex;
+  gap: 5px;
+  width: min(380px, 100%);
+}
+
+.seg {
+  flex: 1;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--border);
+  transform: skewX(-9deg);
+  transition: background-color 250ms;
+}
+
+.you .on {
+  background: var(--you);
+}
+
+.rival .on {
+  background: var(--opp);
+}
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 30px;
+  color: var(--muted);
+  font: 500 13px/1 var(--font-code);
+}
+
+.blink {
+  animation: blink 1s steps(2, jump-none) infinite;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+.ok {
+  color: var(--you);
+  font-weight: 700;
+  animation: pop 450ms cubic-bezier(0.2, 1.5, 0.4, 1) both;
+}
+
+.delta {
+  padding: 2px 9px;
+  border: 1px solid;
+  border-radius: 6px;
+  font-weight: 700;
+  animation: pop 450ms cubic-bezier(0.2, 1.5, 0.4, 1) both;
+}
+
+.gain {
+  color: var(--you);
+}
+
+.loss {
+  color: var(--opp);
+}
+
+/* scale only: the clock's opacity belongs to the scroll (it fades as the halves open) */
+@keyframes clockIn {
+  from {
+    scale: 0.6;
+  }
+  to {
+    scale: 1;
+  }
+}
+
+@keyframes pop {
+  from {
+    scale: 0.6;
+    opacity: 0;
+  }
+  to {
+    scale: 1;
+    opacity: 1;
+  }
+}
+
+.clock {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  z-index: 2;
+  padding: 10px 18px;
+  border: 1px solid var(--control-border);
+  border-radius: 99px;
+  background: var(--bg);
+  font: 700 24px/1.2 var(--font-code);
+  font-variant-numeric: tabular-nums;
+  opacity: calc(1 - var(--d, 0) * 2.5);
+  transform: translate(-50%, -50%);
+  animation: clockIn 600ms 0.9s both;
+}
+
+.seam {
+  position: absolute;
+  top: -6%;
+  bottom: -6%;
+  left: 50%;
+  z-index: 1;
+  width: 3px;
+  overflow: hidden;
+  opacity: calc(1 - var(--d, 0) * 2.5);
+  transform: skewX(-10deg);
+  animation: draw 900ms 0.6s ease-out both;
+}
+
+.seamYou {
+  margin-left: -4px;
+  background: var(--you);
+}
+
+.seamRival {
+  margin-left: 1px;
+  background: var(--opp);
+}
+
+/* a light that runs down each line now and then */
+.seam::after {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 70px;
+  background: linear-gradient(transparent, rgb(255 255 255 / 0.85), transparent);
+  animation: run 3.6s 1.6s ease-in-out infinite;
+}
+
+.seamRival::after {
+  animation-delay: 1.9s;
+}
+
+@keyframes run {
+  from {
+    translate: 0 -80px;
+  }
+  to {
+    translate: 0 420px;
+  }
+}
+
+@keyframes draw {
+  from {
+    scale: 1 0;
+  }
+  to {
+    scale: 1 1;
+  }
+}
+
+@media (max-width: 900px) {
+  .band {
+    container-type: normal;
+    display: grid;
+    height: auto;
+    margin-top: 40px;
+  }
+
+  .panel {
+    position: relative;
+    align-items: flex-start;
+    padding: 32px 24px;
+    clip-path: none;
+    text-align: left;
+    transform: none;
+  }
+
+  .rival .who {
+    flex-direction: row;
+  }
+
+  .name {
+    font-size: clamp(52px, 16vw, 88px);
+  }
+
+  .clock {
+    position: relative;
+    top: auto;
+    left: auto;
+    justify-self: center;
+    margin: -22px 0;
+    transform: none;
+  }
+
+  .seam {
+    display: none;
+  }
+}

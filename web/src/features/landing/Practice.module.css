@@ -1,0 +1,134 @@
+.section {
+  position: relative;
+  z-index: 1;
+  padding: clamp(88px, 11vw, 150px) 0 clamp(88px, 10vw, 140px);
+  overflow: clip;
+}
+
+.wrap {
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 clamp(24px, 5vw, 80px);
+}
+
+/* A small question over one huge word, the text low on the right. */
+.head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 48px;
+  margin-bottom: clamp(40px, 5vw, 64px);
+}
+
+.caption {
+  margin: 0;
+  color: var(--muted);
+  font: 600 clamp(18px, 1.7vw, 24px) / 1.3 var(--font-body);
+}
+
+.title {
+  margin: 8px 0 0;
+  font: 400 clamp(64px, 14vw, 220px) / 0.86 var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+.text {
+  max-width: 14em;
+  margin: 0;
+  padding-bottom: 18px;
+  color: var(--text-2);
+  font-size: clamp(18px, 1.5vw, 21px);
+  line-height: 1.6;
+}
+
+.mq {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 5%, #000 95%, transparent);
+}
+
+.mq + .mq {
+  margin-top: 16px;
+}
+
+/* the whole row also slides with the scroll; --p goes 0 to 1 as the section crosses the screen */
+.shift {
+  transform: translateX(calc((var(--p, 0.5) - 0.5) * -440px));
+  will-change: transform;
+}
+
+.reverse .shift {
+  transform: translateX(calc((var(--p, 0.5) - 0.5) * 440px));
+}
+
+.track {
+  display: flex;
+  gap: 14px;
+  width: max-content;
+  transform: translateX(-25%);
+  animation: slide 52s linear infinite;
+}
+
+.reverse .track {
+  animation-direction: reverse;
+  animation-duration: 64s;
+}
+
+@keyframes slide {
+  from {
+    transform: translateX(-25%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.topic {
+  display: inline-flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 28px;
+  border: 1px solid var(--control-border);
+  border-radius: 99px;
+  background: var(--surface);
+  font: 600 18px/1 var(--font-body);
+  white-space: nowrap;
+}
+
+/* one row of big pills, one of small */
+.large .topic {
+  height: 70px;
+  padding: 0 38px;
+  font-size: 24px;
+}
+
+.reverse .topic {
+  height: 38px;
+  padding: 0 20px;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .wrap {
+    padding: 0 22px;
+  }
+
+  .head {
+    display: block;
+  }
+
+  .text {
+    padding: 16px 0 0;
+  }
+
+  .large .topic {
+    height: 52px;
+    padding: 0 24px;
+    font-size: 18px;
+  }
+
+  .reverse .topic {
+    height: 36px;
+    padding: 0 16px;
+    font-size: 13px;
+  }
+}
